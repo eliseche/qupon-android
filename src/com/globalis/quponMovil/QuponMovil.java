@@ -1,6 +1,7 @@
 package com.globalis.quponMovil;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
 public class QuponMovil extends Activity {
@@ -8,6 +9,7 @@ public class QuponMovil extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+        Intent loginIntent = new Intent(this, Login.class);        
+        startActivity(loginIntent);
     }
 }
