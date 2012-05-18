@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 public class Login extends Activity implements OnClickListener {
-	private Button btnLogin;
+	private Button btnLogin,btnRegister;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -20,9 +20,13 @@ public class Login extends Activity implements OnClickListener {
 	
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.login_btn_login:
-				Toast toast = Toast.makeText(getApplicationContext(), "OK", Toast.LENGTH_SHORT);
-				toast.show();
+		case R.id.login_btn_log:
+				login();
+				//Toast toast = Toast.makeText(getApplicationContext(), "OK", Toast.LENGTH_SHORT);
+				//toast.show();
+			break;
+		case R.id.login_btn_register:
+				register();
 			break;
 		default:
 			break;
@@ -30,7 +34,17 @@ public class Login extends Activity implements OnClickListener {
 	}
 	
 	private void initViews() {
-		btnLogin = (Button)findViewById(R.id.login_btn_login);
+		btnLogin = (Button)findViewById(R.id.login_btn_log);
 		btnLogin.setOnClickListener(this);	
+		btnRegister = (Button)findViewById(R.id.login_btn_register);
+		btnRegister.setOnClickListener(this);
+	}
+
+	private void login(){
+		
+	}
+	
+	private void register(){
+		
 	}
 }

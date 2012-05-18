@@ -2,7 +2,11 @@
 <resources>    
     <string name="app_name">QuponMovil</string>
     <string name="login_btn_login">Login</string>
+    <string name="login_btn_reg">Register</string>
     <string name="ok">OK</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="login_lbl_title">Welcome to QuPon</string>
+    <string name="login_lbl_user">User name</string>
+    <string name="login_lbl_password">Password</string>
 </resources>
