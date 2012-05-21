@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>    
-    <string name="app_name">QuponMovil</string>
-    <string name="login_btn_login">Login</string>
-    <string name="login_btn_reg">Register</string>
+    <string name="app_name">QuponMovil</string>    
     <string name="ok">OK</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
-    <string name="login_lbl_title">Welcome to QuPon</string>
-    <string name="login_lbl_user">User name</string>
+    <string name="login_lbl_title">Welcome to Qupon</string>
+    <string name="login_lbl_user">Username</string>
     <string name="login_lbl_password">Password</string>
+    <string name="login_btn_sign_in">Sign In</string>
+    <string name="login_btn_sign_up">Not a member? <u><b><i>Sign Up</i></b></u></string>
 </resources>

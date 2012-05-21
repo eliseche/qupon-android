@@ -1,14 +1,16 @@
 package com.globalis.quponMovil;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.Toast;
+import android.widget.TextView;
 
 public class Login extends Activity implements OnClickListener {
-	private Button btnLogin,btnRegister;
+	private Button btnSignIn;
+	private TextView btnSignUp;	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -20,13 +22,11 @@ public class Login extends Activity implements OnClickListener {
 	
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.login_btn_log:
-				login();
-				//Toast toast = Toast.makeText(getApplicationContext(), "OK", Toast.LENGTH_SHORT);
-				//toast.show();
+		case R.id.login_btn_sign_in:
+			Intent intentPromotion = new Intent(this, PromotionActivity.class);
+			startActivity(intentPromotion);
 			break;
-		case R.id.login_btn_register:
-				register();
+		case R.id.login_btn_sign_up:			
 			break;
 		default:
 			break;
@@ -34,17 +34,9 @@ public class Login extends Activity implements OnClickListener {
 	}
 	
 	private void initViews() {
-		btnLogin = (Button)findViewById(R.id.login_btn_log);
-		btnLogin.setOnClickListener(this);	
-		btnRegister = (Button)findViewById(R.id.login_btn_register);
-		btnRegister.setOnClickListener(this);
-	}
-
-	private void login(){
-		
-	}
-	
-	private void register(){
-		
-	}
+		btnSignIn = (Button)findViewById(R.id.login_btn_sign_in);		
+		btnSignIn.setOnClickListener(this);
+		btnSignUp = (TextView)findViewById(R.id.login_btn_sign_up);		
+		btnSignUp.setOnClickListener(this);		
+	}	
 }

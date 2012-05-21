@@ -1,81 +1,116 @@
 package com.globalis.entities;
 
-import java.util.Calendar;
+import java.util.List;
 
-public class Promotion {
-	
+import com.google.gson.annotations.SerializedName;
+
+public class Promotion {	
 	private String description;
-	private Calendar since_date;
-	private Calendar due_date;
-	private int max_quantity_of_generated_coupon;
-	private int max_quantity_of_validated_coupon;
-	private int max_quantity_per_client;
+	@SerializedName("due_date")
+	private String dueDate;
 	private String image;
-	private String terms_and_condition;
+	@SerializedName("max_quantity_of_generated_coupon") 
+	private int maxQuantityOfGeneratedCoupon;
+	@SerializedName("max_quantity_of_validated_coupon") 
+	private int maxQuantityOfValidatedCoupon;
+	@SerializedName("max_quantity_per_client") 
+	private int maxQuantityPerClient;
+	@SerializedName("since_date") 
+	private String sinceDate;
+	@SerializedName("terms_and_condition") 
+	private String termsAndCondition;
+	private static List<Promotion> promotions;
 	
 	public String getDescription() {
 		return description;
 	}
+	
 	public void setDescription(String description) {
 		this.description = description;
+	}	
+	
+	public String getDueDate() {
+		return dueDate;
+	}	
+	
+	public void setDueDate(String dueDate) {
+		this.dueDate = dueDate;
 	}
-	public Calendar getSince_date() {
-		return since_date;
-	}
-	public void setSince_date(Calendar since_date) {
-		this.since_date = since_date;
-	}
-	public Calendar getDue_date() {
-		return due_date;
-	}
-	public void setDue_date(Calendar due_date) {
-		this.due_date = due_date;
-	}
-	public int getMax_quantity_of_generated_coupon() {
-		return max_quantity_of_generated_coupon;
-	}
-	public void setMax_quantity_of_generated_coupon(
-			int max_quantity_of_generated_coupon) {
-		this.max_quantity_of_generated_coupon = max_quantity_of_generated_coupon;
-	}
-	public int getMax_quantity_of_validated_coupon() {
-		return max_quantity_of_validated_coupon;
-	}
-	public void setMax_quantity_of_validated_coupon(
-			int max_quantity_of_validated_coupon) {
-		this.max_quantity_of_validated_coupon = max_quantity_of_validated_coupon;
-	}
-	public int getMax_quantity_per_client() {
-		return max_quantity_per_client;
-	}
-	public void setMax_quantity_per_client(int max_quantity_per_client) {
-		this.max_quantity_per_client = max_quantity_per_client;
-	}
+	
 	public String getImage() {
 		return image;
 	}
+	
 	public void setImage(String image) {
 		this.image = image;
 	}
-	public String getTerms_and_condition() {
-		return terms_and_condition;
-	}
-	public void setTerms_and_condition(String terms_and_condition) {
-		this.terms_and_condition = terms_and_condition;
-	}
-
-	public Promotion(){}
 	
-	public Promotion(String description, Calendar since_date, Calendar due_date,
-			int max_quantity_of_generated_coupon, int max_quantity_of_validated_coupon,
-			int max_quantity_per_client, String image, String terms_and_condition){
+	public int getMaxQuantityOfGeneratedCoupon() {
+		return maxQuantityOfGeneratedCoupon;
+	}
+	
+	public void setDescription(int maxQuantityOfGeneratedCoupon) {
+		this.maxQuantityOfGeneratedCoupon = maxQuantityOfGeneratedCoupon;		
+	}
+	
+	public int getMaxQuantityOfValidatedCoupon() {
+		return maxQuantityOfValidatedCoupon;
+	}
+	
+	public void setMaxQuantityOfValidatedCoupon(int maxQuantityOfValidatedCoupon) {
+		this.maxQuantityOfValidatedCoupon = maxQuantityOfValidatedCoupon;
+	}
+	
+	public int getMaxQuantityPerClient() {
+		return maxQuantityPerClient;
+	}
+	
+	public void setMaxQuantityPerClient(int maxQuantityPerClient) {
+		this.maxQuantityPerClient = maxQuantityPerClient;
+	}
+	
+	public String getSinceDate() {
+		return sinceDate;
+	}
+	
+	public void setsinceDate(String sinceDate) {
+		this.sinceDate = sinceDate;
+	}
+	
+	public String getTermsAndCondition() {
+		return termsAndCondition;
+	}
+	
+	public void setTermsAndCondition(String termsAndCondition) {
+		this.termsAndCondition = termsAndCondition;
+	}
+	
+	public Promotion(String description, String dueDate, 
+			String image, int maxQuantityOfGeneratedCoupon, int maxQuantityOfValidatedCoupon, 
+			int maxQuantityPerClient, String sinceDate, String termsAndCondition) {
 		this.description = description;
-		this.since_date = since_date;
-		this.due_date = due_date;
-		this.max_quantity_of_generated_coupon = max_quantity_of_generated_coupon;
-		this.max_quantity_of_validated_coupon = max_quantity_of_validated_coupon;
-		this.max_quantity_per_client = max_quantity_per_client;
+		this.dueDate = dueDate;
 		this.image = image;
-		this.terms_and_condition = terms_and_condition;
+		this.maxQuantityOfGeneratedCoupon = maxQuantityOfGeneratedCoupon;
+		this.maxQuantityOfValidatedCoupon = maxQuantityOfValidatedCoupon;
+		this.maxQuantityPerClient = maxQuantityPerClient;
+		this.sinceDate = sinceDate;
+		this.termsAndCondition = termsAndCondition;
+	}
+	
+	public static List<Promotion> getPromotions() {
+		return promotions;
+	}
+	
+	public static void setPromotions(List<Promotion> promotions) {
+		Promotion.promotions = promotions;
+	}
+	
+	@Override
+	public String toString() {
+		return "desciption: " + description + ", dueDate: " + dueDate + 
+				", image: " + image + ", maxQuantityOfGeneratedCoupon: " + maxQuantityOfGeneratedCoupon + 
+				", maxQuantityOfValidatedCoupon: " + maxQuantityOfValidatedCoupon + ", maxQuantityPerClient: " + maxQuantityPerClient +
+				", sinceDate: " + sinceDate + ", termsAndCondition: " + termsAndCondition;  		
 	}
 }
