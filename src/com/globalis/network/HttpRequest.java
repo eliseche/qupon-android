@@ -4,16 +4,17 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.net.Authenticator;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.PasswordAuthentication;
 import java.net.URL;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
 public class HttpRequest {	
 	private URL url;
-	private String params;
-	private String test = "[{\"created_at\":\"2012-05-17T16:05:30Z\",\"description\":\"Test\",\"due_date\":\"2012-05-17T15:57:00Z\",\"id\":1,\"image\":\"hola.gif\",\"max_quantity_of_generated_coupon\":50,\"max_quantity_of_validated_coupon\":40,\"max_quantity_per_client\":2,\"since_date\":\"2012-05-17T15:57:00Z\",\"terms_and_condition\":\"Test uno\",\"updated_at\":\"2012-05-17T16:05:30Z\"},{\"created_at\":\"2012-05-17T16:25:57Z\",\"description\":\"Comidas Ya\",\"due_date\":\"2012-05-17T16:25:00Z\",\"id\":2,\"image\":\"asdfas.jpg\",\"max_quantity_of_generated_coupon\":15,\"max_quantity_of_validated_coupon\":15,\"max_quantity_per_client\":2,\"since_date\":\"2012-05-17T16:25:00Z\",\"terms_and_condition\":\"come mucho paga poco\",\"updated_at\":\"2012-05-17T16:25:57Z\"}]";
+	private String params;	
 	
 	public Response get(String url) {
 		setUrl(url);
@@ -22,12 +23,18 @@ public class HttpRequest {
 		Response response = null;
 		
 		try {
+			Authenticator.setDefault(new ProxyAuthenticator(USER, PASSWORD));
+			System.setProperty("http.proxyHost", HOST);
+			System.setProperty("http.proxyPort", PORT);
+			
 			conn = (HttpURLConnection)this.url.openConnection();
 			InputStream in = conn.getInputStream();
 			byte[] body = readStream(in);
 			response = new Response(conn.getResponseCode(), new String(body));
 		} catch (IOException e) {
 			e.printStackTrace();
+		} catch (Exception ex){
+			ex.printStackTrace();
 		}
 		finally {
 			if(conn != null) {
@@ -35,6 +42,26 @@ public class HttpRequest {
 			}
 		}
 		return response;
+	}
+	
+	private static final String USER = "aeliseche",
+			  PASSWORD = "Tafirol1204",
+			  HOST = "fwglobalis.omnitronic.com.ar",
+			  PORT = "3128";
+	
+	public static class ProxyAuthenticator extends Authenticator {
+		 
+		   private String user, password; 
+		 
+		   public ProxyAuthenticator(String user, String password) {
+		       this.user = user;
+		       this.password = password;
+		   }
+		 
+		   protected PasswordAuthentication getPasswordAuthentication() {
+		       return new PasswordAuthentication(user, password.toCharArray());
+		   }
+		 
 	}
 	
 	public Response post(String url, Hashtable<String, String> params) {
@@ -45,6 +72,10 @@ public class HttpRequest {
 		Response response = null;
 		
 		try {
+			Authenticator.setDefault(new ProxyAuthenticator(USER, PASSWORD));
+			System.setProperty("http.proxyHost", HOST);
+			System.setProperty("http.proxyPort", PORT);
+			
 			conn = (HttpURLConnection)this.url.openConnection();
 			// Sets the output to true, indicating that it's going to send POST data
 			conn.setDoOutput(true);
@@ -59,7 +90,7 @@ public class HttpRequest {
 			out.close();
 			InputStream in = conn.getInputStream();
 			byte[] body = readStream(in);			
-			response = new Response(conn.getResponseCode(), new String(test));
+			response = new Response(conn.getResponseCode(), new String(body));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -106,6 +137,6 @@ public class HttpRequest {
 	
 	public static class Url {
 		public static String login = "https://eventioz.com/session.json";
-		public static String promotions = "http://192.168.0.196/promotions.json"; 
+		public static String promotions = "http://192.168.0.196:3000/promotions.json"; 
 	}
 }
