@@ -9,7 +9,7 @@ public class QuponMovil extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Intent loginIntent = new Intent(this, Login.class);        
-        startActivity(loginIntent);
+        Intent promotionIntent = new Intent(this, PromotionActivity.class);        
+        startActivity(promotionIntent);
     }
 }
