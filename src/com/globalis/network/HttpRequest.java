@@ -87,9 +87,9 @@ public class HttpRequest {
 	}
 	
 	private void setProxy() {
-		Authenticator.setDefault(new ProxyAuthenticator("aeliseche", "Tafirol1204"));		
-		System.setProperty("http.proxyHost", "fwglobalis.omnitronic.com.ar");
-		System.setProperty("http.proxyPort", "3128");		
+		Authenticator.setDefault(new ProxyAuthenticator(ProxyAuthenticator.USER, ProxyAuthenticator.PASSWORD));		
+		System.setProperty("http.proxyHost", ProxyAuthenticator.HOST);
+		System.setProperty("http.proxyPort", ProxyAuthenticator.PORT);		
 	}
 	
 	private void setUrl(String url) {		
