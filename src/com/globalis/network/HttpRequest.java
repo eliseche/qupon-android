@@ -22,14 +22,11 @@ public class HttpRequest {
 	
 	public Response get(String url, Hashtable<String, String> params) {
 		setProxy();
-		if(params == null) {
-			setUrl(url);			
+		setParams(params);
+		if(this.params.length() != 0) {
+			url = url + "?" + this.params;			
 		}
-		else {
-			setParams(params);
-			url = url + "?" + this.params;
-			setUrl(url);
-		}		
+		setUrl(url);		
 		
 		HttpURLConnection conn = null;
 		Response response = null;
@@ -54,8 +51,8 @@ public class HttpRequest {
 	
 	public Response post(String url, Hashtable<String, String> params) {
 		setProxy();
-		setUrl(url);
-		setParams(params);		
+		setParams(params);
+		setUrl(url);				
 		
 		HttpURLConnection conn = null;
 		Response response = null;

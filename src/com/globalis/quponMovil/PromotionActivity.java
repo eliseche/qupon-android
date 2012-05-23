@@ -22,12 +22,9 @@ public class PromotionActivity extends Activity {
 		setContentView(R.layout.promotions);
 		
 		initViews();		
-		
-		Hashtable<String, String> params = new Hashtable<String, String>();
-		params.put("user", "Ale");
-		params.put("password", "Ale");
+						
 		HttpRequest req = new HttpRequest();
-		Response response = req.get(HttpRequest.Url.promotions, params);
+		Response response = req.get(HttpRequest.Url.promotions, null);
 		
 		Gson gson = new Gson();
 		Type collectionType = new TypeToken<List<Promotion>>(){}.getType();
