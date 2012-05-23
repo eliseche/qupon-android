@@ -23,12 +23,11 @@ public class PromotionActivity extends Activity {
 		
 		initViews();		
 		
-		/*Hashtable<String, String> params = new Hashtable<String, String>();
-		params.put("login", "Demo");
-		params.put("password", "Demo");
-		params.put("locale", "es");*/
+		Hashtable<String, String> params = new Hashtable<String, String>();
+		params.put("user", "Ale");
+		params.put("password", "Ale");
 		HttpRequest req = new HttpRequest();
-		Response response = req.get(HttpRequest.Url.promotions);
+		Response response = req.get(HttpRequest.Url.promotions, params);
 		
 		Gson gson = new Gson();
 		Type collectionType = new TypeToken<List<Promotion>>(){}.getType();
