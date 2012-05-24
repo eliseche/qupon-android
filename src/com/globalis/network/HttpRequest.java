@@ -20,7 +20,7 @@ public class HttpRequest {
 		public static String promotions = "http://192.168.0.196:3000/promotions.json"; 
 	}
 	
-	public Response get(String url, Hashtable<String, String> params) {
+	public Response get(String url, Hashtable<String, String> params) throws Exception {
 		setProxy();
 		setParams(params);
 		if(this.params.length() != 0) {
@@ -34,12 +34,14 @@ public class HttpRequest {
 		try {
 			conn = (HttpURLConnection)this.url.openConnection();
 			InputStream in = conn.getInputStream();
-			byte[] body = readStream(in);
+			byte[] body = readStream(in);			
 			response = new Response(conn.getResponseCode(), new String(body));
 		} catch (IOException e) {
 			e.printStackTrace();
+			throw new ConnectionErrorException();
 		} catch (Exception e){
 			e.printStackTrace();
+			throw new ConnectionErrorException();
 		}
 		finally {
 			if(conn != null) {
@@ -49,7 +51,7 @@ public class HttpRequest {
 		return response;
 	}
 	
-	public Response post(String url, Hashtable<String, String> params) {
+	public Response post(String url, Hashtable<String, String> params) throws Exception {
 		setProxy();
 		setParams(params);
 		setUrl(url);				
@@ -75,8 +77,10 @@ public class HttpRequest {
 			response = new Response(conn.getResponseCode(), new String(body));
 		} catch (IOException e) {
 			e.printStackTrace();
+			throw new ConnectionErrorException();
 		} catch (Exception e) {
 			e.printStackTrace();
+			throw new ConnectionErrorException();
 		}
 		finally {
 			if(conn != null) {
@@ -130,5 +134,20 @@ public class HttpRequest {
 			out.write(buf, 0, count);
 		}		
 		return out.toByteArray();
+	}
+	
+	private class ConnectionErrorException extends Exception
+	{
+		String errorMessage;
+		
+		ConnectionErrorException() {
+			super();
+			errorMessage = new String("Error when trying to bring data from network");
+		}
+		
+		@Override
+		public String getMessage() {
+			return errorMessage;
+		}
 	}
 }
