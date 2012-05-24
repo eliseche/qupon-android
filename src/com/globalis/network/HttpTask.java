@@ -6,12 +6,14 @@ import android.os.AsyncTask;
 import android.widget.Toast;
 
 public abstract class HttpTask extends AsyncTask<String, Void, Response>  {
+	private HttpRequest request;
 	private Context context;
 	private ProgressDialog dialog;
-	private String error;
+	private String error;	
 	
-	public HttpTask setContext(Context context) {
+	public HttpTask set(Context context, HttpRequest request) {
 		this.context = context;
+		this.request = request;
 		return this;
 	}
 	
@@ -26,8 +28,7 @@ public abstract class HttpTask extends AsyncTask<String, Void, Response>  {
 	@Override
 	protected Response doInBackground(String... params) {	
 		try {
-			HttpRequest req = new HttpRequest();
-			Response response = req.get(HttpRequest.Url.promotions, null);				
+			Response response = request.execute();				
 			return response;
 			
 		} catch (Exception e) {

@@ -27,6 +27,8 @@ public class PromotionActivity extends Activity {
 		
 		initViews();
 		
+		HttpRequest req = new HttpRequest();
+		req.set(HttpRequest.Url.promotions, null, HttpRequest.HttpMethod.GET);		
 		HttpTask task = new HttpTask() {
 			
 			@Override
@@ -42,7 +44,7 @@ public class PromotionActivity extends Activity {
 				}				
 			}
 		};
-		task.setContext(this).execute();
+		task.set(this, req).execute();
 	}
 	
 	@Override

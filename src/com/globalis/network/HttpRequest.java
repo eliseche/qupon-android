@@ -11,14 +11,38 @@ import java.net.URL;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
-public class HttpRequest {	
+public class HttpRequest {
+	private String initialUrl;
+	private Hashtable<String, String> initialParams;
+	private HttpMethod initialHttpMethod;
 	private URL url;
 	private String params;
+	
+	public enum HttpMethod {
+		GET, POST;
+	}
 	
 	public static class Url {
 		public static String login = "https://eventioz.com/session.json";
 		public static String promotions = "http://192.168.0.196:3000/promotions.json"; 
 	}
+	
+	public void set(String initialUrl, Hashtable<String, String> initialParams, HttpMethod initialHttpMethod) {
+		this.initialUrl = initialUrl;
+		this.initialParams = initialParams;
+		this.initialHttpMethod = initialHttpMethod;
+	}
+	
+	public Response execute() throws Exception {
+		if(this.initialHttpMethod == HttpMethod.GET) {
+			return get(this.initialUrl, this.initialParams);			
+		}
+		else if(this.initialHttpMethod == HttpMethod.POST) {
+			return post(this.initialUrl, this.initialParams);			
+		}
+		
+		return null;
+	}	
 	
 	public Response get(String url, Hashtable<String, String> params) throws Exception {
 		setProxy();
