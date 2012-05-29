@@ -1,8 +1,93 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"        
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:layout_margin="30dip" >
+        <TextView
+            android:id="@+id/signin_lbl_title"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/signin_lbl_title"
+            android:gravity="center_horizontal"
+            android:textSize="18sp"
+            android:textStyle="bold" >
+        </TextView>
+        <EditText
+            android:id="@+id/signin_txt_user"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/signin_lbl_user"
+            android:layout_marginTop="50dip" >
+        </EditText>
+        <EditText
+            android:id="@+id/signin_txt_password"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/signin_lbl_password" >
+        </EditText>
+        <EditText
+            android:id="@+id/signin_txt_repassword"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/signin_lbl_repassword" >
+        </EditText>
+        <EditText
+            android:id="@+id/signin_txt_name"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/signin_lbl_name" >
+        </EditText>
+        <EditText
+            android:id="@+id/signin_txt_last_name"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/signin_lbl_last_name" >
+        </EditText>
+        <EditText
+            android:id="@+id/signin_txt_zip_code"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/signin_zip_code" >
+        </EditText>
+        <EditText
+            android:id="@+id/signin_txt_phone_number"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/signin_lbl_phone_number" >
+        </EditText>
+        <Spinner android:id="@+id/signin_spn_gender"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:drawSelectorOnTop="true"
+        android:prompt="@string/signin_spn_gender"
+    	/>
+        <EditText
+            android:id="@+id/signin_txt_email"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/signin_lbl_email" >
+        </EditText>
+        
+        <Button
+            android:id="@+id/signin_btn_sign_in"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"            
+            android:text="@string/signin_btn_sign_in"
+            android:layout_marginTop="50dip" >
+        </Button>
+        <TextView
+            android:id="@+id/signin_btn_sign_up"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/signin_btn_sign_up"
+            android:layout_marginTop="20dip" >
+        </TextView>
+    </LinearLayout>
 
 </LinearLayout>

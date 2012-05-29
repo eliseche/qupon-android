@@ -1,6 +1,8 @@
 package com.globalis.quponMovil;
 
+
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -23,7 +25,9 @@ public class LoginActivity extends Activity implements OnClickListener {
 		switch (v.getId()) {
 		case R.id.login_btn_sign_in:			
 			break;
-		case R.id.login_btn_sign_up:			
+		case R.id.login_btn_sign_up:
+			Intent intentSignup = new Intent(this, SignupActivity.class);
+			startActivity(intentSignup);			
 			break;
 		default:
 			break;
