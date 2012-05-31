@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <color name="promotions_list">#FFF8F8F8</color>    
+    <color name="promotions_item">#FF000000</color>    
+</resources>
