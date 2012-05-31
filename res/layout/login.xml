@@ -1,51 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"    
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
     android:background="#771E9BED" >
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"        
+    <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="vertical"
-        android:layout_margin="30dip" >
-        <TextView
-            android:id="@+id/login_lbl_title"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/login_lbl_title"
-            android:gravity="center_horizontal"
-            android:textSize="18sp"
-            android:textStyle="bold" >
-        </TextView>
-        <EditText
-            android:id="@+id/login_txt_user"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/login_lbl_user"
-            android:layout_marginTop="50dip" >
-        </EditText>
-        <EditText
-            android:id="@+id/login_txt_password"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/login_lbl_password"
-            android:password="true">
-        </EditText>
-        <Button
-            android:id="@+id/login_btn_sign_in"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"            
-            android:text="@string/login_btn_sign_in"
-            android:layout_marginTop="50dip" >
-        </Button>
-        <TextView
-            android:id="@+id/login_btn_sign_up"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/login_btn_sign_up"
-            android:layout_marginTop="20dip" >
-        </TextView>
-    </LinearLayout>
+        android:layout_height="fill_parent" >
+	    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="vertical"
+	        android:padding="30dip" >	
+	        <TextView
+	            android:id="@+id/login_lbl_title"
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:gravity="center_horizontal"
+	            android:text="@string/login_lbl_title"
+	            android:textSize="18sp"
+	            android:textStyle="bold" />
+	        <EditText
+	            android:id="@+id/login_txt_user"
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_marginTop="50dip"
+	            android:hint="@string/login_lbl_user" />
+	        <EditText
+	            android:id="@+id/login_txt_password"
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:hint="@string/login_lbl_password"
+	            android:inputType="textPassword" />
+	        <Button
+	            android:id="@+id/login_btn_sign_in"
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_marginTop="50dip"
+	            android:text="@string/login_btn_sign_in" />
+	        <TextView
+	            android:id="@+id/login_btn_sign_up"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_marginTop="20dip"
+	            android:text="@string/login_btn_sign_up" />	        
+	    </LinearLayout>
+    </ScrollView>
 </LinearLayout>
