@@ -24,7 +24,8 @@ public class HttpRequest {
 	
 	public static class Url {
 		public static String login = "https://eventioz.com/session.json";
-		public static String promotions = "http://50.116.21.186/promotions.json"; 
+		public static String promotions = "http://50.116.21.186/promotions.json";
+		public static String signup = "https://50.116.21.186/signup";
 	}
 	
 	public void set(String initialUrl, Hashtable<String, String> initialParams, HttpMethod initialHttpMethod) {

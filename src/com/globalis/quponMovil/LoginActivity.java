@@ -13,6 +13,8 @@ public class LoginActivity extends Activity implements OnClickListener {
 	private Button btnSignIn;
 	private TextView btnSignUp;	
 	
+	public static final int REGISTRATION_DETAIL_REQUEST_CODE = 0;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -27,7 +29,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 			break;
 		case R.id.login_btn_sign_up:
 			Intent intentSignup = new Intent(this, SignupActivity.class);
-			startActivity(intentSignup);			
+			startActivityForResult(intentSignup, REGISTRATION_DETAIL_REQUEST_CODE);			
 			break;
 		default:
 			break;
@@ -40,4 +42,23 @@ public class LoginActivity extends Activity implements OnClickListener {
 		btnSignUp = (TextView)findViewById(R.id.login_btn_sign_up);		
 		btnSignUp.setOnClickListener(this);		
 	}	
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		super.onActivityResult(requestCode, resultCode, data);
+		if (requestCode == REGISTRATION_DETAIL_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {                
+            	String username = data.getStringExtra("USERNAME");
+            	String password = data.getStringExtra("PASSWORD");
+            	TextView txtUser = (TextView)findViewById(R.id.login_txt_user);	
+            	TextView txtPassword = (TextView)findViewById(R.id.login_txt_password);
+            	
+            	txtUser.setText(username);
+            	txtPassword.setText(password);
+            	onClick(findViewById(R.id.login_btn_sign_in));
+            }
+            else if(resultCode==RESULT_CANCELED){}
+		}
+	}
 }

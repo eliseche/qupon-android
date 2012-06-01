@@ -20,5 +20,9 @@
     <string name="signup_spn_gender">Choose a gender</string>
     <string name="signup_txt_email">Email</string>
 	<string name="signup_btn_register">Send</string>
+	<string name="signup_error_msg_complete_user">Please complete user name</string>
+	<string name="signup_error_msg_unmatching_pass">The two passwords don\'t match</string>
+    <string name="signup_error_msg_complete_name">Please input your name</string>
+    <string name="signup_error_msg_complete_last_name">Please input your last name</string>
     <string name="menu_login">Login</string>
 </resources>

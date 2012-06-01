@@ -1,11 +1,25 @@
 package com.globalis.entities;
 
+import java.lang.reflect.Type;
+import java.util.Hashtable;
 import java.util.List;
+
+import android.app.Activity;
+
+import com.globalis.network.HttpRequest;
+import com.globalis.network.HttpTask;
+import com.globalis.network.Response;
+import com.globalis.quponMovil.PromotionAdapter;
+import com.globalis.quponMovil.R;
+import com.google.gson.Gson;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.reflect.TypeToken;
 
 public class User {
 	
 	private String username;
-	private	String password_digest;
+	@SerializedName("password_digest")
+	private	String passwordDigest;
 	private Person person;
 	private UserState userState;
 	private UserType userType;
@@ -19,12 +33,12 @@ public class User {
 		this.username = username;
 	}
 	
-	public String getPassword_digest(){
-		return password_digest;
+	private String getPasswordDigest() {
+		return passwordDigest;
 	}
-	
-	public void setPassword_digest(String password_digest){
-		this.password_digest = password_digest;
+
+	private void setPasswordDigest(String passwordDigest) {
+		this.passwordDigest = passwordDigest;
 	}
 	
 	public Person getPerson() {
@@ -61,18 +75,22 @@ public class User {
 	
 	public User(){}
 	
-	public User(String username, String password_digest, Person person,
+	public User(String username, String passwordDigest, Person person,
 			UserState userState, UserType userType, List<Permission> permissions){
 		this.username = username;
-		this.password_digest = password_digest;
+		this.passwordDigest = passwordDigest;
 		this.person = person;
 		this.userState = userState;
 		this.userType = userType;
 		this.permissions = permissions;
 	}
 
-
-
+	public Hashtable<String, String> getHashtable(){
+		Hashtable<String, String> hashtable = new Hashtable<String, String>();
+		hashtable.put("username", username);
+		hashtable.put("password_digest", passwordDigest);
+		return hashtable;
+	}
 
 	
 }
