@@ -16,7 +16,7 @@
         android:layout_width="100dip"
         android:layout_height="50dip"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/promotions_lbl_description"
+        android:layout_below="@id/promotions_lbl_description"
         android:src="@drawable/lock" />
     <TextView
         android:id="@+id/promotions_lbl_terms_and_condition"
@@ -28,16 +28,18 @@
     <TextView
         android:id="@+id/promotions_lbl_special_price"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/promotions_lbl_terms_and_condition"        
-        android:layout_alignParentRight="true"
-        android:textColor="@color/green" />
-    <TextView
-        android:id="@+id/promotions_lbl_normal_price"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"        
-        android:layout_below="@+id/promotions_lbl_terms_and_condition"
-        android:layout_toLeftOf="@+id/promotions_lbl_special_price"
-        android:layout_marginRight="5dip"
-        android:textColor="@color/red" />
+        android:layout_below="@id/promotions_lbl_terms_and_condition"
+        android:layout_toRightOf="@id/promotions_img_promotion"
+        android:layout_marginLeft="5dip"        
+        android:textSize="16sp"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/promotions_lbl_discount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/promotions_lbl_special_price"        
+        android:layout_toRightOf="@id/promotions_img_promotion"
+        android:layout_marginLeft="5dip"
+        android:textSize="14sp" />    
 </RelativeLayout>

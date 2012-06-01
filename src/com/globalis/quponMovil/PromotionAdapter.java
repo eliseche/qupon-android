@@ -33,17 +33,16 @@ public class PromotionAdapter extends ArrayAdapter<Promotion> {
 		// Get views from promotions_adapter.xml
 		TextView lblDescription = (TextView)convertView.findViewById(R.id.promotions_lbl_description);
 		TextView lblTermsAndCondition = (TextView)convertView.findViewById(R.id.promotions_lbl_terms_and_condition);
-		ImageView imgPromotion = (ImageView)convertView.findViewById(R.id.promotions_img_promotion);
-		TextView lblNormalPrice = (TextView)convertView.findViewById(R.id.promotions_lbl_normal_price);
+		ImageView imgPromotion = (ImageView)convertView.findViewById(R.id.promotions_img_promotion);		
 		TextView lblSpecialPrice = (TextView)convertView.findViewById(R.id.promotions_lbl_special_price);
+		TextView lblDiscount= (TextView)convertView.findViewById(R.id.promotions_lbl_discount);
 		
 		// Assign the appropriate data from out promotions object
 		lblDescription.setText(promotion.getDescription());
 		lblTermsAndCondition.setText(promotion.getTermsAndCondition());
 		imgPromotion.setImageBitmap(getBitmap(HttpRequest.Url.base + promotion.getImagePath()));
-		lblNormalPrice.setText(String.valueOf(promotion.getNormalPrice()));
-		lblNormalPrice.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);		
-		lblSpecialPrice.setText(String.valueOf(promotion.getSpecialPrice()));		
+		lblSpecialPrice.setText("$" + String.valueOf(promotion.getSpecialPrice()));		
+		lblDiscount.setText(String.valueOf(promotion.getDiscount()) + "%");
 		
 		return convertView;
 	}		

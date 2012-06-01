@@ -24,7 +24,8 @@ public class Promotion {
 	@SerializedName("normal_price")
 	private float normalPrice;
 	@SerializedName("special_price")
-	private float specialPrice;
+	private float specialPrice;	
+	private float discount;
 	private static List<Promotion> promotions;
 	
 	public String getDescription() {
@@ -113,6 +114,14 @@ public class Promotion {
 
 	public void setSpecialPice(float specialPrice) {
 		this.specialPrice = specialPrice;
+	}
+	
+	public float getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(float discount) {
+		this.discount = discount;
 	}
 	
 	public Promotion(String description, String dueDate, 
