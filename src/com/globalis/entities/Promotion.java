@@ -21,6 +21,11 @@ public class Promotion {
 	private String termsAndCondition;
 	@SerializedName("image_path")
 	private String imagePath;
+	@SerializedName("normal_price")
+	private float normalPrice;
+	@SerializedName("special_price")
+	private float specialPrice;	
+	private float discount;
 	private static List<Promotion> promotions;
 	
 	public String getDescription() {
@@ -87,6 +92,38 @@ public class Promotion {
 		this.termsAndCondition = termsAndCondition;
 	}
 	
+	public String getImagePath() {
+		return imagePath;
+	}
+
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
+	}
+	
+	public float getNormalPrice() {
+		return normalPrice;
+	}
+
+	public void setNormalPrice(float normalPrice) {
+		this.normalPrice = normalPrice;
+	}
+	
+	public float getSpecialPrice() {
+		return specialPrice;
+	}
+
+	public void setSpecialPice(float specialPrice) {
+		this.specialPrice = specialPrice;
+	}
+	
+	public float getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(float discount) {
+		this.discount = discount;
+	}
+	
 	public Promotion(String description, String dueDate, 
 			String image, int maxQuantityOfGeneratedCoupon, int maxQuantityOfValidatedCoupon, 
 			int maxQuantityPerClient, String sinceDate, String termsAndCondition) {
@@ -114,13 +151,5 @@ public class Promotion {
 				", image: " + image + ", maxQuantityOfGeneratedCoupon: " + maxQuantityOfGeneratedCoupon + 
 				", maxQuantityOfValidatedCoupon: " + maxQuantityOfValidatedCoupon + ", maxQuantityPerClient: " + maxQuantityPerClient +
 				", sinceDate: " + sinceDate + ", termsAndCondition: " + termsAndCondition;  		
-	}
-
-	public String getImagePath() {
-		return imagePath;
-	}
-
-	public void setImagePath(String imagePath) {
-		this.imagePath = imagePath;
 	}
 }
