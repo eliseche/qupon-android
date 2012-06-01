@@ -1,30 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:stretchColumns="*" >
-    <TableRow>
-        <TextView
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+              <TextView
             android:id="@+id/promotions_lbl_description"            
-            android:layout_gravity="center_horizontal"
-            android:layout_span="4"
-            android:padding="3dip"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            android:textColor="@color/promotions_item" />
-    </TableRow>
-    <TableRow android:layout_marginTop="15dip">
+            android:layout_gravity="center_horizontal" />
+    
         <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_span="1"
-            android:padding="3dip"
+            android:layout_height="wrap_content"            
             android:src="@drawable/lock" />
         <TextView
-            android:id="@+id/promotions_lbl_terms_and_condition"
-            android:layout_span="3"
+            android:id="@+id/promotions_lbl_terms_and_condition"            
             android:padding="3dip"
-            android:textColor="@color/promotions_item" />
-    </TableRow>
-</TableLayout>
+            />
+
+    </RelativeLayout>  
