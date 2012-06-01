@@ -19,6 +19,8 @@ public class Promotion {
 	private String sinceDate;
 	@SerializedName("terms_and_condition") 
 	private String termsAndCondition;
+	@SerializedName("image_path")
+	private String imagePath;
 	private static List<Promotion> promotions;
 	
 	public String getDescription() {
@@ -112,5 +114,13 @@ public class Promotion {
 				", image: " + image + ", maxQuantityOfGeneratedCoupon: " + maxQuantityOfGeneratedCoupon + 
 				", maxQuantityOfValidatedCoupon: " + maxQuantityOfValidatedCoupon + ", maxQuantityPerClient: " + maxQuantityPerClient +
 				", sinceDate: " + sinceDate + ", termsAndCondition: " + termsAndCondition;  		
+	}
+
+	public String getImagePath() {
+		return imagePath;
+	}
+
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
 	}
 }
