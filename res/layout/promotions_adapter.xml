@@ -8,7 +8,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="15dip"        
+        android:layout_marginBottom="15dip"
+        android:textColor="@color/promotions_item"        
         android:textSize="15sp"
         android:textStyle="bold" />
     <ImageView
@@ -24,14 +25,16 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dip"
         android:layout_below="@id/promotions_lbl_description"
-        android:layout_toRightOf="@id/promotions_img_promotion" />
+        android:layout_toRightOf="@id/promotions_img_promotion"
+        android:textColor="@color/promotions_item" />
     <TextView
         android:id="@+id/promotions_lbl_special_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"        
         android:layout_below="@id/promotions_lbl_terms_and_condition"
         android:layout_toRightOf="@id/promotions_img_promotion"
-        android:layout_marginLeft="5dip"        
+        android:layout_marginLeft="5dip" 
+		android:textColor="@color/promotions_item"      
         android:textSize="16sp"
         android:textStyle="bold" />
     <TextView
@@ -40,6 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/promotions_lbl_special_price"        
         android:layout_toRightOf="@id/promotions_img_promotion"
+        android:textColor="@color/promotions_item"
         android:layout_marginLeft="5dip"
         android:textSize="14sp" />    
 </RelativeLayout>
