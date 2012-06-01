@@ -8,6 +8,7 @@ import com.globalis.network.HttpRequest;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,20 +34,26 @@ public class PromotionAdapter extends ArrayAdapter<Promotion> {
 		TextView lblDescription = (TextView)convertView.findViewById(R.id.promotions_lbl_description);
 		TextView lblTermsAndCondition = (TextView)convertView.findViewById(R.id.promotions_lbl_terms_and_condition);
 		ImageView imgPromotion = (ImageView)convertView.findViewById(R.id.promotions_img_promotion);
+		TextView lblNormalPrice = (TextView)convertView.findViewById(R.id.promotions_lbl_normal_price);
+		TextView lblSpecialPrice = (TextView)convertView.findViewById(R.id.promotions_lbl_special_price);
 		
 		// Assign the appropriate data from out promotions object
 		lblDescription.setText(promotion.getDescription());
 		lblTermsAndCondition.setText(promotion.getTermsAndCondition());
-		imgPromotion.setImageBitmap(getBitmap("http://50.116.21.186/" + promotion.getImagePath()));
+		imgPromotion.setImageBitmap(getBitmap(HttpRequest.Url.base + promotion.getImagePath()));
+		lblNormalPrice.setText(String.valueOf(promotion.getNormalPrice()));
+		lblNormalPrice.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);		
+		lblSpecialPrice.setText(String.valueOf(promotion.getSpecialPrice()));		
 		
 		return convertView;
 	}		
 	
-	public Bitmap getBitmap(String bitmapUrl) {
-		  try {
-		    URL url = new URL(bitmapUrl);
-		    return BitmapFactory.decodeStream(url.openConnection().getInputStream()); 
-		  }
-		  catch(Exception ex) {return null;}
+	private Bitmap getBitmap(String bitmapUrl) {
+		try {
+			URL url = new URL(bitmapUrl);
+		    return BitmapFactory.decodeStream(url.openConnection().getInputStream());			
+		} catch (Exception e) {
+			return null;
 		}
+	}	  
 }
