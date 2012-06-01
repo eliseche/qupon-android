@@ -24,7 +24,7 @@ public class HttpRequest {
 	
 	public static class Url {
 		public static String login = "https://eventioz.com/session.json";
-		public static String promotions = "http://192.168.0.196:3000/promotions.json"; 
+		public static String promotions = "http://50.116.21.186/promotions.json"; 
 	}
 	
 	public void set(String initialUrl, Hashtable<String, String> initialParams, HttpMethod initialHttpMethod) {
@@ -45,7 +45,7 @@ public class HttpRequest {
 	}	
 	
 	public Response get(String url, Hashtable<String, String> params) throws Exception {
-		setProxy();
+		//setProxy();
 		setParams(params);
 		if(this.params.length() != 0) {
 			url = url + "?" + this.params;			
@@ -76,7 +76,7 @@ public class HttpRequest {
 	}
 	
 	public Response post(String url, Hashtable<String, String> params) throws Exception {
-		setProxy();
+		//setProxy();
 		setParams(params);
 		setUrl(url);				
 		
