@@ -5,6 +5,7 @@ import java.util.List;
 import com.globalis.entities.Promotion;
 import com.globalis.network.HttpRequest;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -17,17 +18,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class PromotionAdapter extends ArrayAdapter<Promotion> {
-	public PromotionAdapter(Context context, int resource, List<Promotion> list) {		
-		super(context, resource, list);		
+	private Activity context;
+	public ImageManager imageManager;
+	
+	public PromotionAdapter(Activity context, int resource, List<Promotion> list) {		
+		super(context, resource, list);
+		this.context = context;
+		imageManager = new ImageManager(context.getApplicationContext());
 	}
 	
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		Promotion promotion = getItem(position);
-		
 		if(convertView == null) {			
 			LayoutInflater li = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);			
-			convertView = li.inflate(R.layout.promotions_adapter, parent, false);			
+			convertView = li.inflate(R.layout.promotions_adapter, parent, false);
 		}
 		
 		// Get views from promotions_adapter.xml
@@ -37,22 +41,15 @@ public class PromotionAdapter extends ArrayAdapter<Promotion> {
 		TextView lblSpecialPrice = (TextView)convertView.findViewById(R.id.promotions_lbl_special_price);
 		TextView lblDiscount= (TextView)convertView.findViewById(R.id.promotions_lbl_discount);
 		
+		Promotion promotion = getItem(position);
+		
 		// Assign the appropriate data from out promotions object
 		lblDescription.setText(promotion.getDescription());
 		lblTermsAndCondition.setText(promotion.getTermsAndCondition());
-		imgPromotion.setImageBitmap(getBitmap(HttpRequest.Url.base + promotion.getImagePath()));
+		imageManager.displayImage(HttpRequest.Url.base + promotion.getImagePath(), imgPromotion);		
 		lblSpecialPrice.setText("$" + String.valueOf(promotion.getSpecialPrice()));		
 		lblDiscount.setText(String.valueOf(promotion.getDiscount()) + "%");
 		
 		return convertView;
-	}		
-	
-	private Bitmap getBitmap(String bitmapUrl) {
-		try {
-			URL url = new URL(bitmapUrl);
-		    return BitmapFactory.decodeStream(url.openConnection().getInputStream());			
-		} catch (Exception e) {
-			return null;
-		}
-	}	  
+	} 
 }

@@ -39,7 +39,7 @@ public class PromotionActivity extends Activity {
 					List<Promotion> promotions = gson.fromJson(response.getBody(), collectionType);
 					Promotion.setPromotions(promotions);
 					
-					promotionAdapter = new PromotionAdapter(getApplicationContext(), R.layout.promotions_adapter, Promotion.getPromotions());
+					promotionAdapter = new PromotionAdapter(PromotionActivity.this, R.layout.promotions_adapter, Promotion.getPromotions());
 					listViewPromotion.setAdapter(promotionAdapter);
 				}				
 			}
