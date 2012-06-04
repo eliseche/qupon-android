@@ -5,7 +5,6 @@ import java.io.FileOutputStream;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Stack;
-
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -131,12 +130,9 @@ public class ImageManager {
 						
 						Bitmap bitmap = getBitmap(imageToLoad.imageUrl);
 						imageMap.put(imageToLoad.imageUrl, bitmap);
-						/*Object tag = imageToLoad.imageView.getTag();						
-						if(tag != null && ((String)tag).equals(imageToLoad.imageUrl)) {*/
-							BitmapDisplayer bitmapDisplayer = new BitmapDisplayer(bitmap, imageToLoad.imageView);
-							Activity activity = (Activity)imageToLoad.imageView.getContext();
-							activity.runOnUiThread(bitmapDisplayer);
-						//}
+						BitmapDisplayer bitmapDisplayer = new BitmapDisplayer(bitmap, imageToLoad.imageView);
+						Activity activity = (Activity)imageToLoad.imageView.getContext();
+						activity.runOnUiThread(bitmapDisplayer);						
 					}
 					
 					if(Thread.interrupted()) {
