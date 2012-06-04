@@ -40,11 +40,11 @@
                 android:hint="@string/signup_txt_repassword"
                 android:inputType="textPassword" />
             <EditText
-                android:id="@+id/signup_txt_name"
+                android:id="@+id/signup_txt_first_name"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dip"
-                android:hint="@string/signup_txt_name" />
+                android:hint="@string/signup_txt_first_name" />
             <EditText
                 android:id="@+id/signup_txt_last_name"
                 android:layout_width="fill_parent"

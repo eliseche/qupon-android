@@ -3,31 +3,36 @@ package com.globalis.entities;
 import java.util.Hashtable;
 
 public class Person {
+	private String firstName;
+	private String lastName;
+	private String zipCode;
+	private String phoneNumber;
+	private String gender;
+	private String email;
 	
-	
-	public String getName() {
-		return name;
+	public String getFirstName() {
+		return firstName;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
-	public String getLast_name() {
+	public String getLastName() {
 		return lastName;
 	}
-	public void setLast_name(String last_name) {
-		this.lastName = last_name;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
-	public String getZip_code() {
+	public String getZipCode() {
 		return zipCode;
 	}
-	public void setZip_code(String zip_code) {
-		this.zipCode = zip_code;
+	public void setZipCode(String zipCode) {
+		this.zipCode = zipCode;
 	}
-	public String getPhone_number() {
+	public String getPhoneNumber() {
 		return phoneNumber;
 	}
-	public void setPhone_number(String phone_number) {
-		this.phoneNumber = phone_number;
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 	public String getGender() {
 		return gender;
@@ -41,19 +46,9 @@ public class Person {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	private String name;
-	private String lastName;
-	private String zipCode;
-	private String phoneNumber;
-	private String gender;
-	private String email;
-	
-	public Person(){}
-	
-	public Person(String name, String lastName, String zipCode, String phoneNumber,
-			String gender, String email){
-		this.name = name;
+		
+	public Person(String firstName, String lastName, String zipCode, String phoneNumber, String gender, String email) {
+		this.firstName = firstName;
 		this.lastName = lastName;
 		this.zipCode = zipCode;
 		this.phoneNumber = phoneNumber;
@@ -61,15 +56,14 @@ public class Person {
 		this.email = email;
 	}
 	
-	public Hashtable<String, String> getHashtable(){
-		Hashtable<String, String> hashtable = new Hashtable<String, String>();
-		hashtable.put("name",name);
-		hashtable.put("last_name",lastName);
-		hashtable.put("zip_code",zipCode);
-		hashtable.put("phone_number",phoneNumber);
-		hashtable.put("gender",gender);
-		hashtable.put("email",email);
-		return hashtable;
+	public Hashtable<String, String> getHashTable() {
+		Hashtable<String, String> hashTable = new Hashtable<String, String>();
+		hashTable.put("firstName", firstName);
+		hashTable.put("lastName", lastName);
+		hashTable.put("zipCode", zipCode);
+		hashTable.put("phoneNumber", phoneNumber);
+		hashTable.put("gender", gender);
+		hashTable.put("email", email);
+		return hashTable;
 	}
-	
 }

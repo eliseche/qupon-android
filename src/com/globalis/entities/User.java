@@ -1,19 +1,8 @@
 package com.globalis.entities;
 
-import java.lang.reflect.Type;
 import java.util.Hashtable;
 import java.util.List;
-
-import android.app.Activity;
-
-import com.globalis.network.HttpRequest;
-import com.globalis.network.HttpTask;
-import com.globalis.network.Response;
-import com.globalis.quponMovil.PromotionAdapter;
-import com.globalis.quponMovil.R;
-import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
-import com.google.gson.reflect.TypeToken;
 
 public class User {
 	
@@ -33,11 +22,11 @@ public class User {
 		this.username = username;
 	}
 	
-	private String getPasswordDigest() {
+	public String getPasswordDigest() {
 		return passwordDigest;
 	}
 
-	private void setPasswordDigest(String passwordDigest) {
+	public void setPasswordDigest(String passwordDigest) {
 		this.passwordDigest = passwordDigest;
 	}
 	

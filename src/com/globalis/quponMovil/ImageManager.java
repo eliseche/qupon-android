@@ -13,7 +13,7 @@ import android.graphics.BitmapFactory;
 import android.widget.ImageView;
 
 public class ImageManager {
-	private final int avatar = R.drawable.lock;
+	private final int avatar = R.drawable.avatar;
 	private HashMap<String, Bitmap> imageMap = new HashMap<String, Bitmap>();
 	private File cacheDir;
 	private ImageQueue imageQueue = new ImageQueue();
@@ -29,7 +29,7 @@ public class ImageManager {
 		String sdState = android.os.Environment.getExternalStorageState();
 		if(sdState.equals(android.os.Environment.MEDIA_MOUNTED)) {
 			File sdDir = android.os.Environment.getExternalStorageDirectory();
-			cacheDir = new File(sdDir, "data/qupon");
+			cacheDir = new File(sdDir, "qupon");
 		}
 		else {
 			cacheDir = context.getCacheDir();
