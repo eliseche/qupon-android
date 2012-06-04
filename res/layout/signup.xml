@@ -21,11 +21,11 @@
                 android:textSize="18sp"
                 android:textStyle="bold" />
             <EditText
-                android:id="@+id/signup_txt_user"
+                android:id="@+id/signup_txt_username"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dip"
-                android:hint="@string/signup_txt_user" />
+                android:hint="@string/signup_txt_username" />
             <EditText
                 android:id="@+id/signup_txt_password"
                 android:layout_width="fill_parent"
