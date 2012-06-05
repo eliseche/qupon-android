@@ -6,12 +6,13 @@ import com.globalis.network.HttpRequest;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class PromotionAdapter extends ArrayAdapter<Promotion> {	
+public class PromotionAdapter extends ArrayAdapter<Promotion> implements OnClickListener {	
 	public ImageManager imageManager;
 	
 	public PromotionAdapter(Context context, int resource, List<Promotion> list) {		
@@ -22,6 +23,7 @@ public class PromotionAdapter extends ArrayAdapter<Promotion> {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder holder;
+		
 		
 		if(convertView ==  null) {			
 			LayoutInflater li = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);			
@@ -39,6 +41,8 @@ public class PromotionAdapter extends ArrayAdapter<Promotion> {
 		else {
 			holder = (ViewHolder)convertView.getTag();
 		}
+		
+		convertView.setOnClickListener(this);
 		
 		final Promotion promotion = getItem(position);
 		if(promotion != null) {
@@ -59,5 +63,10 @@ public class PromotionAdapter extends ArrayAdapter<Promotion> {
 		public ImageView imgPromotion;
 		public TextView lblSpecialPrice;
 		public TextView lblDiscount;
+	}
+
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		
 	}
 }
