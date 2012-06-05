@@ -6,14 +6,13 @@ import com.globalis.network.HttpRequest;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-public class PromotionAdapter extends ArrayAdapter<Promotion> implements OnClickListener {	
+public class PromotionAdapter extends ArrayAdapter<Promotion> {	
 	public ImageManager imageManager;
 	
 	public PromotionAdapter(Context context, int resource, List<Promotion> list) {		
@@ -44,8 +43,6 @@ public class PromotionAdapter extends ArrayAdapter<Promotion> implements OnClick
 			holder = (ViewHolder)convertView.getTag();
 		}
 		
-		convertView.setOnClickListener(this);
-		
 		final Promotion promotion = getItem(position);
 		if(promotion != null) {
 			// Assign the appropriate data from out promotions object
@@ -66,10 +63,5 @@ public class PromotionAdapter extends ArrayAdapter<Promotion> implements OnClick
 		public TextView lblSpecialPrice;
 		public TextView lblDiscount;
 		public ProgressBar pbProgress;
-	}
-
-	public void onClick(View v) {
-		// TODO Auto-generated method stub
-		
-	}
+	}	
 }

@@ -163,7 +163,6 @@ public class ImageManager {
 	
 	private class ImageQueue {
 		private LinkedList<ImageRef> imageRef = new LinkedList<ImageRef>();
-		//private Stack<ImageRef> imageRef = new Stack<ImageRef>();
 		
 		public void clean(ImageView imageView) {
 			for(int i = 0; i < imageRef.size(); i++) {
