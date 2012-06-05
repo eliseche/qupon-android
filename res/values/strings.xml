@@ -28,7 +28,7 @@
     <string name="promotion_detail_lbl_sav_price">Saving price:</string>
     <string name="promotion_detail_lbl_perc_disc">You save:</string>
     <string name="promotion_detail_lbl_tag_names">Tag list:</string>
-    <string name="promotion_detail_lbl_quantity_remaining">Quantity of remaining coupons:</string>
+    <string name="promotion_detail_lbl_quantity_remaining">Remaining coupons:</string>
     <string name="promotion_detail_lbl_terms_cond">Terms and conditions:</string>
     <string name="promotion_detail_lbl_from_date">From date:</string>
     <string name="promotion_detail_lbl_to_date">To date:</string>

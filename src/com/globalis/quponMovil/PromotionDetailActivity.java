@@ -3,6 +3,8 @@ package com.globalis.quponMovil;
 import java.io.Serializable;
 
 import com.globalis.entities.Promotion;
+import com.globalis.network.HttpRequest;
+import com.globalis.utils.Utils;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -27,7 +29,7 @@ public class PromotionDetailActivity extends Activity {
 			finish();
 		}
 		else{
-			Promotion promotion = (Promotion) extras.getSerializable("promotion");
+			promotion = (Promotion) extras.getSerializable("promotion");
 			
 			initViews();
 		}
@@ -35,17 +37,27 @@ public class PromotionDetailActivity extends Activity {
 
 	private void initViews() {
 		ViewHolder holder = new ViewHolder();
-		holder.lblDescription = (TextView)this.findViewById(R.id.promotion_detail_lbl_description);
-		holder.lblSavPrice = (TextView)this.findViewById(R.id.promotion_detail_lbl_sav_price);
-		holder.lblPercDisc = (TextView)this.findViewById(R.id.promotion_detail_lbl_perc_disc);
-		holder.lblTagNames = (TextView)this.findViewById(R.id.promotion_detail_lbl_tag_names);
-		holder.lblQuantityRemaining = (TextView)this.findViewById(R.id.promotion_detail_lbl_quantity_remaining);
-		holder.lblTermsCond = (TextView)this.findViewById(R.id.promotion_detail_lbl_terms_cond);
-		holder.lblFromDate = (TextView)this.findViewById(R.id.promotion_detail_lbl_from_date);
-		holder.lblToDate = (TextView)this.findViewById(R.id.promotion_detail_lbl_to_date);
-		holder.lblState = (TextView)this.findViewById(R.id.promotion_detail_lbl_state);
+		holder.lblDescription = (TextView)this.findViewById(R.id.promotion_detail_lbl_description1);
+		holder.lblSavPrice = (TextView)this.findViewById(R.id.promotion_detail_lbl_sav_price1);
+		holder.lblPercDisc = (TextView)this.findViewById(R.id.promotion_detail_lbl_perc_disc1);
+		holder.lblTagNames = (TextView)this.findViewById(R.id.promotion_detail_lbl_tag_names1);
+		holder.lblQuantityRemaining = (TextView)this.findViewById(R.id.promotion_detail_lbl_quantity_remaining1);
+		holder.lblTermsCond = (TextView)this.findViewById(R.id.promotion_detail_lbl_terms_cond1);
+		holder.lblFromDate = (TextView)this.findViewById(R.id.promotion_detail_lbl_from_date1);
+		holder.lblToDate = (TextView)this.findViewById(R.id.promotion_detail_lbl_to_date1);
+		holder.lblState = (TextView)this.findViewById(R.id.promotion_detail_lbl_state1);
 
 		holder.lblDescription.setText(holder.lblDescription.getText()+promotion.getDescription());
+		holder.lblSavPrice.setText(holder.lblSavPrice.getText()+String.valueOf(promotion.getNormalPrice()));
+		holder.lblPercDisc.setText(holder.lblPercDisc.getText()+String.valueOf(promotion.getDiscount()));
+		holder.lblTagNames.setText(holder.lblTagNames.getText());
+		holder.lblQuantityRemaining.setText(holder.lblQuantityRemaining.getText());
+		holder.lblTermsCond.setText(holder.lblTermsCond.getText()+promotion.getTermsAndCondition());
+		//new ImageManager(this).displayImage(HttpRequest.Url.base + promotion.getImagePath(), holder.imgPromotion);		
+		holder.lblFromDate.setText(holder.lblFromDate.getText()+Utils.parseDate(promotion.getSinceDate(), this));
+		holder.lblToDate.setText(holder.lblToDate.getText()+Utils.parseDate(promotion.getDueDate(), this));
+		holder.lblState.setText(holder.lblState.getText());
+		
 	}
 	
 	private static class ViewHolder {
