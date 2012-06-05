@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
-    <TextView
+    <TextView        
         android:id="@+id/promotions_lbl_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -12,19 +12,31 @@
         android:textColor="@color/promotions_item"        
         android:textSize="15sp"
         android:textStyle="bold" />
-    <ImageView
-        android:id="@+id/promotions_img_promotion"
+     <RelativeLayout
+        android:id="@+id/promotions_rl_image"
         android:layout_width="100dip"
         android:layout_height="50dip"
         android:layout_alignParentLeft="true"
-        android:layout_below="@id/promotions_lbl_description" />
+        android:layout_below="@id/promotions_lbl_description" >
+        <ImageView
+	        android:id="@+id/promotions_img_promotion"
+	        android:layout_width="fill_parent"
+	        android:layout_height="fill_parent"
+	        android:visibility="gone" />
+	    <ProgressBar 
+	        android:id="@+id/promotions_progress"
+	        android:layout_width="40dip"
+	        android:layout_height="40dip"	        
+	        android:indeterminate="true"	        	        
+	        android:layout_centerHorizontal="true"/>
+    </RelativeLayout>    
     <TextView
         android:id="@+id/promotions_lbl_terms_and_condition"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dip"
         android:layout_below="@id/promotions_lbl_description"
-        android:layout_toRightOf="@id/promotions_img_promotion"        
+        android:layout_toRightOf="@id/promotions_rl_image"        
         android:textColor="@color/promotions_item" />
     <TextView
         android:id="@+id/promotions_lbl_special_price"
@@ -43,5 +55,5 @@
         android:layout_below="@id/promotions_lbl_special_price"        
         android:layout_alignParentRight="true"
         android:textColor="@color/promotions_item"        
-        android:textSize="14sp" />    
+        android:textSize="14sp" />
 </RelativeLayout>

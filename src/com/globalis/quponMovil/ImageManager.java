@@ -4,15 +4,16 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.net.URL;
 import java.util.HashMap;
-import java.util.Stack;
+import java.util.LinkedList;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
-public class ImageManager {
-	private final int avatar = R.drawable.avatar;
+public class ImageManager {	
 	private HashMap<String, Bitmap> imageMap = new HashMap<String, Bitmap>();
 	private File cacheDir;
 	private ImageQueue imageQueue = new ImageQueue();
@@ -39,23 +40,26 @@ public class ImageManager {
 		}
 	}
 	
-	public void displayImage(String url, ImageView imageView) {
+	public void displayImage(String url, ImageView imageView, ProgressBar progressBar) {
 		if(imageMap.containsKey(url)) {
 			imageView.setImageBitmap(imageMap.get(url));
+			progressBar.setVisibility(View.GONE);
+			imageView.setVisibility(View.VISIBLE);
 		}
 		else {
-			queueImage(url, imageView);
-			imageView.setImageResource(avatar);
+			queueImage(url, imageView, progressBar);			
+			imageView.setVisibility(View.GONE);
+			progressBar.setVisibility(View.VISIBLE);
 		}
 	}
 	
-	private void queueImage(String url, ImageView imageView) {
+	private void queueImage(String url, ImageView imageView, ProgressBar progressBar) {
 		/*
 		 * This imageView might have been used for other images, so we
 		 * clear the queue of old tasks before starting
 		 */
 		imageQueue.clean(imageView);
-		ImageRef imageRef = new ImageRef(url, imageView);		
+		ImageRef imageRef = new ImageRef(url, imageView, progressBar);		
 		
 		synchronized (imageQueue.imageRef) {			
 			imageQueue.imageRef.push(imageRef);
@@ -130,7 +134,7 @@ public class ImageManager {
 						
 						Bitmap bitmap = getBitmap(imageToLoad.imageUrl);
 						imageMap.put(imageToLoad.imageUrl, bitmap);
-						BitmapDisplayer bitmapDisplayer = new BitmapDisplayer(bitmap, imageToLoad.imageView);
+						BitmapDisplayer bitmapDisplayer = new BitmapDisplayer(bitmap, imageToLoad.imageView, imageToLoad.progressBar);
 						Activity activity = (Activity)imageToLoad.imageView.getContext();
 						activity.runOnUiThread(bitmapDisplayer);						
 					}
@@ -148,15 +152,18 @@ public class ImageManager {
 	private class ImageRef {
 		public String imageUrl;
 		public ImageView imageView;		
+		public ProgressBar progressBar;
 		
-		public ImageRef(String imageUrl, ImageView imageView) {
+		public ImageRef(String imageUrl, ImageView imageView, ProgressBar progressBar) {
 			this.imageUrl = imageUrl;
-			this.imageView = imageView;			
+			this.imageView = imageView;
+			this.progressBar = progressBar;
 		}
 	}
 	
 	private class ImageQueue {
-		private Stack<ImageRef> imageRef = new Stack<ImageRef>();
+		private LinkedList<ImageRef> imageRef = new LinkedList<ImageRef>();
+		//private Stack<ImageRef> imageRef = new Stack<ImageRef>();
 		
 		public void clean(ImageView imageView) {
 			for(int i = 0; i < imageRef.size(); i++) {
@@ -170,18 +177,23 @@ public class ImageManager {
 	private class BitmapDisplayer implements Runnable {
 		Bitmap bitmap;
 		ImageView imageView;		
+		ProgressBar progressBar;
 		
-		public BitmapDisplayer(Bitmap bitmap, ImageView imageView) {
+		public BitmapDisplayer(Bitmap bitmap, ImageView imageView, ProgressBar progressBar) {
 			this.bitmap = bitmap;
-			this.imageView = imageView;			
+			this.imageView = imageView;
+			this.progressBar = progressBar;
 		}
 		
 		public void run() {
 			if(bitmap != null) {
 				imageView.setImageBitmap(bitmap);
+				progressBar.setVisibility(View.GONE);
+				imageView.setVisibility(View.VISIBLE);
 			}
-			else {
-				imageView.setImageResource(avatar);
+			else {				
+				imageView.setVisibility(View.GONE);
+				progressBar.setVisibility(View.VISIBLE);
 			}
 		}
 	}
