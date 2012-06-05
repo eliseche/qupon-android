@@ -1,9 +1,10 @@
 package com.globalis.entities;
 
+import java.io.Serializable;
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
-public class Promotion {	
+public class Promotion implements Serializable{	
 	private String description;
 	@SerializedName("due_date")
 	private String dueDate;

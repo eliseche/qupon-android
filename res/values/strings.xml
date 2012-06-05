@@ -24,5 +24,14 @@
 	<string name="signup_error_msg_unmatching_pass">The two passwords don\'t match</string>
     <string name="signup_error_msg_complete_first_name">Please input your first name</string>
     <string name="signup_error_msg_complete_last_name">Please input your last name</string>
+    <string name="promotion_detail_lbl_desc">Description:</string>
+    <string name="promotion_detail_lbl_sav_price">Saving price:</string>
+    <string name="promotion_detail_lbl_perc_disc">You save:</string>
+    <string name="promotion_detail_lbl_tag_names">Tag list:</string>
+    <string name="promotion_detail_lbl_quantity_remaining">Quantity of remaining coupons:</string>
+    <string name="promotion_detail_lbl_terms_cond">Terms and conditions:</string>
+    <string name="promotion_detail_lbl_from_date">From date:</string>
+    <string name="promotion_detail_lbl_to_date">To date:</string>
+    <string name="promotion_detail_lbl_state">State of promotion:</string>
     <string name="menu_login">Login</string>
 </resources>

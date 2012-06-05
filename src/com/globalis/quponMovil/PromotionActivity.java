@@ -14,9 +14,13 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
-public class PromotionActivity extends Activity {
+public class PromotionActivity extends Activity implements OnItemClickListener{
 	private ListView listViewPromotion;	
 	private PromotionAdapter promotionAdapter; 
 	
@@ -69,5 +73,13 @@ public class PromotionActivity extends Activity {
 	
 	private void initViews() {
 		listViewPromotion = (ListView)findViewById(R.id.promotions_lst);
+		listViewPromotion.setOnItemClickListener(this);
+	}
+
+	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+		Promotion promotion = Promotion.getPromotions().get(arg2);
+		Intent intent = new Intent(this, PromotionDetailActivity.class);
+		intent.putExtra("promotion", promotion);
+		startActivity(intent);
 	}
 }
