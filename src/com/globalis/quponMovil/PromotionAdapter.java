@@ -6,13 +6,13 @@ import com.globalis.network.HttpRequest;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
-public class PromotionAdapter extends ArrayAdapter<Promotion> implements OnClickListener {	
+public class PromotionAdapter extends ArrayAdapter<Promotion> {	
 	public ImageManager imageManager;
 	
 	public PromotionAdapter(Context context, int resource, List<Promotion> list) {		
@@ -35,21 +35,20 @@ public class PromotionAdapter extends ArrayAdapter<Promotion> implements OnClick
 			holder.lblTermsAndCondition = (TextView)convertView.findViewById(R.id.promotions_lbl_terms_and_condition);
 			holder.imgPromotion = (ImageView)convertView.findViewById(R.id.promotions_img_promotion);		
 			holder.lblSpecialPrice = (TextView)convertView.findViewById(R.id.promotions_lbl_special_price);
-			holder.lblDiscount= (TextView)convertView.findViewById(R.id.promotions_lbl_discount);
+			holder.lblDiscount = (TextView)convertView.findViewById(R.id.promotions_lbl_discount);
+			holder.pbProgress = (ProgressBar)convertView.findViewById(R.id.promotions_progress);
 			convertView.setTag(holder);
 		}
 		else {
 			holder = (ViewHolder)convertView.getTag();
 		}
 		
-		convertView.setOnClickListener(this);
-		
 		final Promotion promotion = getItem(position);
 		if(promotion != null) {
 			// Assign the appropriate data from out promotions object
 			holder.lblDescription.setText(promotion.getDescription());
 			holder.	lblTermsAndCondition.setText(promotion.getTermsAndCondition());
-			imageManager.displayImage(HttpRequest.Url.base + promotion.getImagePath(), holder.imgPromotion);		
+			imageManager.displayImage(HttpRequest.Url.base + promotion.getImagePath(), holder.imgPromotion, holder.pbProgress);		
 			holder.lblSpecialPrice.setText("$" + String.valueOf(promotion.getSpecialPrice()));		
 			holder.lblDiscount.setText(String.valueOf(promotion.getDiscount()) + "%");			
 		}
@@ -63,10 +62,6 @@ public class PromotionAdapter extends ArrayAdapter<Promotion> implements OnClick
 		public ImageView imgPromotion;
 		public TextView lblSpecialPrice;
 		public TextView lblDiscount;
-	}
-
-	public void onClick(View v) {
-		// TODO Auto-generated method stub
-		
-	}
+		public ProgressBar pbProgress;
+	}	
 }
