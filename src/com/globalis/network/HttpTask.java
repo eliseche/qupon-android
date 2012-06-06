@@ -1,5 +1,8 @@
 package com.globalis.network;
 
+import com.globalis.quponMovil.R;
+import com.globalis.utils.Utils;
+
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -28,9 +31,13 @@ public abstract class HttpTask extends AsyncTask<String, Void, Response>  {
 	@Override
 	protected Response doInBackground(String... params) {	
 		try {
-			Response response = request.execute();				
-			return response;
-			
+			if(Utils.isNetworkAvailable(context)) {
+				Response response = request.execute();				
+				return response;
+			}
+			else {				
+				throw new Exception(context.getResources().getString(R.string.exception_no_network));				
+			}
 		} catch (Exception e) {
 			error = e.getMessage();
 			cancel(true);

@@ -4,6 +4,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
@@ -44,5 +46,27 @@ public class Utils {
 		default:
 			return null;			
 		}
+	}
+	
+	public static boolean isNetworkAvailable(Context context) {
+		boolean haveWifiConnection = false;
+		boolean haveMobileConnection = false;
+		
+		ConnectivityManager cm = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo[] networkInfo = cm.getAllNetworkInfo();
+		for (NetworkInfo ni : networkInfo) {
+			if(ni.getType() == ConnectivityManager.TYPE_WIFI) {
+				if(ni.isConnected()) {
+					haveWifiConnection = true;					
+				}				
+			}
+			if(ni.getType() == ConnectivityManager.TYPE_MOBILE) {
+				if(ni.isConnected()) {
+					haveMobileConnection = true;					
+				}				
+			}
+		}
+		
+		return haveWifiConnection || haveMobileConnection;
 	}
 }
