@@ -41,8 +41,6 @@ public class Utils {
 			return Resolution.MEDIUM;
 		case DisplayMetrics.DENSITY_HIGH:
 			return Resolution.HIGH;
-		case DisplayMetrics.DENSITY_XHIGH:
-			return Resolution.XHIGH;
 		default:
 			return null;			
 		}
