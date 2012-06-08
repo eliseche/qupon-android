@@ -62,7 +62,7 @@ public class ImageManager {
 		ImageRef imageRef = new ImageRef(url, imageView, progressBar);		
 		
 		synchronized (imageQueue.imageRef) {			
-			imageQueue.imageRef.push(imageRef);
+			imageQueue.imageRef.addLast(imageRef);
 			imageQueue.imageRef.notifyAll();
 		}
 		
@@ -129,7 +129,7 @@ public class ImageManager {
 						ImageRef imageToLoad;
 						
 						synchronized (imageQueue.imageRef) {
-							imageToLoad = imageQueue.imageRef.pop();							
+							imageToLoad = imageQueue.imageRef.removeFirst();							
 						}
 						
 						Bitmap bitmap = getBitmap(imageToLoad.imageUrl);
