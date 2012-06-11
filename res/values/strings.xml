@@ -23,16 +23,16 @@
 	<string name="signup_error_msg_complete_user">Please complete user name</string>
 	<string name="signup_error_msg_unmatching_pass">The two passwords don\'t match</string>
     <string name="signup_error_msg_complete_first_name">Please input your first name</string>
-    <string name="signup_error_msg_complete_last_name">Please input your last name</string>
-    <string name="promotion_detail_lbl_desc">Description:</string>
-    <string name="promotion_detail_lbl_sav_price">Saving price</string>
-    <string name="promotion_detail_lbl_perc_disc">You save</string>
-    <string name="promotion_detail_lbl_tag_names">Tag list:</string>
-    <string name="promotion_detail_lbl_quantity_remaining">Remaining coupons</string>
-    <string name="promotion_detail_lbl_terms_cond">Terms and conditions:</string>
-    <string name="promotion_detail_lbl_from_date">From date:</string>
-    <string name="promotion_detail_lbl_to_date">To date:</string>
-    <string name="promotion_detail_lbl_state">State of promotion:</string>
+    <string name="signup_error_msg_complete_last_name">Please input your last name</string>    
+    <string name="promotion_detail_lbl_special_price_title">Special Price</string>
+    <string name="promotion_detail_lbl_discount_title">You save</string>
+    <string name="promotion_detail_lbl_to_date_title">To date</string>
+    <string name="promotion_detail_lbl_quantity_remaining_title">Remaining</string>
+    <string name="promotion_detail_lbl_terms_cond_title">Terms and conditions:</string>
+    <string name="promotion_detail_lbl_description_title">Description:</string>
+    <string name="promotion_detail_lbl_tag_names_title">Tag list:</string>    
+    <string name="promotion_detail_lbl_from_date_title">From date:</string>    
+    <string name="promotion_detail_lbl_state_title">State of promotion:</string>
     <string name="menu_login">Login</string>
     <string name="exception_no_network">Couldn\'t find an Internet connection</string>
 </resources>
