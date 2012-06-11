@@ -1,88 +1,65 @@
 package com.globalis.quponMovil;
 
 import java.io.Serializable;
-
 import com.globalis.entities.Promotion;
 import com.globalis.network.HttpRequest;
 import com.globalis.utils.Utils;
-
 import android.app.Activity;
-import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class PromotionDetailActivity extends Activity {
-
-	public TextView lblDescription;
-	public TextView lblSavPrice;
-	public TextView lblPercDisc;
-	public TextView lblTagNames;
-	public TextView lblQuantityRemaining;
-	public TextView lblTermsCond;
-	public ImageView imgPromotion;
-	public TextView lblFromDate;
-	public TextView lblToDate;
-	public TextView lblState;
-
 	private Promotion promotion;
-	private Bitmap imageBitmap;
+	private TextView lblSpecialPrice, lblDiscount, lblToDate, lblRemaining, lblTermsCond,
+		lblDescription, lblTags, lblState, lblFromDate;
+	private ImageView imgPromotion;
+	private ProgressBar pbProgress;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.promotion_detail);
+		
+		initViews();
 
 		Bundle extras = getIntent().getExtras();
-		Serializable serializable = extras.getSerializable("promotion");
-		Serializable serializable1 = extras.getSerializable("imageBitmap");
-		if (serializable == null || serializable1 == null) {
-			Toast.makeText(PromotionDetailActivity.this, "Error",
-					Toast.LENGTH_LONG).show();
+		Serializable serializable = extras.getSerializable("promotion");		
+		if (serializable == null) {
+			Toast.makeText(PromotionDetailActivity.this, "Error", Toast.LENGTH_LONG).show();
 			finish();
 		} else {
-			promotion = (Promotion) serializable;
-			//imageBitmap = (Bitmap) serializable1;
-			initViews();
+			promotion = (Promotion)serializable;
+			collectData();	
+			ImageManager imageManager = new ImageManager(getApplicationContext());
+			imageManager.displayImage(HttpRequest.Url.base + promotion.getImagePath(), imgPromotion, pbProgress);
+								
 		}
+	}
+	
+	private void collectData() {
+		lblSpecialPrice.setText(String.valueOf(promotion.getSpecialPrice()));
+		lblDiscount.setText(String.valueOf(promotion.getDiscount()));
+		lblToDate.setText(Utils.parseDate(promotion.getDueDate(), PromotionDetailActivity.this));
+		lblRemaining.setText(String.valueOf(promotion.getMaxQuantityOfGeneratedCoupon()));
+		lblTermsCond.setText(String.valueOf(promotion.getTermsAndCondition()));
+		lblDescription.setText(String.valueOf(promotion.getDescription()));
+		lblFromDate.setText(Utils.parseDate(promotion.getSinceDate(), PromotionDetailActivity.this));
 	}
 
 	private void initViews() {
-
-		lblDescription = (TextView) this
-				.findViewById(R.id.promotion_detail_lbl_description1);
-		lblSavPrice = (TextView) this
-				.findViewById(R.id.promotion_detail_lbl_sav_price1);
-		lblPercDisc = (TextView) this
-				.findViewById(R.id.promotion_detail_lbl_perc_disc1);
-		lblTagNames = (TextView) this
-				.findViewById(R.id.promotion_detail_lbl_tag_names1);
-		lblQuantityRemaining = (TextView) this
-				.findViewById(R.id.promotion_detail_lbl_quantity_remaining1);
-		lblTermsCond = (TextView) this
-				.findViewById(R.id.promotion_detail_lbl_terms_cond1);
-		lblFromDate = (TextView) this
-				.findViewById(R.id.promotion_detail_lbl_from_date1);
-		lblToDate = (TextView) this
-				.findViewById(R.id.promotion_detail_lbl_to_date1);
-		lblState = (TextView) this
-				.findViewById(R.id.promotion_detail_lbl_state1);
-
-		lblDescription.setText(promotion.getDescription());
-		lblSavPrice.setText(String.valueOf(promotion.getNormalPrice()));
-		lblPercDisc.setText(String.valueOf(promotion.getDiscount()));
-		lblTagNames.setText(lblTagNames.getText());
-		lblQuantityRemaining.setText(lblQuantityRemaining.getText());
-		lblTermsCond
-				.setText("texto super largo texto super largo texto super largo texto super largo texto super largo ");
-		// new ImageManager(this).displayImage(HttpRequest.Url.base +
-		// promotion.getImagePath(), imgPromotion);
-		lblFromDate.setText(Utils.parseDate(promotion.getSinceDate(), this));
-		lblToDate.setText(Utils.parseDate(promotion.getDueDate(), this));
-		lblState.setText(lblState.getText());
-
+		lblSpecialPrice = (TextView)findViewById(R.id.promotion_detail_lbl_special_price);
+		lblDiscount = (TextView)findViewById(R.id.promotion_detail_lbl_discount);
+		lblToDate = (TextView)findViewById(R.id.promotion_detail_lbl_to_date);
+		lblRemaining = (TextView)findViewById(R.id.promotion_detail_lbl_quantity_remaining);
+		lblTermsCond = (TextView)findViewById(R.id.promotion_detail_lbl_terms_cond);
+		lblDescription = (TextView)findViewById(R.id.promotion_detail_lbl_description);
+		lblTags = (TextView)findViewById(R.id.promotion_detail_lbl_tag_names);
+		lblState = (TextView)findViewById(R.id.promotion_detail_lbl_tag_names);
+		lblFromDate = (TextView)findViewById(R.id.promotion_detail_lbl_from_date);
+		imgPromotion = (ImageView)findViewById(R.id.promotion_detail_img_promotion);
+		pbProgress = (ProgressBar)findViewById(R.id.promotion_detail_pb_loading);
 	}
-
 }
