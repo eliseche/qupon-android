@@ -35,7 +35,6 @@ public class PromotionDetailActivity extends Activity {
 			collectData();	
 			ImageManager imageManager = new ImageManager(getApplicationContext());
 			imageManager.displayImage(HttpRequest.Url.base + promotion.getImagePath(), imgPromotion, pbProgress);
-								
 		}
 	}
 	
