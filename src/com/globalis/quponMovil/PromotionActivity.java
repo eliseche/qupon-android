@@ -20,7 +20,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
-public class PromotionActivity extends Activity implements OnItemClickListener{
+public class PromotionActivity extends Activity implements OnItemClickListener, OnClickListener{
 	private ListView listViewPromotion;	
 	private PromotionAdapter promotionAdapter; 
 	
@@ -81,5 +81,33 @@ public class PromotionActivity extends Activity implements OnItemClickListener{
 		Intent intent = new Intent(this, PromotionDetailActivity.class);
 		intent.putExtra("promotion", promotion);
 		startActivity(intent);
+	}
+	
+	public void generateCoupon(){
+		Promotion promotion = null;
+		
+		HttpRequest req = new HttpRequest();
+		req.set(HttpRequest.Url.promotions, null, HttpRequest.HttpMethod.GET);		
+		HttpTask task = new HttpTask() {
+			
+			@Override
+			public void doWork(Response response) {
+				if(response != null) {
+					Gson gson = new Gson();
+					Type collectionType = new TypeToken<List<Promotion>>(){}.getType();
+					List<Promotion> promotions = gson.fromJson(response.getBody(), collectionType);
+					Promotion.setPromotions(promotions);
+					
+					promotionAdapter = new PromotionAdapter(PromotionActivity.this, R.layout.promotions_adapter, Promotion.getPromotions());
+					listViewPromotion.setAdapter(promotionAdapter);
+				}				
+			}
+		};
+		task.set(this, req).execute();
+	}
+
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
 public class Promotion implements Serializable{	
+	private int id;
 	private String description;
 	@SerializedName("due_date")
 	private String dueDate;
@@ -27,6 +28,14 @@ public class Promotion implements Serializable{
 	private float specialPrice;	
 	private float discount;
 	private static List<Promotion> promotions;
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 	
 	public String getDescription() {
 		return description;
@@ -152,4 +161,6 @@ public class Promotion implements Serializable{
 				", maxQuantityOfValidatedCoupon: " + maxQuantityOfValidatedCoupon + ", maxQuantityPerClient: " + maxQuantityPerClient +
 				", sinceDate: " + sinceDate + ", termsAndCondition: " + termsAndCondition;  		
 	}
+
+	
 }

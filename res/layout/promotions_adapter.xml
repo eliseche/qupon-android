@@ -3,58 +3,81 @@
     android:id="@+id/promotions_adapter"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
-    <TextView        
+
+    <TextView
         android:id="@+id/promotions_lbl_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="15dip"
-        android:textColor="@color/promotions_item"        
+        android:textColor="@color/promotions_item"
         android:textSize="15sp"
         android:textStyle="bold" />
-     <RelativeLayout
+
+    <RelativeLayout
         android:id="@+id/promotions_rl_image"
         android:layout_width="100dip"
         android:layout_height="50dip"
         android:layout_alignParentLeft="true"
         android:layout_below="@id/promotions_lbl_description" >
+
         <ImageView
-	        android:id="@+id/promotions_img_promotion"
-	        android:layout_width="fill_parent"
-	        android:layout_height="fill_parent"
-	        android:visibility="gone" />
-	    <ProgressBar 
-	        android:id="@+id/promotions_progress"
-	        android:layout_width="40dip"
-	        android:layout_height="40dip"	        
-	        android:indeterminate="true"	        	        
-	        android:layout_centerHorizontal="true"/>
-    </RelativeLayout>    
+            android:id="@+id/promotions_img_promotion"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:visibility="gone" />
+
+        <ProgressBar
+            android:id="@+id/promotions_progress"
+            android:layout_width="40dip"
+            android:layout_height="40dip"
+            android:layout_centerHorizontal="true"
+            android:indeterminate="true" />
+    </RelativeLayout>
+
     <TextView
         android:id="@+id/promotions_lbl_terms_and_condition"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="5dip"
         android:layout_below="@id/promotions_lbl_description"
-        android:layout_toRightOf="@id/promotions_rl_image"        
+        android:layout_marginLeft="5dip"
+        android:layout_toRightOf="@id/promotions_rl_image"
         android:textColor="@color/promotions_item" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/promotions_lbl_terms_and_condition"
+        android:layout_toLeftOf="@+id/promotions_lbl_special_price"
+        android:layout_toRightOf="@+id/promotions_rl_image" >
+
+        <Button
+            android:id="@+id/promotions_btn_generate_coupon"
+            android:layout_width="wrap_content"
+            android:layout_height="35dip"
+            android:layout_centerInParent="true"
+            android:text="@string/promotions_btn_generate_coupon" />
+    </RelativeLayout>
+
     <TextView
         android:id="@+id/promotions_lbl_special_price"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"        
-        android:layout_below="@id/promotions_lbl_terms_and_condition"
+        android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="5dip" 
-		android:textColor="@color/promotions_item"      
+        android:layout_below="@id/promotions_lbl_terms_and_condition"
+        android:layout_marginRight="5dip"
+        android:textColor="@color/promotions_item"
         android:textSize="16sp"
         android:textStyle="bold" />
+
     <TextView
         android:id="@+id/promotions_lbl_discount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/promotions_lbl_special_price"        
         android:layout_alignParentRight="true"
-        android:textColor="@color/promotions_item"        
+        android:layout_below="@id/promotions_lbl_special_price"
+        android:textColor="@color/promotions_item"
         android:textSize="14sp" />
+
 </RelativeLayout>
