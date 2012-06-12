@@ -1,18 +1,28 @@
 package com.globalis.quponMovil;
 
+import java.lang.reflect.Type;
 import java.util.List;
 import com.globalis.entities.Promotion;
 import com.globalis.network.HttpRequest;
+import com.globalis.network.HttpTask;
+import com.globalis.network.Response;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class PromotionAdapter extends ArrayAdapter<Promotion> {	
+public class PromotionAdapter extends ArrayAdapter<Promotion>{	
 	public ImageManager imageManager;
 	
 	public PromotionAdapter(Context context, int resource, List<Promotion> list) {		
@@ -21,9 +31,8 @@ public class PromotionAdapter extends ArrayAdapter<Promotion> {
 	}
 	
 	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
+	public View getView(final int position, View convertView, ViewGroup parent) {
 		ViewHolder holder;
-		
 		
 		if(convertView ==  null) {			
 			LayoutInflater li = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);			
@@ -38,12 +47,35 @@ public class PromotionAdapter extends ArrayAdapter<Promotion> {
 			holder.lblDiscount = (TextView)convertView.findViewById(R.id.promotions_lbl_discount);
 			holder.pbProgress = (ProgressBar)convertView.findViewById(R.id.promotions_progress);
 			convertView.setTag(holder);
+			holder.btnGenCoupon = (Button)convertView.findViewById(R.id.promotions_btn_generate_coupon);
+			holder.btnGenCoupon.setOnClickListener(new OnClickListener() {
+				
+				public void onClick(View v) {
+					Promotion promotion = getItem(position);
+					int promID = promotion.getId();
+					
+					HttpRequest req = new HttpRequest();
+					req.set(HttpRequest.Url.getURLGenQPon(promID), null, HttpRequest.HttpMethod.POST);		
+					Log.i("debug", HttpRequest.Url.getURLGenQPon(promID));
+					HttpTask task = new HttpTask() {
+						
+						@Override
+						public void doWork(Response response) {
+							if(response != null) {
+								Log.i("exito", response.getBody());
+							}
+							Log.i("falla", "ninguna respuesta del sitio");
+						}
+					};
+					task.set(getContext(), req).execute();
+				}
+			});
 		}
 		else {
 			holder = (ViewHolder)convertView.getTag();
 		}
 		
-		final Promotion promotion = getItem(position);
+		Promotion promotion = getItem(position);
 		if(promotion != null) {
 			// Assign the appropriate data from out promotions object
 			holder.lblDescription.setText(promotion.getDescription());
@@ -63,5 +95,7 @@ public class PromotionAdapter extends ArrayAdapter<Promotion> {
 		public TextView lblSpecialPrice;
 		public TextView lblDiscount;
 		public ProgressBar pbProgress;
-	}	
+		public Button btnGenCoupon;
+	}
+
 }
