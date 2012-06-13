@@ -35,5 +35,6 @@
     <string name="promotion_detail_lbl_state_title">State of promotion:</string>
     <string name="promotion_btn_generate_coupon">GENERATE</string>
     <string name="menu_login">Login</string>
+    <string name="menu_settings">Settings</string>
     <string name="exception_no_network">Couldn\'t find an Internet connection</string>
 </resources>

@@ -26,7 +26,7 @@ public class HttpRequest {
 		public static String base = "http://50.116.21.186";
 		public static String login = base + "/session.json";
 		public static String promotions = base + "/promotions.json";
-		public static String signup = base + "/signup";
+		public static String signup = base + "/users/signup";
 		
 		public static String getURLGenQPon(int promID){
 			return base + "/promotions/" + promID + "/coupons";
