@@ -1,83 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/promotions_adapter"
+    android:id="@+id/promotion_adapter"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
-
     <TextView
-        android:id="@+id/promotions_lbl_description"
+        android:id="@+id/promotion_lbl_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="15dip"
-        android:textColor="@color/promotions_item"
+        android:textColor="@color/promotion_item"
         android:textSize="15sp"
         android:textStyle="bold" />
-
     <RelativeLayout
-        android:id="@+id/promotions_rl_image"
+        android:id="@+id/promotion_rl_image"
         android:layout_width="100dip"
-        android:layout_height="50dip"
+        android:layout_height="80dip"
         android:layout_alignParentLeft="true"
-        android:layout_below="@id/promotions_lbl_description" >
-
+        android:layout_below="@id/promotion_lbl_description" >
         <ImageView
-            android:id="@+id/promotions_img_promotion"
+            android:id="@+id/promotion_img_promotion"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="fill_parent"  
+            android:scaleType="centerInside"
+			android:cropToPadding="true"
+			android:padding="1dip"          
             android:visibility="gone" />
-
         <ProgressBar
-            android:id="@+id/promotions_progress"
+            android:id="@+id/promotion_pb_loading"
             android:layout_width="40dip"
             android:layout_height="40dip"
             android:layout_centerHorizontal="true"
             android:indeterminate="true" />
     </RelativeLayout>
-
     <TextView
-        android:id="@+id/promotions_lbl_terms_and_condition"
+        android:id="@+id/promotion_lbl_terms_and_condition"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/promotions_lbl_description"
+        android:layout_below="@id/promotion_lbl_description"
         android:layout_marginLeft="5dip"
-        android:layout_toRightOf="@id/promotions_rl_image"
-        android:textColor="@color/promotions_item" />
-
+        android:layout_toRightOf="@id/promotion_rl_image"
+        android:textColor="@color/promotion_item" />
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/promotions_lbl_terms_and_condition"
-        android:layout_toLeftOf="@+id/promotions_lbl_special_price"
-        android:layout_toRightOf="@+id/promotions_rl_image" >
-
+        android:layout_below="@+id/promotion_rl_image"
+        android:layout_toLeftOf="@+id/promotion_lbl_special_price"
+        android:layout_toRightOf="@+id/promotion_rl_image" >
         <Button
-            android:id="@+id/promotions_btn_generate_coupon"
+            android:id="@+id/promotion_btn_generate_coupon"
             android:layout_width="wrap_content"
-            android:layout_height="35dip"
+            android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="@string/promotions_btn_generate_coupon" />
+            android:text="@string/promotion_btn_generate_coupon" />
     </RelativeLayout>
-
     <TextView
-        android:id="@+id/promotions_lbl_special_price"
+        android:id="@+id/promotion_lbl_special_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_below="@id/promotions_lbl_terms_and_condition"
+        android:layout_below="@id/promotion_lbl_terms_and_condition"
         android:layout_marginRight="5dip"
-        android:textColor="@color/promotions_item"
+        android:textColor="@color/promotion_item"
         android:textSize="16sp"
         android:textStyle="bold" />
-
     <TextView
-        android:id="@+id/promotions_lbl_discount"
+        android:id="@+id/promotion_lbl_discount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_below="@id/promotions_lbl_special_price"
-        android:textColor="@color/promotions_item"
+        android:layout_below="@id/promotion_lbl_special_price"
+        android:textColor="@color/promotion_item"
         android:textSize="14sp" />
-
 </RelativeLayout>

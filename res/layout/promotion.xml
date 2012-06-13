@@ -3,9 +3,9 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"    
     android:orientation="vertical"
-    android:background="@color/promotions_list" >
+    android:background="@color/promotion_list" >
     <ListView
-        android:id="@+id/promotions_lst"
+        android:id="@+id/promotion_list"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" >
     </ListView>
