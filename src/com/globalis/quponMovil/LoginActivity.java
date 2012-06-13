@@ -1,5 +1,8 @@
 package com.globalis.quponMovil;
 
+import java.util.Hashtable;
+
+import com.globalis.entities.User;
 import com.globalis.network.HttpRequest;
 import com.globalis.network.HttpTask;
 import com.globalis.network.Response;
@@ -31,16 +34,21 @@ public class LoginActivity extends Activity implements OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.login_btn_sign_in:
+			final String user = txtUser.getText().toString();
+			final String password = txtPassword.getText().toString();
+			Hashtable<String, String> params = new Hashtable<String, String>();
+			params.put("user", user);
+			params.put("password", password);
 			HttpRequest req = new HttpRequest();
-			req.set(HttpRequest.Url.signup, null,
+			req.set(HttpRequest.Url.signup, params,
 					HttpRequest.HttpMethod.POST);
 			HttpTask task = new HttpTask() {
 
 				@Override
 				public void doWork(Response response) {
 					if (response != null) {
-
-
+						User newUser = new User(user, password, null, null, null, null);
+						User.setLoggedUser(newUser);
 					}
 				}
 			};

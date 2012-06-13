@@ -6,6 +6,16 @@ import com.google.gson.annotations.SerializedName;
 
 public class User {
 	
+	private static User loggedUser;
+	
+	public static User getLoggedUser(){
+		return loggedUser;
+	}
+	
+	public static void setLoggedUser(User loggedUser){
+		User.loggedUser = loggedUser;
+	}
+	
 	private String username;
 	@SerializedName("password_digest")
 	private	String passwordDigest;
