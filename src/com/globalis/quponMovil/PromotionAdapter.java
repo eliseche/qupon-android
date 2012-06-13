@@ -19,9 +19,9 @@ public class PromotionAdapter extends ArrayAdapter<Promotion>{
 	private ImageManager imageManager;
 	private IOnCustomClickListener callback;
 	
-	public PromotionAdapter(Context context, int resource, List<Promotion> list, IOnCustomClickListener callback) {		
+	public PromotionAdapter(Context context, int resource, List<Promotion> list) {		
 		super(context, resource, list);	
-		this.callback = callback;
+		this.callback = (IOnCustomClickListener)context;
 		imageManager = new ImageManager(context.getApplicationContext());
 	}
 	

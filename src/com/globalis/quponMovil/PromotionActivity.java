@@ -17,7 +17,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
@@ -45,7 +44,7 @@ public class PromotionActivity extends Activity implements OnItemClickListener, 
 					List<Promotion> promotions = gson.fromJson(response.getBody(), collectionType);
 					Promotion.setPromotions(promotions);
 					
-					promotionAdapter = new PromotionAdapter(PromotionActivity.this, R.layout.promotion_adapter, Promotion.getPromotions(), PromotionActivity.this);
+					promotionAdapter = new PromotionAdapter(PromotionActivity.this, R.layout.promotion_adapter, Promotion.getPromotions());
 					listViewPromotion.setAdapter(promotionAdapter);
 				}				
 			}
@@ -102,6 +101,6 @@ public class PromotionActivity extends Activity implements OnItemClickListener, 
 				Log.i("falla", "ninguna respuesta del sitio");
 			}
 		};
-		task.set(this, req).execute();
+		task.set(PromotionActivity.this, req).execute();
 	}
 }
