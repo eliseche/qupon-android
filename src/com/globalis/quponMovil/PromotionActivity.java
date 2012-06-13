@@ -10,9 +10,12 @@ import com.globalis.network.Response;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -102,5 +105,28 @@ public class PromotionActivity extends Activity implements OnItemClickListener, 
 			}
 		};
 		task.set(PromotionActivity.this, req).execute();
+	}
+	
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if(keyCode == KeyEvent.KEYCODE_BACK) {
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			builder.setMessage(getResources().getString(R.string.exit));
+			builder.setCancelable(false);
+			builder.setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {				
+				public void onClick(DialogInterface dialog, int which) {
+					finish();					
+				}
+			});
+			builder.setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {				
+				public void onClick(DialogInterface dialog, int which) {
+					dialog.cancel();
+				}
+			});
+			AlertDialog alert = builder.create();
+			alert.show();
+		}
+	
+		return super.onKeyDown(keyCode, event);
 	}
 }

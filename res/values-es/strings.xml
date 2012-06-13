@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>    
+    <string name="app_name">QuponMovil</string>    
+    <string name="ok">OK</string>
+    <string name="yes">Si</string>
+    <string name="no">No</string>
+    <string name="exit">Esta seguro que desea salir?</string>
+    <string name="login_lbl_title">Bienvenido a QuponMovil</string>
+    <string name="login_lbl_user">Usuario</string>
+    <string name="login_lbl_password">Contraseña</string>
+    <string name="login_btn_sign_in">Iniciar sesión</string>
+    <string name="login_btn_sign_up">No estas registrado? <u><b><i>Registrarse</i></b></u></string>
+    <string name="signup_lbl_title">Por favor llene el formulario</string>
+    <string name="signup_txt_username">Usuario</string>
+    <string name="signup_txt_password">Contraseña</string>
+    <string name="signup_txt_repassword">Vuelva a escribir contraseña</string>
+    <string name="signup_txt_first_name">Nombre</string>
+    <string name="signup_txt_last_name">Apellido</string>
+    <string name="signup_txt_zip_code">Código Postal</string>
+    <string name="signup_txt_phone_number">Teléfono</string>
+    <string name="signup_spn_gender">Sexo</string>
+    <string name="signup_txt_email">Email</string>
+	<string name="signup_btn_register">Enviar</string>
+	<string name="signup_error_msg_complete_user">Por favor complete el usuario</string>
+	<string name="signup_error_msg_unmatching_pass">Las contraseñas no coinciden</string>
+    <string name="signup_error_msg_complete_first_name">Por favor complete su nombre</string>
+    <string name="signup_error_msg_complete_last_name">Por favor complete su apellido</string>    
+    <string name="promotion_detail_lbl_special_price_title">Precio</string>
+    <string name="promotion_detail_lbl_discount_title">Ahorro</string>
+    <string name="promotion_detail_lbl_to_date_title">Hasta</string>
+    <string name="promotion_detail_lbl_quantity_remaining_title">Quedan</string>
+    <string name="promotion_detail_lbl_terms_cond_title">Terminos y condiciones:</string>
+    <string name="promotion_detail_lbl_description_title">Descripción:</string>
+    <string name="promotion_detail_lbl_tag_names_title">Tags:</string>    
+    <string name="promotion_detail_lbl_from_date_title">Desde:</string>    
+    <string name="promotion_detail_lbl_state_title">Estado promoción:</string>
+    <string name="promotion_btn_generate_coupon">GENERAR</string>
+    <string name="menu_login">Login</string>
+    <string name="menu_settings">Opciones</string>
+    <string name="exception_no_network">No se pudo encontrar una conexión a Internet</string>
+</resources>
