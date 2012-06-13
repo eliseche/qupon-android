@@ -3,6 +3,7 @@ package com.globalis.quponMovil;
 import java.lang.reflect.Type;
 import java.util.List;
 import com.globalis.entities.Promotion;
+import com.globalis.extensions.IOnCustomClickListener;
 import com.globalis.network.HttpRequest;
 import com.globalis.network.HttpTask;
 import com.globalis.network.Response;
@@ -11,6 +12,7 @@ import com.google.gson.reflect.TypeToken;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -20,7 +22,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
-public class PromotionActivity extends Activity implements OnItemClickListener, OnClickListener{
+public class PromotionActivity extends Activity implements OnItemClickListener, IOnCustomClickListener {
 	private ListView listViewPromotion;	
 	private PromotionAdapter promotionAdapter; 
 	
@@ -43,12 +45,12 @@ public class PromotionActivity extends Activity implements OnItemClickListener, 
 					List<Promotion> promotions = gson.fromJson(response.getBody(), collectionType);
 					Promotion.setPromotions(promotions);
 					
-					promotionAdapter = new PromotionAdapter(PromotionActivity.this, R.layout.promotion_adapter, Promotion.getPromotions());
+					promotionAdapter = new PromotionAdapter(PromotionActivity.this, R.layout.promotion_adapter, Promotion.getPromotions(), PromotionActivity.this);
 					listViewPromotion.setAdapter(promotionAdapter);
 				}				
 			}
 		};
-		task.set(this, req).execute();
+		task.set(PromotionActivity.this, req).execute();
 	}
 	
 	@Override
@@ -82,32 +84,24 @@ public class PromotionActivity extends Activity implements OnItemClickListener, 
 		intent.putExtra("promotion", promotion);
 		startActivity(intent);
 	}
-	
-	public void generateCoupon(){
-		Promotion promotion = null;
+
+	public void OnCustomClick(View view, int position) {
+		Promotion promotion = Promotion.getPromotions().get(position);
+		int promID = promotion.getId();
 		
 		HttpRequest req = new HttpRequest();
-		req.set(HttpRequest.Url.promotions, null, HttpRequest.HttpMethod.GET);		
+		req.set(HttpRequest.Url.getURLGenQPon(promID), null, HttpRequest.HttpMethod.POST);		
+		Log.i("debug", HttpRequest.Url.getURLGenQPon(promID));
 		HttpTask task = new HttpTask() {
 			
 			@Override
 			public void doWork(Response response) {
 				if(response != null) {
-					Gson gson = new Gson();
-					Type collectionType = new TypeToken<List<Promotion>>(){}.getType();
-					List<Promotion> promotions = gson.fromJson(response.getBody(), collectionType);
-					Promotion.setPromotions(promotions);
-					
-					promotionAdapter = new PromotionAdapter(PromotionActivity.this, R.layout.promotion_adapter, Promotion.getPromotions());
-					listViewPromotion.setAdapter(promotionAdapter);
-				}				
+					Log.i("exito", response.getBody());
+				}
+				Log.i("falla", "ninguna respuesta del sitio");
 			}
 		};
 		task.set(this, req).execute();
-	}
-
-	public void onClick(View v) {
-		// TODO Auto-generated method stub
-		
 	}
 }
