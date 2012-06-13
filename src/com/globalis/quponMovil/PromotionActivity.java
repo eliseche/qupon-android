@@ -27,7 +27,7 @@ public class PromotionActivity extends Activity implements OnItemClickListener, 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {	
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.promotions);
+		setContentView(R.layout.promotion);
 		
 		initViews();
 		
@@ -43,7 +43,7 @@ public class PromotionActivity extends Activity implements OnItemClickListener, 
 					List<Promotion> promotions = gson.fromJson(response.getBody(), collectionType);
 					Promotion.setPromotions(promotions);
 					
-					promotionAdapter = new PromotionAdapter(PromotionActivity.this, R.layout.promotions_adapter, Promotion.getPromotions());
+					promotionAdapter = new PromotionAdapter(PromotionActivity.this, R.layout.promotion_adapter, Promotion.getPromotions());
 					listViewPromotion.setAdapter(promotionAdapter);
 				}				
 			}
@@ -72,7 +72,7 @@ public class PromotionActivity extends Activity implements OnItemClickListener, 
 	}	
 	
 	private void initViews() {
-		listViewPromotion = (ListView)findViewById(R.id.promotions_lst);
+		listViewPromotion = (ListView)findViewById(R.id.promotion_list);
 		listViewPromotion.setOnItemClickListener(this);
 	}
 
@@ -98,7 +98,7 @@ public class PromotionActivity extends Activity implements OnItemClickListener, 
 					List<Promotion> promotions = gson.fromJson(response.getBody(), collectionType);
 					Promotion.setPromotions(promotions);
 					
-					promotionAdapter = new PromotionAdapter(PromotionActivity.this, R.layout.promotions_adapter, Promotion.getPromotions());
+					promotionAdapter = new PromotionAdapter(PromotionActivity.this, R.layout.promotion_adapter, Promotion.getPromotions());
 					listViewPromotion.setAdapter(promotionAdapter);
 				}				
 			}

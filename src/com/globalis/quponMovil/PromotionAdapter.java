@@ -36,19 +36,21 @@ public class PromotionAdapter extends ArrayAdapter<Promotion>{
 		
 		if(convertView ==  null) {			
 			LayoutInflater li = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);			
-			convertView = li.inflate(R.layout.promotions_adapter, null);
+			convertView = li.inflate(R.layout.promotion_adapter, null);
 			
 			holder = new ViewHolder();
 			// Get views from promotions_adapter.xml
-			holder.lblDescription = (TextView)convertView.findViewById(R.id.promotions_lbl_description);
-			holder.lblTermsAndCondition = (TextView)convertView.findViewById(R.id.promotions_lbl_terms_and_condition);
-			holder.imgPromotion = (ImageView)convertView.findViewById(R.id.promotions_img_promotion);		
-			holder.lblSpecialPrice = (TextView)convertView.findViewById(R.id.promotions_lbl_special_price);
-			holder.lblDiscount = (TextView)convertView.findViewById(R.id.promotions_lbl_discount);
-			holder.pbProgress = (ProgressBar)convertView.findViewById(R.id.promotions_progress);
+			holder.lblDescription = (TextView)convertView.findViewById(R.id.promotion_lbl_description);
+			holder.lblTermsAndCondition = (TextView)convertView.findViewById(R.id.promotion_lbl_terms_and_condition);
+			holder.imgPromotion = (ImageView)convertView.findViewById(R.id.promotion_img_promotion);		
+			holder.lblSpecialPrice = (TextView)convertView.findViewById(R.id.promotion_lbl_special_price);
+			holder.lblDiscount = (TextView)convertView.findViewById(R.id.promotion_lbl_discount);
+			holder.pbProgress = (ProgressBar)convertView.findViewById(R.id.promotion_pb_loading);
 			convertView.setTag(holder);
-			holder.btnGenCoupon = (Button)convertView.findViewById(R.id.promotions_btn_generate_coupon);
+			holder.btnGenCoupon = (Button)convertView.findViewById(R.id.promotion_btn_generate_coupon);
+			holder.btnGenCoupon.setFocusable(false);
 			holder.btnGenCoupon.setOnClickListener(new OnClickListener() {
+				
 				
 				public void onClick(View v) {
 					Promotion promotion = getItem(position);

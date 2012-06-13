@@ -2,9 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/promotions_list"
+    android:background="@color/promotion_list"
     android:orientation="vertical" >
-
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" >
@@ -13,15 +12,15 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" >
             <TextView
-                android:id="@+id/promotion_detail_lbl_title"                
+                android:id="@+id/promotion_detail_lbl_title"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:paddingTop="5dip"                
+                android:paddingTop="5dip"
+                android:text="Title"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:typeface="normal" 
-                android:text="Title"/>
+                android:typeface="normal" />
             <RelativeLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -36,9 +35,9 @@
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
                         android:background="@color/white"
-			            android:scaleType="centerInside"
-			            android:cropToPadding="true"
-			            android:padding="1dip"
+                        android:cropToPadding="true"
+                        android:padding="1dip"
+                        android:scaleType="centerInside"
                         android:visibility="gone" />
                     <ProgressBar
                         android:id="@+id/promotion_detail_pb_loading"
@@ -51,33 +50,33 @@
                     android:id="@+id/promotion_detail_ll_info"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_toRightOf="@id/promotion_detail_rl_image" >
-                    <TextView                    
+                    android:layout_toRightOf="@id/promotion_detail_rl_image"
+                    android:orientation="vertical" >
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"                        
+                        android:layout_gravity="center_horizontal"
                         android:text="@string/promotion_detail_lbl_special_price_title" />
                     <TextView
                         android:id="@+id/promotion_detail_lbl_special_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"                        
-                        android:textSize="18sp" 
-                        android:text="-"/>
-                    <TextView                        
+                        android:layout_gravity="center_horizontal"
+                        android:text="-"
+                        android:textSize="18sp" />
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"                        
+                        android:layout_gravity="center_horizontal"
                         android:text="@string/promotion_detail_lbl_discount_title" />
                     <TextView
                         android:id="@+id/promotion_detail_lbl_discount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"                        
-                        android:textSize="18sp" 
-                        android:text="-"/>
-                    <TextView                        
+                        android:layout_gravity="center_horizontal"
+                        android:text="-"
+                        android:textSize="18sp" />
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
@@ -86,21 +85,21 @@
                         android:id="@+id/promotion_detail_lbl_to_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"                        
-                        android:textSize="18dip"
-                        android:text="-" />
-                    <TextView                       
+                        android:layout_gravity="center_horizontal"
+                        android:text="-"
+                        android:textSize="18sp" />
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"                        
+                        android:layout_gravity="center_horizontal"
                         android:text="@string/promotion_detail_lbl_quantity_remaining_title" />
                     <TextView
                         android:id="@+id/promotion_detail_lbl_quantity_remaining"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"                        
-                        android:textSize="18sp" 
-                        android:text="-"/>
+                        android:layout_gravity="center_horizontal"
+                        android:text="-"
+                        android:textSize="18sp" />
                 </LinearLayout>
                 <LinearLayout
                     android:id="@+id/promotion_detail_ll_more_info"
@@ -110,11 +109,11 @@
                     android:layout_marginTop="30dip"
                     android:orientation="horizontal" >
                     <LinearLayout
-                        android:layout_width="fill_parent"                        
-                        android:layout_height="wrap_content"                        
-                        android:orientation="vertical"
-                        android:layout_weight="1">                        
-                        <TextView                            
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical" >
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/promotion_detail_lbl_terms_cond_title"
@@ -123,66 +122,66 @@
                             android:id="@+id/promotion_detail_lbl_terms_cond"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="-" />                        
+                            android:text="-" />
                     </LinearLayout>
                     <View
-				        android:layout_height="fill_parent"
-				        android:layout_width="1dip"
-				        android:layout_marginLeft="3dip"
-				        android:layout_marginRight="3dip"
-				        android:background="@color/dark_grey" />
+                        android:layout_width="1dip"
+                        android:layout_height="fill_parent"
+                        android:layout_marginLeft="3dip"
+                        android:layout_marginRight="3dip"
+                        android:background="@color/dark_grey" />
                     <LinearLayout
                         android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"                        
-                        android:orientation="vertical"
-                        android:layout_weight="1">
-                        <TextView                            
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical" >
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/promotion_detail_lbl_description_title"
-                            android:textStyle="bold" />                        
+                            android:textStyle="bold" />
                         <TextView
-                            android:id="@+id/promotion_detail_lbl_description"                            
+                            android:id="@+id/promotion_detail_lbl_description"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" 
-                            android:text="-"/>
+                            android:layout_height="wrap_content"
+                            android:text="-" />
                     </LinearLayout>
                 </LinearLayout>
                 <LinearLayout
                     android:id="@+id/promotion_detail_ll_extra_info"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:layout_below="@+id/promotion_detail_ll_more_info"
-                    android:layout_marginTop="30dip" >
-	                <TextView                    
-	                    android:layout_width="fill_parent"
-	                    android:layout_height="wrap_content"                                        
-	                    android:text="@string/promotion_detail_lbl_tag_names_title" />
-	                <TextView
-	                    android:id="@+id/promotion_detail_lbl_tag_names"
-	                    android:layout_width="fill_parent"
-	                    android:layout_height="wrap_content"
-	                    android:text="-" />
-	                <TextView                    
-	                    android:layout_width="fill_parent"
-	                    android:layout_height="wrap_content"                    
-	                    android:text="@string/promotion_detail_lbl_from_date_title" />
-	                <TextView
-	                    android:id="@+id/promotion_detail_lbl_from_date"
-	                    android:layout_width="fill_parent"
-	                    android:layout_height="wrap_content"
-	                    android:text="-" />
-	                <TextView                    
-	                    android:layout_width="fill_parent"
-	                    android:layout_height="wrap_content"                                        
-	                    android:text="@string/promotion_detail_lbl_state_title" />
-	                <TextView
-	                    android:id="@+id/promotion_detail_lbl_state"
-	                    android:layout_width="fill_parent"
-	                    android:layout_height="wrap_content"
-	                    android:text="-" />
-	        	</LinearLayout>
+                    android:layout_marginTop="30dip"
+                    android:orientation="vertical" >
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/promotion_detail_lbl_tag_names_title" />
+                    <TextView
+                        android:id="@+id/promotion_detail_lbl_tag_names"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="-" />
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/promotion_detail_lbl_from_date_title" />
+                    <TextView
+                        android:id="@+id/promotion_detail_lbl_from_date"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="-" />
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/promotion_detail_lbl_state_title" />
+                    <TextView
+                        android:id="@+id/promotion_detail_lbl_state"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="-" />
+                </LinearLayout>
             </RelativeLayout>
         </LinearLayout>
     </ScrollView>
