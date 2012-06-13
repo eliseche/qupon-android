@@ -4,6 +4,7 @@
     <string name="ok">OK</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="exit">Are you sure you want to exit?</string>
     <string name="login_lbl_title">Welcome to Qupon</string>
     <string name="login_lbl_user">Username</string>
     <string name="login_lbl_password">Password</string>
