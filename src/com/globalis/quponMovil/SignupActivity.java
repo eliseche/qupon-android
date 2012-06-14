@@ -21,8 +21,8 @@ import android.widget.Toast;
 public class SignupActivity extends Activity implements OnClickListener {
 	private String username, password, rePassword, firstName, lastName,
 		phoneNumber, zipCode, gender, email;
-	private EditText txtUsername, txtPassword, txtRePassword, txtFirstName, txtLastName,
-		txtPhoneNumber, txtZipCode, txtEmail;
+	private EditText txtEmail, txtPassword, txtRePassword, txtFirstName, txtLastName,
+		txtPhoneNumber, txtZipCode;
 	private Spinner spnGender;
 	private Button btnSignUp;	
 	
@@ -50,7 +50,7 @@ public class SignupActivity extends Activity implements OnClickListener {
 	}
 	
 	private void collectUserData() {
-		username = String.valueOf(txtUsername.getText());
+		username = String.valueOf(txtEmail.getText());
 		password = String.valueOf(txtPassword.getText());
 		rePassword = String.valueOf(txtRePassword.getText());
 		firstName = String.valueOf(txtFirstName.getText());
@@ -83,16 +83,15 @@ public class SignupActivity extends Activity implements OnClickListener {
 	}
 	
 	private User createUser() {
-		Person person = new Person(firstName, lastName, zipCode, phoneNumber,
-				gender, email);
-		User user = new User(username, password, person , null, null, null);
+		User user = new User(email,password,firstName,lastName,zipCode,phoneNumber,gender,
+				null,null,null);
 		return user;
 	}	
 	
 	public void saveUser(final User user) {
 		HttpRequest req = new HttpRequest();
 		Hashtable<String, String> params = new Hashtable<String, String>();
-		params.putAll(user.getPerson().getHashTable());
+		params.putAll(user.getHashtable());
 		req.set(HttpRequest.Url.signup, params, HttpRequest.HttpMethod.POST);		
 		HttpTask task = new HttpTask() {			
 			@Override
@@ -103,7 +102,7 @@ public class SignupActivity extends Activity implements OnClickListener {
 					if(response.isValidStatusCode()) {
 						Toast.makeText(SignupActivity.this, registerResponse.getMessage(), Toast.LENGTH_LONG).show();						
 						Intent intent = new Intent();                   
-                        intent.putExtra("username", user.getUsername());
+                        intent.putExtra("username", user.getEmail());
                         intent.putExtra("password", user.getPasswordDigest());
                         setResult(Activity.RESULT_OK, intent);
                         finish();
@@ -118,20 +117,31 @@ public class SignupActivity extends Activity implements OnClickListener {
 	}
 
 	private void initViews() {
-		txtUsername = (EditText)findViewById(R.id.signup_txt_username);
+		txtEmail = (EditText)findViewById(R.id.signup_txt_username);
 		txtPassword = (EditText)findViewById(R.id.signup_txt_password);
 		txtRePassword = (EditText)findViewById(R.id.signup_txt_repassword);
 		txtFirstName = (EditText)findViewById(R.id.signup_txt_first_name);
 		txtLastName = (EditText)findViewById(R.id.signup_txt_last_name);
 		txtPhoneNumber = (EditText)findViewById(R.id.signup_txt_phone_number);
-		txtZipCode = (EditText)findViewById(R.id.signup_txt_zip_code);		
-		txtEmail = (EditText)findViewById(R.id.signup_txt_email);
+		txtZipCode = (EditText)findViewById(R.id.signup_txt_zip_code);
 		btnSignUp = (Button)findViewById(R.id.signup_btn_sign_up);		
 		btnSignUp.setOnClickListener(this);		
 		spnGender = (Spinner)findViewById(R.id.signup_spn_gender);
 		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.gender, android.R.layout.simple_spinner_item);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spnGender.setAdapter(adapter);
+		
+		User loggedUser = User.getLoggedUser();
+		if(loggedUser!=null){
+			txtEmail.setText(loggedUser.getEmail());
+			txtPassword.setText(loggedUser.getPasswordDigest());
+			txtRePassword.setText(loggedUser.getPasswordDigest());
+			txtFirstName.setText(loggedUser.getFirstName());
+			txtLastName.setText(loggedUser.getLastName());
+			txtPhoneNumber.setText(loggedUser.getPhoneNumber());
+			txtZipCode.setText(loggedUser.getZipCode());
+			spnGender.setPrompt(loggedUser.getGender());
+		}
 	}
 	
 	private class RegisterResponse {

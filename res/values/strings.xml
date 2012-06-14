@@ -35,6 +35,9 @@
     <string name="promotion_detail_lbl_from_date_title">From date:</string>    
     <string name="promotion_detail_lbl_state_title">State of promotion:</string>
     <string name="promotion_btn_generate_coupon">GENERATE</string>
+    <string name="settings_cat_1">Account</string>
+    <string name="settings_ttl_modify_info_user">Modify user</string>
+    <string name="settings_sum_modify_info_user">Change your account information</string>
     <string name="menu_login">Login</string>
     <string name="menu_settings">Settings</string>
     <string name="exception_no_network">Couldn\'t find an Internet connection</string>

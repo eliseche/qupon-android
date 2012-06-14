@@ -25,7 +25,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dip"
-                android:hint="@string/signup_txt_username" />
+                android:hint="@string/signup_txt_email" />
             <EditText
                 android:id="@+id/signup_txt_password"
                 android:layout_width="fill_parent"
@@ -69,12 +69,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dip"
                 android:prompt="@string/signup_spn_gender" />
-            <EditText
-                android:id="@+id/signup_txt_email"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dip"
-                android:hint="@string/signup_txt_email" />
             <Button
                 android:id="@+id/signup_btn_sign_up"
                 android:layout_width="fill_parent"

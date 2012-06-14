@@ -67,11 +67,11 @@ public class PromotionActivity extends Activity implements OnItemClickListener,
 	}
 
 	public boolean onPrepareOptionsMenu(Menu menu) {
+		//User.setLoggedUser(new User());
 		if (User.getLoggedUser() == null)
 			menu.findItem(R.id.menu_settings).setVisible(false);
 		else
 			menu.findItem(R.id.menu_login).setVisible(false);
-
 		return super.onPrepareOptionsMenu(menu);
 
 	}
