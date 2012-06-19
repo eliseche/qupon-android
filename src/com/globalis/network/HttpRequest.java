@@ -23,13 +23,26 @@ public class HttpRequest {
 	}
 	
 	public static class Url {
-		public static String base = "http://50.116.21.186";
-		public static String login = base + "/session.json";
-		public static String promotions = base + "/promotions.json";
-		public static String signup = base + "/users";
+		private static String base = "http://50.116.21.186";		
 		
-		public static String getURLGenQPon(int promID){
-			return base + "/promotions/" + promID + "/coupons";
+		public static String getBase() {
+			return base;
+		}
+		
+		public static String getLogin() {
+			return base + "/session.json";		
+		}
+		
+		public static String getPromotion() {
+			return base + "/promotions.json";
+		}
+		
+		public static String getSignup() {
+			return base + "/users/sign_up.json";
+		}
+		
+		public static String getCoupon(int promotionID) {
+			return base + "/promotions/" + promotionID + "/coupons";
 		}
 	}
 	

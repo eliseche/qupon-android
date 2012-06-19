@@ -1,34 +1,25 @@
 package com.globalis.entities;
 
 import java.util.Hashtable;
-import java.util.List;
-import java.util.Map;
-
 import com.google.gson.annotations.SerializedName;
 
-public class User {
-
-	private static User loggedUser;
+public class User {	
 	private String email;
+	@SerializedName("name")
 	private String firstName;
+	@SerializedName("last_name")
 	private String lastName;
+	@SerializedName("zip_code")
 	private String zipCode;
+	@SerializedName("phone_number")
 	private String phoneNumber;
+	@SerializedName("sex")
 	private String gender;
-	@SerializedName("password_digest")
-	private String passwordDigest;
-	private UserState userState;
-	private UserType userType;
-	private List<Permission> permissions;
-
-	public static User getLoggedUser() {
-		return loggedUser;
-	}
-
-	public static void setLoggedUser(User loggedUser) {
-		User.loggedUser = loggedUser;
-	}
-
+	@SerializedName("password")
+	private String password;
+	@SerializedName("password_confirmation")
+	private String passwordConfirmation;
+	
 	public String getEmail() {
 		return email;
 	}
@@ -77,67 +68,44 @@ public class User {
 		this.gender = gender;
 	}
 
-	public String getPasswordDigest() {
-		return passwordDigest;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setPasswordDigest(String passwordDigest) {
-		this.passwordDigest = passwordDigest;
-	}
-
-	public UserState getUserState() {
-		return userState;
-	}
-
-	public void setUserState(UserState userState) {
-		this.userState = userState;
-	}
-
-	public UserType getUserType() {
-		return userType;
-	}
-
-	public void setUserType(UserType userType) {
-		this.userType = userType;
-	}
-
-	public List<Permission> getPermissions() {
-		return permissions;
-	}
-
-	public void setPermissions(List<Permission> permissions) {
-		this.permissions = permissions;
-	}
-
-	public User() {
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	
-	public User(String email, String passwordDigest,String firstName, String lastName,
-			String zipCode, String phoneNumber, String gender,
-			UserState userState, UserType userType, List<Permission> permissions) {
+	public String getPasswordConfirmation() {
+		return passwordConfirmation;
+	}
+
+	public void setPasswordConfirmation(String passwordConfirmation) {
+		this.passwordConfirmation = passwordConfirmation;
+	}	
+	
+	public User(String email, String firstName, String lastName, String zipCode,
+			String phoneNumber, String gender, String password, String passwordConfirmation) {
 		this.email = email;
-		this.passwordDigest = passwordDigest;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.zipCode = zipCode;
 		this.phoneNumber = phoneNumber;
 		this.gender = gender;
-		this.userState = userState;
-		this.userType = userType;
-		this.permissions = permissions;
+		this.password = password;
+		this.passwordConfirmation = passwordConfirmation;
 	}
 
 	public Hashtable<String, String> getHashtable() {
 		Hashtable<String, String> hashtable = new Hashtable<String, String>();
-		hashtable.put("user[email]", email);
-		hashtable.put("user[name]", firstName);
-		hashtable.put("user[last_name]", lastName);
-		hashtable.put("user[zip_code]", zipCode);
-		hashtable.put("user[phone_number]", phoneNumber);
-		hashtable.put("user[sex]", gender);
-		hashtable.put("user[password]", passwordDigest);
-		hashtable.put("user[password_confirmation]", passwordDigest);
+		hashtable.put("email", email);
+		hashtable.put("name", firstName);
+		hashtable.put("last_name", lastName);
+		hashtable.put("zip_code", zipCode);
+		hashtable.put("phone_number", phoneNumber);
+		hashtable.put("sex", gender);
+		hashtable.put("password", password);
+		hashtable.put("password_confirmation", passwordConfirmation);
 		return hashtable;
 	}
-
 }

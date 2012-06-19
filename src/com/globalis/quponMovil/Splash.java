@@ -7,7 +7,7 @@ import android.view.MotionEvent;
 
 public class Splash extends Activity {
 	private boolean active = true;
-	private int splashTime = 2000;
+	private int splashTime = 2500;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

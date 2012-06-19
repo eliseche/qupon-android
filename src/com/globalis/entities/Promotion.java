@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
-public class Promotion implements Serializable{	
-	private int id;
+public class Promotion implements Serializable {
+	private int id;	
 	private String description;
 	@SerializedName("due_date")
 	private String dueDate;
@@ -156,11 +156,6 @@ public class Promotion implements Serializable{
 	
 	@Override
 	public String toString() {
-		return "desciption: " + description + ", dueDate: " + dueDate + 
-				", image: " + image + ", maxQuantityOfGeneratedCoupon: " + maxQuantityOfGeneratedCoupon + 
-				", maxQuantityOfValidatedCoupon: " + maxQuantityOfValidatedCoupon + ", maxQuantityPerClient: " + maxQuantityPerClient +
-				", sinceDate: " + sinceDate + ", termsAndCondition: " + termsAndCondition;  		
-	}
-
-	
+		return description;
+	}	
 }

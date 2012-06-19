@@ -2,7 +2,6 @@ package com.globalis.network;
 
 import com.globalis.quponMovil.R;
 import com.globalis.utils.Utils;
-
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;

@@ -35,9 +35,9 @@
     <string name="promotion_detail_lbl_from_date_title">Desde:</string>    
     <string name="promotion_detail_lbl_state_title">Estado promoción:</string>
     <string name="promotion_btn_generate_coupon">GENERAR</string>
-    <string name="settings_cat_1">Cuenta</string>
-    <string name="settings_ttl_modify_info_user">Modificar usuario</string>
-    <string name="settings_sum_modify_info_user">Cambiar la información de su cuenta</string>
+    <string name="settings_lbl_account">Cuenta</string>
+    <string name="settings_lbl_modify_info_user">Modificar usuario</string>
+    <string name="settings_lbl_modify_info_user_summary">Cambiar la información de su cuenta</string>
     <string name="menu_login">Login</string>
     <string name="menu_settings">Opciones</string>
     <string name="exception_no_network">No se pudo encontrar una conexión a Internet</string>

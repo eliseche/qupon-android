@@ -13,7 +13,7 @@ public class OnCustomClickListener implements OnClickListener  {
 		this.position = position;
 	}
 	
-	// The onClick method wich has "NO" position information
+	// The onClick method which has "NO" position information
 	public void onClick(View view) {
 		callback.OnCustomClick(view, position);		
 	}

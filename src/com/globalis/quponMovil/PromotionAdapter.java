@@ -55,7 +55,7 @@ public class PromotionAdapter extends ArrayAdapter<Promotion>{
 			// Assign the appropriate data from out promotions object
 			holder.lblDescription.setText(promotion.getDescription());
 			holder.	lblTermsAndCondition.setText(promotion.getTermsAndCondition());
-			imageManager.displayImage(HttpRequest.Url.base + promotion.getImagePath(), holder.imgPromotion, holder.pbProgress);		
+			imageManager.displayImage(HttpRequest.Url.getBase() + promotion.getImagePath(), holder.imgPromotion, holder.pbProgress);		
 			holder.lblSpecialPrice.setText("$" + String.valueOf(promotion.getSpecialPrice()));		
 			holder.lblDiscount.setText(String.valueOf(promotion.getDiscount()) + "%");			
 		}

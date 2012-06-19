@@ -3,7 +3,6 @@ package com.globalis.quponMovil;
 import java.lang.reflect.Type;
 import java.util.List;
 import com.globalis.entities.Promotion;
-import com.globalis.entities.User;
 import com.globalis.extensions.IOnCustomClickListener;
 import com.globalis.network.HttpRequest;
 import com.globalis.network.HttpTask;
@@ -25,8 +24,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
-public class PromotionActivity extends Activity implements OnItemClickListener,
-		IOnCustomClickListener {
+public class PromotionActivity extends Activity implements OnItemClickListener, IOnCustomClickListener {
 	private ListView listViewPromotion;
 	private PromotionAdapter promotionAdapter;
 
@@ -38,17 +36,14 @@ public class PromotionActivity extends Activity implements OnItemClickListener,
 		initViews();
 
 		HttpRequest req = new HttpRequest();
-		req.set(HttpRequest.Url.promotions, null, HttpRequest.HttpMethod.GET);
+		req.set(HttpRequest.Url.getPromotion(), null, HttpRequest.HttpMethod.GET);
 		HttpTask task = new HttpTask() {
-
 			@Override
 			public void doWork(Response response) {
 				if (response != null) {
 					Gson gson = new Gson();
-					Type collectionType = new TypeToken<List<Promotion>>() {
-					}.getType();
-					List<Promotion> promotions = gson.fromJson(
-							response.getBody(), collectionType);
+					Type collectionType = new TypeToken<List<Promotion>>() {}.getType();
+					List<Promotion> promotions = gson.fromJson(response.getBody(), collectionType);
 					Promotion.setPromotions(promotions);
 					
 					promotionAdapter = new PromotionAdapter(PromotionActivity.this, R.layout.promotion_adapter, Promotion.getPromotions());
@@ -68,12 +63,12 @@ public class PromotionActivity extends Activity implements OnItemClickListener,
 
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		//User.setLoggedUser(new User());
-		if (User.getLoggedUser() == null)
+		// we should check in shared preference
+		if (1 == 2)
 			menu.findItem(R.id.menu_settings).setVisible(false);
 		else
 			menu.findItem(R.id.menu_login).setVisible(false);
 		return super.onPrepareOptionsMenu(menu);
-
 	}
 
 	@Override
@@ -110,11 +105,8 @@ public class PromotionActivity extends Activity implements OnItemClickListener,
 		int promID = promotion.getId();
 
 		HttpRequest req = new HttpRequest();
-		req.set(HttpRequest.Url.getURLGenQPon(promID), null,
-				HttpRequest.HttpMethod.POST);
-		Log.i("debug", HttpRequest.Url.getURLGenQPon(promID));
+		req.set(HttpRequest.Url.getCoupon(promID), null, HttpRequest.HttpMethod.POST);		
 		HttpTask task = new HttpTask() {
-
 			@Override
 			public void doWork(Response response) {
 				if (response != null) {

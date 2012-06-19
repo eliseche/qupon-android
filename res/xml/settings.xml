@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
-
-    <!-- <PreferenceCategory android:title="@string/settings_cat_1"> -->
+    <!--<PreferenceCategory android:title="@string/settings_lbl_account" >-->    
     <Preference
         android:key="settings_btn_modify_info_user"
-        android:summary="@string/settings_sum_modify_info_user"
-        android:title="@string/settings_ttl_modify_info_user">
+        android:title="@string/settings_lbl_modify_info_user"
+        android:summary="@string/settings_lbl_modify_info_user_summary" >
     </Preference>
-    <!-- </PreferenceCategory> -->
-
+    <!--</PreferenceCategory>-->
 </PreferenceScreen>

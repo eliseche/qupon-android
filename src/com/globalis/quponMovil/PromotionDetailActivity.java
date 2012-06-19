@@ -34,7 +34,7 @@ public class PromotionDetailActivity extends Activity {
 			promotion = (Promotion)serializable;
 			collectData();	
 			ImageManager imageManager = new ImageManager(getApplicationContext());
-			imageManager.displayImage(HttpRequest.Url.base + promotion.getImagePath(), imgPromotion, pbProgress);
+			imageManager.displayImage(HttpRequest.Url.getBase() + promotion.getImagePath(), imgPromotion, pbProgress);
 		}
 	}
 	

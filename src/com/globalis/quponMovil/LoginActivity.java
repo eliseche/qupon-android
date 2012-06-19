@@ -1,16 +1,12 @@
 package com.globalis.quponMovil;
 
 import java.util.Hashtable;
-
-import com.globalis.entities.User;
 import com.globalis.network.HttpRequest;
 import com.globalis.network.HttpTask;
 import com.globalis.network.Response;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract.CommonDataKinds.Email;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -38,18 +34,15 @@ public class LoginActivity extends Activity implements OnClickListener {
 			final String user = txtUser.getText().toString();
 			final String password = txtPassword.getText().toString();
 			Hashtable<String, String> params = new Hashtable<String, String>();
-			params.put("user", user);
+			params.put("email", user);
 			params.put("password", password);
 			HttpRequest req = new HttpRequest();
-			req.set(HttpRequest.Url.signup, params,
-					HttpRequest.HttpMethod.POST);
+			req.set(HttpRequest.Url.getLogin(), params, HttpRequest.HttpMethod.POST);
 			HttpTask task = new HttpTask() {
-
 				@Override
 				public void doWork(Response response) {
 					if (response != null) {
-						User newUser = new User(user,password,null,null,null,null,null,null,null,null);
-						User.setLoggedUser(newUser);
+						// Save user in Shared preference						
 					}
 				}
 			};
@@ -63,16 +56,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 			break;
 		}
 	}
-
-	private void initViews() {
-		txtUser = (EditText) findViewById(R.id.login_txt_user);
-		txtPassword = (EditText) findViewById(R.id.login_txt_password);
-		btnSignIn = (Button) findViewById(R.id.login_btn_sign_in);
-		btnSignIn.setOnClickListener(this);
-		btnSignUp = (TextView) findViewById(R.id.login_btn_sign_up);
-		btnSignUp.setOnClickListener(this);
-	}
-
+	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
@@ -87,4 +71,13 @@ public class LoginActivity extends Activity implements OnClickListener {
 			}
 		}
 	}
+
+	private void initViews() {
+		txtUser = (EditText) findViewById(R.id.login_txt_user);
+		txtPassword = (EditText) findViewById(R.id.login_txt_password);
+		btnSignIn = (Button) findViewById(R.id.login_btn_sign_in);
+		btnSignIn.setOnClickListener(this);
+		btnSignUp = (TextView) findViewById(R.id.login_btn_sign_up);
+		btnSignUp.setOnClickListener(this);
+	}	
 }
