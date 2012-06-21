@@ -38,7 +38,7 @@ public class HttpRequest {
 		}
 		
 		public static String getSignup() {
-			return base + "/users/sign_up.json";
+			return base + "/users.json";
 		}
 		
 		public static String getCoupon(int promotionID) {

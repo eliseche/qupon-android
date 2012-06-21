@@ -4,20 +4,21 @@ import java.util.Hashtable;
 import com.google.gson.annotations.SerializedName;
 
 public class User {	
+	@SerializedName("user[email]")
 	private String email;
-	@SerializedName("name")
+	@SerializedName("user[name]")
 	private String firstName;
-	@SerializedName("last_name")
+	@SerializedName("user[last_name]")
 	private String lastName;
-	@SerializedName("zip_code")
+	@SerializedName("user[zip_code]")
 	private String zipCode;
-	@SerializedName("phone_number")
+	@SerializedName("user[phone_number]")
 	private String phoneNumber;
-	@SerializedName("sex")
+	@SerializedName("user[sex]")
 	private String gender;
-	@SerializedName("password")
+	@SerializedName("user[password]")
 	private String password;
-	@SerializedName("password_confirmation")
+	@SerializedName("user[password_confirmation]")
 	private String passwordConfirmation;
 	
 	public String getEmail() {
@@ -98,14 +99,14 @@ public class User {
 
 	public Hashtable<String, String> getHashtable() {
 		Hashtable<String, String> hashtable = new Hashtable<String, String>();
-		hashtable.put("email", email);
-		hashtable.put("name", firstName);
-		hashtable.put("last_name", lastName);
-		hashtable.put("zip_code", zipCode);
-		hashtable.put("phone_number", phoneNumber);
-		hashtable.put("sex", gender);
-		hashtable.put("password", password);
-		hashtable.put("password_confirmation", passwordConfirmation);
+		hashtable.put("user[email]", email);
+		hashtable.put("user[name]", firstName);
+		hashtable.put("user[last_name]", lastName);
+		hashtable.put("user[zip_code]", zipCode);
+		hashtable.put("user[phone_number]", phoneNumber);
+		hashtable.put("user[sex]", gender);
+		hashtable.put("user[password]", password);
+		hashtable.put("user[password_confirmation]", passwordConfirmation);
 		return hashtable;
 	}
 }
