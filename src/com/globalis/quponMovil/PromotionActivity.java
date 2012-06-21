@@ -7,6 +7,7 @@ import com.globalis.extensions.IOnCustomClickListener;
 import com.globalis.network.HttpRequest;
 import com.globalis.network.HttpTask;
 import com.globalis.network.Response;
+import com.globalis.utils.Utils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import android.app.Activity;
@@ -67,7 +68,7 @@ public class PromotionActivity extends Activity implements OnItemClickListener, 
 		String email = pref.getString(GlobalPreference.getLoginEmail(), null);
 		String password= pref.getString(GlobalPreference.getLoginPassword(), null);		
 		
-		if((email == null || email.equals("")) && (password == null || password.equals(""))) {
+		if(Utils.isNullOrEmpty(email) && Utils.isNullOrEmpty(password)) {
 			menu.findItem(R.id.menu_settings).setVisible(false);			
 		}
 		else {

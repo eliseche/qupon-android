@@ -67,4 +67,13 @@ public class Utils {
 		
 		return haveWifiConnection || haveMobileConnection;
 	}
+	
+	public static boolean isNullOrEmpty(String value) {
+		if(value == null || value.equals("") || value.trim().equals("")) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 }
