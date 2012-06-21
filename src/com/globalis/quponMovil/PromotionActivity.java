@@ -13,6 +13,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -62,12 +63,17 @@ public class PromotionActivity extends Activity implements OnItemClickListener, 
 	}
 
 	public boolean onPrepareOptionsMenu(Menu menu) {
-		//User.setLoggedUser(new User());
-		// we should check in shared preference
-		if (1 == 2)
-			menu.findItem(R.id.menu_settings).setVisible(false);
-		else
-			menu.findItem(R.id.menu_login).setVisible(false);
+		SharedPreferences pref = getSharedPreferences(GlobalPreference.getLogin(), MODE_PRIVATE);
+		String email = pref.getString(GlobalPreference.getLoginEmail(), null);
+		String password= pref.getString(GlobalPreference.getLoginPassword(), null);		
+		
+		if((email == null || email.equals("")) && (password == null || password.equals(""))) {
+			menu.findItem(R.id.menu_settings).setVisible(false);			
+		}
+		else {
+			menu.findItem(R.id.menu_login).setVisible(false);			
+		}
+		
 		return super.onPrepareOptionsMenu(menu);
 	}
 

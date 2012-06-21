@@ -4,6 +4,7 @@ import java.util.Hashtable;
 import com.globalis.network.HttpRequest;
 import com.globalis.network.HttpTask;
 import com.globalis.network.Response;
+import com.google.gson.Gson;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class LoginActivity extends Activity implements OnClickListener {
 	private Button btnSignIn;
@@ -42,7 +44,19 @@ public class LoginActivity extends Activity implements OnClickListener {
 				@Override
 				public void doWork(Response response) {
 					if (response != null) {
-						// Save user in Shared preference						
+						Gson gson = new Gson();
+						LoginResponse loginResponse = gson.fromJson(response.getBody(), LoginResponse.class);
+						if(response.isValidStatusCode()) {
+							GlobalPreference.setToken(loginResponse.getToken());
+							getSharedPreferences(GlobalPreference.getLogin(), MODE_PRIVATE)
+							.edit()
+							.putString(GlobalPreference.getLoginEmail(), user)
+							.putString(GlobalPreference.getLoginPassword(), password)
+							.commit();							
+						}
+						else {
+							Toast.makeText(LoginActivity.this, loginResponse.getMessage(), Toast.LENGTH_LONG).show();
+						}
 					}
 				}
 			};
@@ -79,5 +93,18 @@ public class LoginActivity extends Activity implements OnClickListener {
 		btnSignIn.setOnClickListener(this);
 		btnSignUp = (TextView) findViewById(R.id.login_btn_sign_up);
 		btnSignUp.setOnClickListener(this);
-	}	
+	}
+	
+	private class LoginResponse {
+		private String token;
+		private String message;
+		
+		public String getToken() {
+			return token;
+		}
+		
+		public String getMessage() {
+			return message;
+		}
+	}
 }

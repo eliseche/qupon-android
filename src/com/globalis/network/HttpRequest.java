@@ -29,8 +29,8 @@ public class HttpRequest {
 			return base;
 		}
 		
-		public static String getLogin() {
-			return base + "/session.json";		
+		public static String getLogin() {			 
+			return base + "/api/v1/tokens.json";	
 		}
 		
 		public static String getPromotion() {
