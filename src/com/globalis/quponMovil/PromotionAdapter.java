@@ -36,7 +36,7 @@ public class PromotionAdapter extends ArrayAdapter<Promotion>{
 			holder = new ViewHolder();
 			// Get views from promotions_adapter.xml
 			holder.lblDescription = (TextView)convertView.findViewById(R.id.promotion_lbl_description);
-			holder.lblTermsAndCondition = (TextView)convertView.findViewById(R.id.promotion_lbl_terms_and_condition);
+			holder.lblTitle = (TextView)convertView.findViewById(R.id.promotion_lbl_title);
 			holder.imgPromotion = (ImageView)convertView.findViewById(R.id.promotion_img_promotion);		
 			holder.lblSpecialPrice = (TextView)convertView.findViewById(R.id.promotion_lbl_special_price);
 			holder.lblDiscount = (TextView)convertView.findViewById(R.id.promotion_lbl_discount);
@@ -53,8 +53,8 @@ public class PromotionAdapter extends ArrayAdapter<Promotion>{
 		Promotion promotion = getItem(position);
 		if(promotion != null) {
 			// Assign the appropriate data from out promotions object
+			holder.lblTitle.setText(promotion.getTitle());
 			holder.lblDescription.setText(promotion.getDescription());
-			holder.	lblTermsAndCondition.setText(promotion.getTermsAndCondition());
 			imageManager.displayImage(HttpRequest.Url.getBase() + promotion.getImagePath(), holder.imgPromotion, holder.pbProgress);		
 			holder.lblSpecialPrice.setText("$" + String.valueOf(promotion.getSpecialPrice()));		
 			holder.lblDiscount.setText(String.valueOf(promotion.getDiscount()) + "%");			
@@ -64,8 +64,8 @@ public class PromotionAdapter extends ArrayAdapter<Promotion>{
 	} 
 	
 	private static class ViewHolder {
+		public TextView lblTitle;
 		public TextView lblDescription;
-		public TextView lblTermsAndCondition;
 		public ImageView imgPromotion;
 		public TextView lblSpecialPrice;
 		public TextView lblDiscount;

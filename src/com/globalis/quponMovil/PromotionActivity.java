@@ -26,7 +26,8 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
-public class PromotionActivity extends Activity implements OnItemClickListener, IOnCustomClickListener {
+public class PromotionActivity extends Activity implements OnItemClickListener,
+		IOnCustomClickListener {
 	private ListView listViewPromotion;
 	private PromotionAdapter promotionAdapter;
 
@@ -38,17 +39,22 @@ public class PromotionActivity extends Activity implements OnItemClickListener, 
 		initViews();
 
 		HttpRequest req = new HttpRequest();
-		req.set(HttpRequest.Url.getPromotion(), null, HttpRequest.HttpMethod.GET);
+		req.set(HttpRequest.Url.getPromotion(), null,
+				HttpRequest.HttpMethod.GET);
 		HttpTask task = new HttpTask() {
 			@Override
 			public void doWork(Response response) {
 				if (response != null) {
 					Gson gson = new Gson();
-					Type collectionType = new TypeToken<List<Promotion>>() {}.getType();
-					List<Promotion> promotions = gson.fromJson(response.getBody(), collectionType);
+					Type collectionType = new TypeToken<List<Promotion>>() {
+					}.getType();
+					List<Promotion> promotions = gson.fromJson(
+							response.getBody(), collectionType);
 					Promotion.setPromotions(promotions);
-					
-					promotionAdapter = new PromotionAdapter(PromotionActivity.this, R.layout.promotion_adapter, Promotion.getPromotions());
+
+					promotionAdapter = new PromotionAdapter(
+							PromotionActivity.this, R.layout.promotion_adapter,
+							Promotion.getPromotions());
 					listViewPromotion.setAdapter(promotionAdapter);
 				}
 			}
@@ -64,17 +70,18 @@ public class PromotionActivity extends Activity implements OnItemClickListener, 
 	}
 
 	public boolean onPrepareOptionsMenu(Menu menu) {
-		SharedPreferences pref = getSharedPreferences(GlobalPreference.getLogin(), MODE_PRIVATE);
+		SharedPreferences pref = getSharedPreferences(
+				GlobalPreference.getLogin(), MODE_PRIVATE);
 		String email = pref.getString(GlobalPreference.getLoginEmail(), null);
-		String password= pref.getString(GlobalPreference.getLoginPassword(), null);		
-		
-		if(Utils.isNullOrEmpty(email) && Utils.isNullOrEmpty(password)) {
-			menu.findItem(R.id.menu_settings).setVisible(false);			
+		String password = pref.getString(GlobalPreference.getLoginPassword(),
+				null);
+
+		if (Utils.isNullOrEmpty(email) && Utils.isNullOrEmpty(password)) {
+			menu.findItem(R.id.menu_settings).setVisible(false);
+		} else {
+			menu.findItem(R.id.menu_login).setVisible(false);
 		}
-		else {
-			menu.findItem(R.id.menu_login).setVisible(false);			
-		}
-		
+
 		return super.onPrepareOptionsMenu(menu);
 	}
 
@@ -98,6 +105,15 @@ public class PromotionActivity extends Activity implements OnItemClickListener, 
 	private void initViews() {
 		listViewPromotion = (ListView) findViewById(R.id.promotion_list);
 		listViewPromotion.setOnItemClickListener(this);
+		SharedPreferences pref = getSharedPreferences(
+				GlobalPreference.getLogin(), MODE_PRIVATE);
+		String email = pref
+				.getString(GlobalPreference.getLoginEmail(), null);
+		String password = pref.getString(
+				GlobalPreference.getLoginPassword(), null);
+		if (email != null && !email.equals("") && password != null) {
+			new LoginActivity().log(this,email, password);
+		}
 	}
 
 	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
@@ -112,7 +128,8 @@ public class PromotionActivity extends Activity implements OnItemClickListener, 
 		int promID = promotion.getId();
 
 		HttpRequest req = new HttpRequest();
-		req.set(HttpRequest.Url.getCoupon(promID), null, HttpRequest.HttpMethod.POST);		
+		req.set(HttpRequest.Url.getCoupon(promID), null,
+				HttpRequest.HttpMethod.POST);
 		HttpTask task = new HttpTask() {
 			@Override
 			public void doWork(Response response) {
@@ -124,27 +141,29 @@ public class PromotionActivity extends Activity implements OnItemClickListener, 
 		};
 		task.set(PromotionActivity.this, req).execute();
 	}
-	
+
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if(keyCode == KeyEvent.KEYCODE_BACK) {
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
 			builder.setMessage(getResources().getString(R.string.exit));
 			builder.setCancelable(false);
-			builder.setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {				
-				public void onClick(DialogInterface dialog, int which) {
-					finish();					
-				}
-			});
-			builder.setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {				
-				public void onClick(DialogInterface dialog, int which) {
-					dialog.cancel();
-				}
-			});
+			builder.setPositiveButton(getResources().getString(R.string.yes),
+					new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int which) {
+							finish();
+						}
+					});
+			builder.setNegativeButton(getResources().getString(R.string.no),
+					new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int which) {
+							dialog.cancel();
+						}
+					});
 			AlertDialog alert = builder.create();
 			alert.show();
 		}
-	
+
 		return super.onKeyDown(keyCode, event);
 	}
 }

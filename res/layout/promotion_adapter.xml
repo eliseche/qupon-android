@@ -5,7 +5,7 @@
     android:layout_height="fill_parent"
     android:padding="5dip" >
     <TextView
-        android:id="@+id/promotion_lbl_description"
+        android:id="@+id/promotion_lbl_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -19,7 +19,7 @@
         android:layout_width="100dip"
         android:layout_height="80dip"
         android:layout_alignParentLeft="true"
-        android:layout_below="@id/promotion_lbl_description" >
+        android:layout_below="@id/promotion_lbl_title" >
         <ImageView
             android:id="@+id/promotion_img_promotion"
             android:layout_width="fill_parent"
@@ -36,17 +36,18 @@
             android:indeterminate="true" />
     </RelativeLayout>
     <TextView
-        android:id="@+id/promotion_lbl_terms_and_condition"
+        android:id="@+id/promotion_lbl_description"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/promotion_lbl_description"
+        android:layout_below="@id/promotion_lbl_title"
         android:layout_marginLeft="5dip"
         android:layout_toRightOf="@id/promotion_rl_image"
         android:textColor="@color/promotion_item" />
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/promotion_lbl_terms_and_condition"
+        android:layout_below="@+id/promotion_lbl_description"
+        android:layout_marginTop="10dip"
         android:layout_toLeftOf="@+id/promotion_lbl_special_price"
         android:layout_toRightOf="@+id/promotion_rl_image" >
         <Button
@@ -61,7 +62,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_below="@id/promotion_lbl_terms_and_condition"
+        android:layout_below="@id/promotion_lbl_description"
         android:layout_marginRight="5dip"
         android:textColor="@color/promotion_item"
         android:textSize="16sp"
