@@ -71,6 +71,20 @@ public class LoginActivity extends Activity implements OnClickListener {
 		btnSignUp = (TextView) findViewById(R.id.login_btn_sign_up);
 		btnSignUp.setOnClickListener(this);
 	}
+	
+	public static boolean isLogged(final Context context){
+		SharedPreferences pref = context.getSharedPreferences(
+				GlobalPreference.getLogin(), MODE_PRIVATE);
+		String email = pref.getString(
+				GlobalPreference.getLoginEmail(), null);
+		String password = pref.getString(
+				GlobalPreference.getLoginPassword(), null);
+		if (email != null && !email.equals("")
+				&& password != null) {
+			return true;
+		}
+		return false;
+	}
 
 	public void log(final Context context,final String user, final String password) {
 
@@ -88,15 +102,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 							response.getBody(), LoginResponse.class);
 					if (response.isValidStatusCode()) {
 						GlobalPreference.setToken(loginResponse.getToken());
-
-						SharedPreferences pref = context.getSharedPreferences(
-								GlobalPreference.getLogin(), MODE_PRIVATE);
-						String emailOld = pref.getString(
-								GlobalPreference.getLoginEmail(), null);
-						String passwordOld = pref.getString(
-								GlobalPreference.getLoginPassword(), null);
-						if (emailOld == null || emailOld.equals("")
-								|| passwordOld == null) {
+						if (!isLogged(context)) {
 							
 							context.getSharedPreferences(GlobalPreference.getLogin(),
 									MODE_PRIVATE)

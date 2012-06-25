@@ -10,7 +10,7 @@
         android:background="@drawable/coupon"
         >
         <RelativeLayout
-            android:id="@+id/coupon_rl_info"
+            android:id="@+id/coupon_detail_rl_info"
             android:layout_width="fill_parent"
             android:layout_height="150dip"
             android:layout_marginLeft="12dip"
@@ -18,24 +18,24 @@
             android:layout_marginTop="10dip"
             >
             <RelativeLayout 
-                android:id="@+id/coupon_rl_discount"
+                android:id="@+id/coupon_detail_rl_discount"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:paddingLeft="10dip"
                 android:paddingRight="10dip">
                 <TextView 
-                android:id="@+id/coupon_lbl_discount"
+                android:id="@+id/coupon_detail_lbl_discount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:textSize="80dip"
                 android:text="50"/>
                 <TextView 
-                    android:id="@+id/coupon_perc_symbol"
+                    android:id="@+id/coupon_detail_perc_symbol"
                     android:layout_width="wrap_content"
                     android:layout_height="53dip"
-                    android:layout_toRightOf="@+id/coupon_lbl_discount"
-                    android:layout_alignTop="@+id/coupon_lbl_discount"
+                    android:layout_toRightOf="@+id/coupon_detail_lbl_discount"
+                    android:layout_alignTop="@+id/coupon_detail_lbl_discount"
                     android:paddingTop="7dip"
                     android:textSize="43dip"
                     android:text="%"
@@ -43,8 +43,8 @@
                 <TextView 
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/coupon_lbl_discount"
-                    android:layout_below="@+id/coupon_perc_symbol"
+                    android:layout_toRightOf="@+id/coupon_detail_lbl_discount"
+                    android:layout_below="@+id/coupon_detail_perc_symbol"
                     android:paddingBottom="13dip"
                     android:textSize="23dip"
                     android:text="@string/discount"
@@ -52,21 +52,21 @@
             </RelativeLayout>
             
             <TextView 
-                android:id="@+id/coupon_lbl_title"
+                android:id="@+id/coupon_detail_lbl_title"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:layout_toRightOf="@+id/coupon_rl_discount"
+                android:layout_toRightOf="@+id/coupon_detail_rl_discount"
                 android:textSize="30dip"
                 android:text="Title"/>
             <LinearLayout 
-                android:id="@+id/coupon_ll_description"
+                android:id="@+id/coupon_detail_ll_description"
                 android:layout_width="fill_parent"
                 android:layout_height="75dip"
-                android:layout_toRightOf="@+id/coupon_rl_discount"
-                android:layout_below="@+id/coupon_lbl_title">
+                android:layout_toRightOf="@+id/coupon_detail_rl_discount"
+                android:layout_below="@+id/coupon_detail_lbl_title">
                 <TextView 
-                android:id="@+id/coupon_lbl_description"
+                android:id="@+id/coupon_detail_lbl_description"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20dip"
@@ -76,11 +76,11 @@
             <LinearLayout 
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:layout_toRightOf="@+id/coupon_rl_discount"
-                android:layout_below="@+id/coupon_ll_description"
+                android:layout_toRightOf="@+id/coupon_detail_rl_discount"
+                android:layout_below="@+id/coupon_detail_ll_description"
                 >
                 <TextView 
-                android:id="@+id/coupon_lbl_terms_and_cond"
+                android:id="@+id/coupon_detail_lbl_terms_and_cond"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textSize="10dip"
@@ -90,29 +90,29 @@
             
         </RelativeLayout>
         <RelativeLayout 
-            android:id="@+id/coupon_rl_code"
+            android:id="@+id/coupon_detail_rl_code"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_marginLeft="12dip"
             android:layout_marginRight="12dip"
             android:layout_marginBottom="10dip"
-            android:layout_below="@+id/coupon_rl_info"
+            android:layout_below="@+id/coupon_detail_rl_info"
             android:background="@color/red">
             <TextView 
-                android:id="@+id/coupon_lbl_fix_code"
+                android:id="@+id/coupon_detail_lbl_fix_code"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:gravity="center_vertical"
                 android:layout_marginLeft="20dip"
                 android:textSize="20dip"
-                android:text="@string/coupon_lbl_code"/>
+                android:text="@string/coupon_detail_lbl_code"/>
             <TextView 
-                android:id="@+id/coupon_lbl_code"
+                android:id="@+id/coupon_detail_lbl_code"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:gravity="center"
                 android:textSize="50dip"
-                android:layout_toRightOf="@+id/coupon_lbl_fix_code"
+                android:layout_toRightOf="@+id/coupon_detail_lbl_fix_code"
                 android:text="XxxxxXxxxxX"/>
         </RelativeLayout>
     </RelativeLayout>

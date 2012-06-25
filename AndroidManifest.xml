@@ -42,7 +42,7 @@
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name=".CouponActivity"
+            android:name=".CouponDetailActivity"
             android:label="@string/app_name"
             android:screenOrientation="landscape" >
         </activity>

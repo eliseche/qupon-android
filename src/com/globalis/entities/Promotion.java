@@ -158,9 +158,11 @@ public class Promotion implements Serializable {
 		this.discount = discount;
 	}
 
-	public Promotion(String description, String dueDate, String image,
+	public Promotion(String title, String description, String dueDate, String image,
 			int maxQuantityOfGeneratedCoupon, int maxQuantityOfValidatedCoupon,
-			int maxQuantityPerClient, String sinceDate, String termsAndCondition) {
+			int maxQuantityPerClient, String sinceDate, String termsAndCondition,
+			float normalPrice, float specialPrice, float discount) {
+		this.title = title;
 		this.description = description;
 		this.dueDate = dueDate;
 		this.image = image;
@@ -169,6 +171,9 @@ public class Promotion implements Serializable {
 		this.maxQuantityPerClient = maxQuantityPerClient;
 		this.sinceDate = sinceDate;
 		this.termsAndCondition = termsAndCondition;
+		this.normalPrice = normalPrice;
+		this.specialPrice = specialPrice;
+		this.discount = discount;
 	}
 
 	public static List<Promotion> getPromotions() {

@@ -38,7 +38,9 @@
     <string name="settings_lbl_account">Cuenta</string>
     <string name="settings_lbl_modify_info_user">Modificar usuario</string>
     <string name="settings_lbl_modify_info_user_summary">Cambiar la información de su cuenta</string>
+    <string name="coupon_detail_lbl_code">Código:</string>
     <string name="menu_login">Login</string>
     <string name="menu_settings">Opciones</string>
     <string name="exception_no_network">No se pudo encontrar una conexión a Internet</string>
+    <string name="must_be_logged">Debe identificarse para poder seguir</string>
 </resources>

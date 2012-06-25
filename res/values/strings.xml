@@ -38,9 +38,10 @@
     <string name="settings_lbl_account">Account</string>
     <string name="settings_lbl_modify_info_user">Modify user</string>
     <string name="settings_lbl_modify_info_user_summary">Change your account information</string>
-    <string name="coupon_lbl_code">Code:</string>
+    <string name="coupon_detail_lbl_code">Code:</string>
     <string name="discount">Off</string>
     <string name="menu_login">Login</string>
     <string name="menu_settings">Settings</string>
     <string name="exception_no_network">Couldn\'t find an Internet connection</string>
+    <string name="must_be_logged">Must be logged in in order to proceed</string>
 </resources>

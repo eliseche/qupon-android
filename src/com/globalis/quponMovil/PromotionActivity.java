@@ -1,17 +1,22 @@
 package com.globalis.quponMovil;
 
 import java.lang.reflect.Type;
+import java.util.Hashtable;
 import java.util.List;
+
+import com.globalis.entities.Coupon;
 import com.globalis.entities.Promotion;
 import com.globalis.extensions.IOnCustomClickListener;
 import com.globalis.network.HttpRequest;
 import com.globalis.network.HttpTask;
 import com.globalis.network.Response;
+import com.globalis.network.HttpRequest.HttpMethod;
 import com.globalis.utils.Utils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -25,6 +30,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class PromotionActivity extends Activity implements OnItemClickListener,
 		IOnCustomClickListener {
@@ -107,12 +113,11 @@ public class PromotionActivity extends Activity implements OnItemClickListener,
 		listViewPromotion.setOnItemClickListener(this);
 		SharedPreferences pref = getSharedPreferences(
 				GlobalPreference.getLogin(), MODE_PRIVATE);
-		String email = pref
-				.getString(GlobalPreference.getLoginEmail(), null);
-		String password = pref.getString(
-				GlobalPreference.getLoginPassword(), null);
+		String email = pref.getString(GlobalPreference.getLoginEmail(), null);
+		String password = pref.getString(GlobalPreference.getLoginPassword(),
+				null);
 		if (email != null && !email.equals("") && password != null) {
-			new LoginActivity().log(this,email, password);
+			new LoginActivity().log(this, email, password);
 		}
 	}
 
@@ -124,22 +129,38 @@ public class PromotionActivity extends Activity implements OnItemClickListener,
 	}
 
 	public void OnCustomClick(View view, int position) {
-		Promotion promotion = Promotion.getPromotions().get(position);
-		int promID = promotion.getId();
+		if (LoginActivity.isLogged(this)) {
+			final Promotion promotion = Promotion.getPromotions().get(position);
+			int promID = promotion.getId();
 
-		HttpRequest req = new HttpRequest();
-		req.set(HttpRequest.Url.getCoupon(promID), null,
-				HttpRequest.HttpMethod.POST);
-		HttpTask task = new HttpTask() {
-			@Override
-			public void doWork(Response response) {
-				if (response != null) {
-					Log.i("exito", response.getBody());
+			HttpRequest req = new HttpRequest();
+			Hashtable<String, String> params = new Hashtable<String, String>();
+			params.put("auth_token", GlobalPreference.getToken());
+			req.set(HttpRequest.Url.getCoupons(promID), params,
+					HttpRequest.HttpMethod.POST);
+			HttpTask task = new HttpTask() {
+				@Override
+				public void doWork(Response response) {
+					if (response != null) {
+						// Log.i("exito", response.getBody());
+						Gson gson = new Gson();
+						Coupon coupon = gson.fromJson(response.getBody(),
+								Coupon.class);
+						coupon.setPromotion(promotion);
+						Intent intent = new Intent(getApplicationContext(),
+								CouponDetailActivity.class);
+						intent.putExtra("coupon", coupon);
+						startActivity(intent);
+					} else
+						Log.i("falla", "ninguna respuesta del sitio");
 				}
-				Log.i("falla", "ninguna respuesta del sitio");
-			}
-		};
-		task.set(PromotionActivity.this, req).execute();
+			};
+			task.set(PromotionActivity.this, req).execute();
+		} else {
+			Toast.makeText(this, R.string.must_be_logged, Toast.LENGTH_SHORT);
+			Intent intent = new Intent(this, LoginActivity.class);
+			startActivity(intent);
+		}
 	}
 
 	@Override
@@ -166,4 +187,26 @@ public class PromotionActivity extends Activity implements OnItemClickListener,
 
 		return super.onKeyDown(keyCode, event);
 	}
+
+	private class GenCouponResponse {
+		private String message;
+		private int couponID;
+
+		public String getMessage() {
+			return message;
+		}
+
+		public void setMessage(String message) {
+			this.message = message;
+		}
+
+		public int getCouponID() {
+			return couponID;
+		}
+
+		public void setCouponID(int couponID) {
+			this.couponID = couponID;
+		}
+	}
+
 }

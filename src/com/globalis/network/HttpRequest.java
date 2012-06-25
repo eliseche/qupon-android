@@ -23,7 +23,8 @@ public class HttpRequest {
 	}
 	
 	public static class Url {
-		public static final String base = "http://50.116.21.186";		
+		public final static String base = "http://50.116.21.186";		
+		//static {base = "http://192.168.0.196:3000";}
 		
 		public static String getBase() {
 			return base;
@@ -41,9 +42,14 @@ public class HttpRequest {
 			return base + "/users.json";
 		}
 		
-		public static String getCoupon(int promotionID) {
+		public static String getCoupons(int promotionID) {
 			return base + "/promotions/" + promotionID + "/coupons";
 		}
+		
+		public static String getCoupon(int couponID){
+			return base + "coupons/"+ couponID;
+		}
+		
 	}
 	
 	public void set(String initialUrl, Hashtable<String, String> initialParams, HttpMethod initialHttpMethod) {
