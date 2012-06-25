@@ -23,7 +23,7 @@ public class HttpRequest {
 	}
 	
 	public static class Url {
-		private static String base = "http://50.116.21.186";		
+		public static final String base = "http://50.116.21.186";		
 		
 		public static String getBase() {
 			return base;
