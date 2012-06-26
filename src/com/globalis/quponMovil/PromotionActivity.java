@@ -63,6 +63,7 @@ public class PromotionActivity extends Activity implements OnItemClickListener,
 					List<Promotion> promotions = new ArrayList<Promotion>();
 					for (PromotionJson promotionJson : promotionsJson) {
 						promotionJson.getPromotion().setImagePath(promotionJson.getImage_url());
+						promotionJson.getPromotion().setTags(promotionJson.getTagList());
 						promotions.add(promotionJson.getPromotion());
 					}
 					Promotion.setPromotions(promotions);
@@ -153,12 +154,12 @@ public class PromotionActivity extends Activity implements OnItemClickListener,
 					if (response != null) {
 						// Log.i("exito", response.getBody());
 						Gson gson = new Gson();
-						Coupon coupon = gson.fromJson(response.getBody(),
-								Coupon.class);
-						coupon.setPromotion(promotion);
+						CouponJson couponJson = gson.fromJson(response.getBody(),
+								CouponJson.class);
+						couponJson.getCoupon().setPromotion(promotion);
 						Intent intent = new Intent(getApplicationContext(),
 								CouponDetailActivity.class);
-						intent.putExtra("coupon", coupon);
+						intent.putExtra("coupon", couponJson.getCoupon());
 						startActivity(intent);
 					} else
 						Log.i("falla", "ninguna respuesta del sitio");
@@ -228,6 +229,26 @@ public class PromotionActivity extends Activity implements OnItemClickListener,
 		}
 		public void setBranch(List<Branch> branch) {
 			this.branch = branch;
+		}
+		
+	}
+	
+	private class CouponJson implements Serializable{
+		
+		private Coupon coupon;
+		private String state;
+		
+		public Coupon getCoupon() {
+			return coupon;
+		}
+		public void setCoupon(Coupon coupon) {
+			this.coupon = coupon;
+		}
+		public String getState() {
+			return state;
+		}
+		public void setState(String state) {
+			this.state = state;
 		}
 		
 	}

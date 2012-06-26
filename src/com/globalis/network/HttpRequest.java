@@ -43,7 +43,7 @@ public class HttpRequest {
 		}
 		
 		public static String getCoupons(int promotionID) {
-			return base + "/promotions/" + promotionID + "/coupons";
+			return base + "/promotions/" + promotionID + "/coupons.json";
 		}
 		
 		public static String getCoupon(int couponID){

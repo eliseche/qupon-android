@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.Iterator;
 
 import com.globalis.entities.Promotion;
-import com.globalis.entities.Promotion.Tag;
 import com.globalis.network.HttpRequest;
 import com.globalis.utils.Utils;
 import android.app.Activity;
@@ -51,8 +50,8 @@ public class PromotionDetailActivity extends Activity {
 		lblDescription.setText(promotion.getDescription());
 		lblFromDate.setText(Utils.parseDate(promotion.getSinceDate(), PromotionDetailActivity.this));
 		String tags = "";
-		for (Tag tag : promotion.getTags()) {
-			tags += tag.getName()+", ";
+		for (String tag : promotion.getTags()) {
+			tags += tag+", ";
 		}
 		tags = tags.substring(0, tags.length()-2);
 		lblTags.setText(tags);

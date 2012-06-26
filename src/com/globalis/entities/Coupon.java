@@ -3,6 +3,7 @@ package com.globalis.entities;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Hashtable;
+import java.util.List;
 
 import com.globalis.network.HttpRequest;
 import com.globalis.network.Response;
@@ -21,6 +22,8 @@ public class Coupon implements Serializable{
 	@SerializedName("validation_date")
 	private Calendar validationDate;
 	private Promotion promotion;
+	
+	private static List<Coupon> coupons;
 	
 	public int getID(){
 		return id;
@@ -51,6 +54,12 @@ public class Coupon implements Serializable{
 	}
 	public void setPromotion(Promotion promotion) {
 		this.promotion = promotion;
+	}
+	public static List<Coupon> getCoupons() {
+		return coupons;
+	}
+	public static void setCoupons(List<Coupon> coupons) {
+		Coupon.coupons = coupons;
 	}
 
 	

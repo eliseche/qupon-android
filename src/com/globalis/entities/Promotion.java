@@ -29,30 +29,8 @@ public class Promotion implements Serializable {
 	private float specialPrice;
 	private float discount;
 	private String state;
-	private List<Tag> tags;
+	private List<String> tags;
 	private static List<Promotion> promotions;
-
-	public static class Tag implements Serializable{
-		private int id;
-		private String name;
-
-		public int getId() {
-			return id;
-		}
-
-		public void setId(int id) {
-			this.id = id;
-		}
-
-		public String getName() {
-			return name;
-		}
-
-		public void setName(String name) {
-			this.name = name;
-		}
-
-	}
 
 	public int getId() {
 		return id;
@@ -197,11 +175,11 @@ public class Promotion implements Serializable {
 		this.title = title;
 	}
 
-	public List<Tag> getTags() {
+	public List<String> getTags() {
 		return tags;
 	}
 
-	public void setTags(List<Tag> tags) {
+	public void setTags(List<String> tags) {
 		this.tags = tags;
 	}
 
