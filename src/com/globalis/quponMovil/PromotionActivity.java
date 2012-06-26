@@ -1,9 +1,12 @@
 package com.globalis.quponMovil;
 
+import java.io.Serializable;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 
+import com.globalis.entities.Branch;
 import com.globalis.entities.Coupon;
 import com.globalis.entities.Promotion;
 import com.globalis.extensions.IOnCustomClickListener;
@@ -13,6 +16,7 @@ import com.globalis.network.Response;
 import com.globalis.network.HttpRequest.HttpMethod;
 import com.globalis.utils.Utils;
 import com.google.gson.Gson;
+import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -52,10 +56,15 @@ public class PromotionActivity extends Activity implements OnItemClickListener,
 			public void doWork(Response response) {
 				if (response != null) {
 					Gson gson = new Gson();
-					Type collectionType = new TypeToken<List<Promotion>>() {
+					Type collectionType = new TypeToken<List<PromotionJson>>() {
 					}.getType();
-					List<Promotion> promotions = gson.fromJson(
+					List<PromotionJson> promotionsJson = gson.fromJson(
 							response.getBody(), collectionType);
+					List<Promotion> promotions = new ArrayList<Promotion>();
+					for (PromotionJson promotionJson : promotionsJson) {
+						promotionJson.getPromotion().setImagePath(promotionJson.getImage_url());
+						promotions.add(promotionJson.getPromotion());
+					}
 					Promotion.setPromotions(promotions);
 
 					promotionAdapter = new PromotionAdapter(
@@ -188,25 +197,39 @@ public class PromotionActivity extends Activity implements OnItemClickListener,
 		return super.onKeyDown(keyCode, event);
 	}
 
-	private class GenCouponResponse {
-		private String message;
-		private int couponID;
-
-		public String getMessage() {
-			return message;
+	private class PromotionJson implements Serializable{
+		
+		private Promotion promotion;
+		private String image_url;
+		@SerializedName("tag_list")
+		private List<String> tagList;
+		private List<Branch> branch;
+		
+		public Promotion getPromotion() {
+			return promotion;
 		}
-
-		public void setMessage(String message) {
-			this.message = message;
+		public void setPromotion(Promotion promotion) {
+			this.promotion = promotion;
 		}
-
-		public int getCouponID() {
-			return couponID;
+		public String getImage_url() {
+			return image_url;
 		}
-
-		public void setCouponID(int couponID) {
-			this.couponID = couponID;
+		public void setImage_url(String image_url) {
+			this.image_url = image_url;
 		}
+		public List<String> getTagList() {
+			return tagList;
+		}
+		public void setTagList(List<String> tagList) {
+			this.tagList = tagList;
+		}
+		public List<Branch> getBranch() {
+			return branch;
+		}
+		public void setBranch(List<Branch> branch) {
+			this.branch = branch;
+		}
+		
 	}
 
 }
