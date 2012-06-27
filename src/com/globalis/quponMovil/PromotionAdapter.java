@@ -53,11 +53,11 @@ public class PromotionAdapter extends ArrayAdapter<Promotion>{
 		Promotion promotion = getItem(position);
 		if(promotion != null) {
 			// Assign the appropriate data from out promotions object
-			holder.lblTitle.setText(promotion.getTitle());
-			holder.lblDescription.setText(promotion.getDescription());
-			imageManager.displayImage(HttpRequest.Url.getBase() + promotion.getImagePath(), holder.imgPromotion, holder.pbProgress);		
-			holder.lblSpecialPrice.setText("$" + String.valueOf(promotion.getSpecialPrice()));		
-			holder.lblDiscount.setText(String.valueOf(promotion.getDiscount()) + "%");			
+			holder.lblTitle.setText(promotion.getPromotion().getTitle());
+			holder.lblDescription.setText(promotion.getPromotion().getDescription());
+			imageManager.displayImage(HttpRequest.Url.getBase() + promotion.getImageUrl(), holder.imgPromotion, holder.pbProgress);		
+			holder.lblSpecialPrice.setText("$" + String.valueOf(promotion.getPromotion().getSpecialPrice()));		
+			holder.lblDiscount.setText(String.valueOf(promotion.getPromotion().getDiscount()) + "%");			
 		}
 		
 		return convertView;

@@ -1,8 +1,6 @@
 package com.globalis.quponMovil;
 
 import java.io.Serializable;
-import java.util.Iterator;
-
 import com.globalis.entities.Promotion;
 import com.globalis.network.HttpRequest;
 import com.globalis.utils.Utils;
@@ -36,26 +34,26 @@ public class PromotionDetailActivity extends Activity {
 			promotion = (Promotion)serializable;
 			collectData();	
 			ImageManager imageManager = new ImageManager(getApplicationContext());
-			imageManager.displayImage(HttpRequest.Url.getBase() + promotion.getImagePath(), imgPromotion, pbProgress);
+			imageManager.displayImage(HttpRequest.Url.getBase() + promotion.getImageUrl(), imgPromotion, pbProgress);
 		}
 	}
 	
 	private void collectData() {
-		lblTitle.setText(promotion.getTitle());
-		lblSpecialPrice.setText(String.valueOf(promotion.getSpecialPrice()));
-		lblDiscount.setText(String.valueOf(promotion.getDiscount()));
-		lblToDate.setText(Utils.parseDate(promotion.getDueDate(), PromotionDetailActivity.this));
-		lblRemaining.setText(String.valueOf(promotion.getMaxQuantityOfGeneratedCoupon()));
-		lblTermsCond.setText(promotion.getTermsAndCondition());
-		lblDescription.setText(promotion.getDescription());
-		lblFromDate.setText(Utils.parseDate(promotion.getSinceDate(), PromotionDetailActivity.this));
+		lblTitle.setText(promotion.getPromotion().getTitle());
+		lblSpecialPrice.setText(String.valueOf(promotion.getPromotion().getSpecialPrice()));
+		lblDiscount.setText(String.valueOf(promotion.getPromotion().getDiscount()));
+		lblToDate.setText(Utils.parseDate(promotion.getPromotion().getDueDate(), PromotionDetailActivity.this));
+		lblRemaining.setText(String.valueOf(promotion.getPromotion().getMaxQuantityOfGeneratedCoupon()));
+		lblTermsCond.setText(promotion.getPromotion().getTermsAndCondition());
+		lblDescription.setText(promotion.getPromotion().getDescription());
+		lblFromDate.setText(Utils.parseDate(promotion.getPromotion().getSinceDate(), PromotionDetailActivity.this));
 		String tags = "";
-		for (String tag : promotion.getTags()) {
-			tags += tag+", ";
+		for (String tag : promotion.getTagList()) {
+			tags += tag +", ";
 		}
-		tags = tags.substring(0, tags.length()-2);
+		tags = tags.substring(0, tags.length() -2);
 		lblTags.setText(tags);
-		lblState.setText(promotion.getState());
+		lblState.setText(promotion.getPromotion().getState());
 	}
 
 	private void initViews() {

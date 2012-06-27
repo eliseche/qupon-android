@@ -4,6 +4,7 @@ import java.util.Hashtable;
 import com.globalis.network.HttpRequest;
 import com.globalis.network.HttpTask;
 import com.globalis.network.Response;
+import com.globalis.utils.Utils;
 import com.google.gson.Gson;
 import android.app.Activity;
 import android.content.Context;
@@ -61,33 +62,19 @@ public class LoginActivity extends Activity implements OnClickListener {
 				// nothing to do for the moment
 			}
 		}
-	}
-
-	private void initViews() {
-		txtUser = (EditText) findViewById(R.id.login_txt_user);
-		txtPassword = (EditText) findViewById(R.id.login_txt_password);
-		btnSignIn = (Button) findViewById(R.id.login_btn_sign_in);
-		btnSignIn.setOnClickListener(this);
-		btnSignUp = (TextView) findViewById(R.id.login_btn_sign_up);
-		btnSignUp.setOnClickListener(this);
-	}
+	}	
 	
 	public static boolean isLogged(final Context context){
-		SharedPreferences pref = context.getSharedPreferences(
-				GlobalPreference.getLogin(), MODE_PRIVATE);
-		String email = pref.getString(
-				GlobalPreference.getLoginEmail(), null);
-		String password = pref.getString(
-				GlobalPreference.getLoginPassword(), null);
-		if (email != null && !email.equals("")
-				&& password != null) {
+		SharedPreferences pref = context.getSharedPreferences(GlobalPreference.getLogin(), MODE_PRIVATE);
+		String email = pref.getString(GlobalPreference.getLoginEmail(), null);
+		String password = pref.getString(GlobalPreference.getLoginPassword(), null);
+		if (!Utils.isNullOrEmpty(email) && !Utils.isNullOrEmpty(password)) {
 			return true;
 		}
 		return false;
 	}
 
 	public void log(final Context context,final String user, final String password) {
-
 		Hashtable<String, String> params = new Hashtable<String, String>();
 		params.put("email", user);
 		params.put("password", password);
@@ -98,35 +85,34 @@ public class LoginActivity extends Activity implements OnClickListener {
 			public void doWork(Response response) {
 				if (response != null) {
 					Gson gson = new Gson();
-					LoginResponse loginResponse = gson.fromJson(
-							response.getBody(), LoginResponse.class);
+					LoginResponse loginResponse = gson.fromJson(response.getBody(), LoginResponse.class);
 					if (response.isValidStatusCode()) {
 						GlobalPreference.setToken(loginResponse.getToken());
-						if (!isLogged(context)) {
-							
-							context.getSharedPreferences(GlobalPreference.getLogin(),
-									MODE_PRIVATE)
+						if (!isLogged(context)) {							
+							context.getSharedPreferences(GlobalPreference.getLogin(), MODE_PRIVATE)
 									.edit()
-									.putString(
-											GlobalPreference.getLoginEmail(),
-											user)
-									.putString(
-											GlobalPreference.getLoginPassword(),
-											password).commit();
-							Toast.makeText(LoginActivity.this,
-									loginResponse.getMessage(),
-									Toast.LENGTH_LONG).show();
+									.putString(GlobalPreference.getLoginEmail(), user)
+									.putString(GlobalPreference.getLoginPassword(), password)
+									.commit();
+							Toast.makeText(LoginActivity.this, loginResponse.getMessage(), Toast.LENGTH_LONG).show();
 							finish();
 						}
 					} else {
-						Toast.makeText(LoginActivity.this,
-								loginResponse.getMessage(), Toast.LENGTH_LONG)
-								.show();
+						Toast.makeText(LoginActivity.this, loginResponse.getMessage(), Toast.LENGTH_LONG).show();
 					}
 				}
 			}
 		};
 		task.set(context, req).execute();
+	}
+	
+	private void initViews() {
+		txtUser = (EditText) findViewById(R.id.login_txt_user);
+		txtPassword = (EditText) findViewById(R.id.login_txt_password);
+		btnSignIn = (Button) findViewById(R.id.login_btn_sign_in);
+		btnSignIn.setOnClickListener(this);
+		btnSignUp = (TextView) findViewById(R.id.login_btn_sign_up);
+		btnSignUp.setOnClickListener(this);
 	}
 
 	private class LoginResponse {

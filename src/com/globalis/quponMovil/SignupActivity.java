@@ -5,6 +5,7 @@ import com.globalis.entities.User;
 import com.globalis.network.HttpRequest;
 import com.globalis.network.HttpTask;
 import com.globalis.network.Response;
+import com.globalis.utils.Utils;
 import com.google.gson.Gson;
 import android.app.Activity;
 import android.content.Intent;
@@ -40,7 +41,6 @@ public class SignupActivity extends Activity implements OnClickListener {
 			if(validateFields()) {
 				User newUser = createUser();
 				saveUser(newUser);
-				//to return the data of the user to the previous activity
 			}
 			break;
 		default:
@@ -88,19 +88,19 @@ public class SignupActivity extends Activity implements OnClickListener {
 	}
 	
 	private boolean validateFields() {		
-		if(email.equals("")) {
+		if(Utils.isNullOrEmpty(email)) {
 			Toast.makeText(this, getResources().getString(R.string.signup_error_msg_complete_user), Toast.LENGTH_LONG).show();
 			return false;
 		}
-		if(!password.equals(rePassword)) {
+		if(Utils.isNullOrEmpty(password) || Utils.isNullOrEmpty(rePassword) || !password.equals(rePassword)) {
 			Toast.makeText(this, getResources().getString(R.string.signup_error_msg_unmatching_pass), Toast.LENGTH_LONG).show();
 			return false;
 		}
-		if(firstName.equals("")) {
+		if(Utils.isNullOrEmpty(firstName)) {
 			Toast.makeText(this,getResources().getString(R.string.signup_error_msg_complete_first_name), Toast.LENGTH_LONG).show();
 			return false;
 		}
-		if(lastName.equals("")) {
+		if(Utils.isNullOrEmpty(lastName)) {
 			Toast.makeText(this, getResources().getString(R.string.signup_error_msg_complete_last_name), Toast.LENGTH_LONG).show();
 			return false;
 		}
