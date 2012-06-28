@@ -10,6 +10,7 @@
     <string name="login_lbl_password">Contraseña</string>
     <string name="login_btn_sign_in">Iniciar sesión</string>
     <string name="login_btn_sign_up">No estas registrado? <u><b><i>Registrarse</i></b></u></string>
+    <string name="login_successfully">Registrado correctamente</string>
     <string name="signup_lbl_title">Por favor llene el formulario</string>
     <string name="signup_txt_username">Usuario</string>
     <string name="signup_txt_password">Contraseña</string>
@@ -39,6 +40,7 @@
     <string name="settings_lbl_modify_info_user">Modificar usuario</string>
     <string name="settings_lbl_modify_info_user_summary">Cambiar la información de su cuenta</string>
     <string name="coupon_detail_lbl_code">Código:</string>
+    <string name="discount">Off</string>
     <string name="menu_login">Login</string>
     <string name="menu_settings">Opciones</string>
     <string name="exception_no_network">No se pudo encontrar una conexión a Internet</string>

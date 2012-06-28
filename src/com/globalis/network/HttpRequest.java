@@ -3,13 +3,21 @@ package com.globalis.network;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.PrintWriter;
 import java.net.Authenticator;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
+import java.util.Map.Entry;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
 
 public class HttpRequest {
 	private String initialUrl;
@@ -70,7 +78,6 @@ public class HttpRequest {
 	}	
 	
 	public Response get(String url, Hashtable<String, String> params) throws Exception {
-		//setProxy();
 		setParams(params);
 		if(this.params.length() != 0) {
 			url = url + "?" + this.params;			
@@ -100,8 +107,36 @@ public class HttpRequest {
 		return response;
 	}
 	
-	public Response post(String url, Hashtable<String, String> params) throws Exception {
-		//setProxy();
+	public Response post(String url, Hashtable<String, String> params) throws Exception {		
+		ArrayList<NameValuePair> postParams = new ArrayList<NameValuePair>();
+	    for (Entry<String, String> entry : params.entrySet()) {
+	    	postParams.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));	        
+	    }
+		
+		HttpClient conn = null;
+		Response response = null;
+		
+		try {
+			conn = new DefaultHttpClient();
+			HttpPost post = new HttpPost(url);			
+			post.setEntity(new UrlEncodedFormEntity(postParams));
+			HttpResponse res = conn.execute(post);
+			InputStream in = res.getEntity().getContent();
+			byte[] body = readStream(in);			
+			response = new Response(res.getStatusLine().getStatusCode(), new String(body));			
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new ConnectionErrorException();
+		}
+			
+	    return response;
+	}	
+	
+	/*
+	 *  Better option, but not being used because of a bug when handling error code 401, throws IOException
+	 *  so we decided to use the Apache post.
+	 */
+	/*public Response post(String url, Hashtable<String, String> params) throws Exception {
 		setParams(params);
 		setUrl(url);				
 		
@@ -137,7 +172,7 @@ public class HttpRequest {
 			}
 		}
 		return response;		
-	}
+	}*/
 	
 	private void setProxy() {
 		Authenticator.setDefault(new ProxyAuthenticator(ProxyAuthenticator.USER, ProxyAuthenticator.PASSWORD));		

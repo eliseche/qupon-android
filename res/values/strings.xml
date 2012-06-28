@@ -10,6 +10,7 @@
     <string name="login_lbl_password">Password</string>
     <string name="login_btn_sign_in">Sign In</string>
     <string name="login_btn_sign_up">Not a member? <u><b><i>Sign Up</i></b></u></string>
+    <string name="login_successfully">Successfully logged in</string>
     <string name="signup_lbl_title">Please complete the next form</string>
     <string name="signup_txt_username">Username</string>
     <string name="signup_txt_password">Password</string>
