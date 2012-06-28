@@ -9,6 +9,7 @@ import com.globalis.extensions.IOnCustomClickListener;
 import com.globalis.network.HttpRequest;
 import com.globalis.network.HttpTask;
 import com.globalis.network.Response;
+import com.globalis.quponMovil.CouponDetailActivity.CouponJson;
 import com.globalis.utils.Utils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -98,7 +99,7 @@ public class PromotionActivity extends Activity implements OnItemClickListener, 
 					if (response != null) {
 						if (!response.getBody().contains("error")) {
 							Gson gson = new Gson();							
-							Coupon coupon = gson.fromJson(response.getBody(), Coupon.class);	
+							CouponJson coupon = gson.fromJson(response.getBody(), CouponJson.class);	
 							
 							Intent intentCouponDetail = new Intent(PromotionActivity.this, CouponDetailActivity.class);
 							intentCouponDetail.putExtra("coupon", coupon);

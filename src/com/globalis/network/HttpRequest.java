@@ -31,8 +31,8 @@ public class HttpRequest {
 	}
 	
 	public static class Url {
-		public final static String base = "http://50.116.21.186";		
-		//static {base = "http://192.168.0.196:3000";}
+		public static String base = "http://50.116.21.186";		
+		static {base = "http://192.168.0.196:3000";}
 		
 		public static String getBase() {
 			return base;
@@ -46,6 +46,10 @@ public class HttpRequest {
 			return base + "/promotions.json";
 		}
 		
+		public static String getPromotion(int promotionID){
+			return base + "/promotions/"+promotionID+".json";
+		}
+		
 		public static String getSignup() {
 			return base + "/users.json";
 		}
@@ -56,6 +60,10 @@ public class HttpRequest {
 		
 		public static String getCoupon(int couponID){
 			return base + "coupons/"+ couponID;
+		}
+		
+		public static String getMyCoupons(){
+			return base + "/coupons/my.json";
 		}
 		
 	}

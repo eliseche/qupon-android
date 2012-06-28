@@ -1,8 +1,20 @@
 package com.globalis.entities;
 
 import java.io.Serializable;
+import java.lang.reflect.Type;
 import java.util.List;
+
+import android.content.Context;
+
+import com.globalis.network.HttpRequest;
+import com.globalis.network.HttpTask;
+import com.globalis.network.Response;
+import com.globalis.quponMovil.PromotionActivity;
+import com.globalis.quponMovil.PromotionAdapter;
+import com.globalis.quponMovil.R;
+import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.reflect.TypeToken;
 
 public class Promotion implements Serializable  {	
 	private PromotionData promotion;
@@ -225,5 +237,15 @@ public class Promotion implements Serializable  {
 		public void setLongitude(double longitude) {
 			this.longitude = longitude;
 		}
+	}
+	
+	public static Promotion getPromotion(int promotionId){
+		for (Promotion promJson : promotions) {
+			PromotionData promData = promJson.getPromotion();
+			if(promData.getId()==promotionId){
+				return promJson;
+			}
+		}
+		return null;
 	}
 }

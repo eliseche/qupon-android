@@ -94,11 +94,11 @@ public class LoginActivity extends Activity implements OnClickListener {
 									.putString(GlobalPreference.getLoginEmail(), user)
 									.putString(GlobalPreference.getLoginPassword(), password)
 									.commit();
-							Toast.makeText(LoginActivity.this, getResources().getString(R.string.login_successfully), Toast.LENGTH_LONG).show();
+							Toast.makeText(getApplicationContext(), getResources().getString(R.string.login_successfully), Toast.LENGTH_LONG).show();
 							finish();
 						}
 					} else {
-						Toast.makeText(LoginActivity.this, loginResponse.getMessage(), Toast.LENGTH_LONG).show();
+						Toast.makeText(getApplicationContext(), loginResponse.getMessage(), Toast.LENGTH_LONG).show();
 					}
 				}
 			}
