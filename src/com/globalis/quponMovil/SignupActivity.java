@@ -1,6 +1,8 @@
 package com.globalis.quponMovil;
 
 import java.util.Hashtable;
+
+import com.globalis.entities.JsonResponse;
 import com.globalis.entities.User;
 import com.globalis.network.HttpRequest;
 import com.globalis.network.HttpTask;
@@ -58,9 +60,9 @@ public class SignupActivity extends Activity implements OnClickListener {
 			public void doWork(Response response) {
 				if(response != null) {
 					Gson gson = new Gson();
-					RegisterResponse registerResponse = gson.fromJson(response.getBody(), RegisterResponse.class);
-					if(response.isValidStatusCode()) {
-						Toast.makeText(SignupActivity.this, registerResponse.getMessage(), Toast.LENGTH_LONG).show();						
+					SignUpResponse signUpResponse = gson.fromJson(response.getBody(), SignUpResponse.class);
+					if(signUpResponse.equals(getResources().getString(R.string.success))) {
+						Toast.makeText(SignupActivity.this, signUpResponse.getMessage(), Toast.LENGTH_LONG).show();						
 						Intent intent = new Intent();                   
                         intent.putExtra("username", user.getEmail());
                         intent.putExtra("password", user.getPassword());
@@ -68,7 +70,7 @@ public class SignupActivity extends Activity implements OnClickListener {
                         finish();
 					}
 					else{
-						Toast.makeText(SignupActivity.this, registerResponse.getMessage(), Toast.LENGTH_LONG).show();
+						Toast.makeText(SignupActivity.this, signUpResponse.getMessage(), Toast.LENGTH_LONG).show();
 					}
 				}				
 			}
@@ -128,11 +130,5 @@ public class SignupActivity extends Activity implements OnClickListener {
 		spnGender.setAdapter(adapter);
 	}
 	
-	private class RegisterResponse {
-		private String message;
-		
-		public String getMessage() {
-			return message;
-		}
-	}
+	private class SignUpResponse extends JsonResponse{}
 }

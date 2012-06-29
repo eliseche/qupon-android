@@ -10,4 +10,8 @@
         android:icon="@drawable/wheel"
         android:title="@string/menu_settings">
     </item>
+    <item 
+        android:id="@+id/menu_logout"
+        android:icon="@drawable/unlock"
+        android:title="@string/menu_logout"></item>
 </menu>

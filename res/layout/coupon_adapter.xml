@@ -1,10 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/promotion_adapter"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:padding="5dip" >
-    <!--  Código de cupón 	Fecha de generación 	Fecha de validación -->
-   
+    android:layout_width="160dip"
+    android:layout_height="95dip" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_margin="10dip"
+        android:background="@drawable/coupon" >
+
+        <RelativeLayout
+            android:id="@+id/coupon_adapter_rl_image"
+            android:layout_width="70dip"
+            android:layout_height="fill_parent"
+            android:layout_alignParentLeft="true" >
+
+            <ImageView
+                android:id="@+id/coupon_adapter_img_promotion"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@color/white"
+                android:cropToPadding="true"
+                android:padding="1dip"
+                android:scaleType="centerInside"
+                android:visibility="gone" />
+
+            <ProgressBar
+                android:id="@+id/coupon_adapter_pb_loading"
+                android:layout_width="20dip"
+                android:layout_height="20dip"
+                android:layout_centerInParent="true"
+                android:indeterminate="true" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/coupon_adapter_rl_info"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_toRightOf="@+id/coupon_adapter_rl_image" >
+
+            <TextView
+                android:id="@+id/coupon_adapter_lbl_title"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="Title"
+                android:textSize="15dip" />
+
+            <TextView
+                android:id="@+id/coupon_adapter_lbl_generation_date"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:gravity="center_horizontal"
+                android:textSize="12dip"
+                android:text="01/01/0001" />
+        </RelativeLayout>
+    </RelativeLayout>
+    <!-- Código de cupón 	Fecha de generación 	Fecha de validación -->
 
 </RelativeLayout>

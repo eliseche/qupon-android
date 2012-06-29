@@ -7,7 +7,9 @@ import com.globalis.network.Response;
 import com.globalis.utils.Utils;
 import com.google.gson.Gson;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -95,7 +97,12 @@ public class LoginActivity extends Activity implements OnClickListener {
 									.putString(GlobalPreference.getLoginPassword(), password)
 									.commit();
 							Toast.makeText(getApplicationContext(), getResources().getString(R.string.login_successfully), Toast.LENGTH_LONG).show();
-							finish();
+							Intent intent = new Intent();
+	                        setResult(Activity.RESULT_OK, intent);
+	                        finish();
+						}else{
+							Intent intent = new Intent();
+							setResult(Activity.RESULT_CANCELED, intent);
 						}
 					} else {
 						Toast.makeText(getApplicationContext(), loginResponse.getMessage(), Toast.LENGTH_LONG).show();
@@ -104,6 +111,37 @@ public class LoginActivity extends Activity implements OnClickListener {
 			}
 		};
 		task.set(context, req).execute();
+	}
+	
+	public void logout(final Context context){
+		AlertDialog.Builder builder = new AlertDialog.Builder(context);
+		builder.setMessage(context.getResources().getString(R.string.logout));
+		builder.setCancelable(false);
+		builder.setPositiveButton(context.getResources().getString(R.string.yes),
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						GlobalPreference.setToken(null);
+						context.getSharedPreferences(GlobalPreference.getLogin(), MODE_PRIVATE)
+						.edit()
+						.putString(GlobalPreference.getLoginEmail(), null)
+						.putString(GlobalPreference.getLoginPassword(), null)
+						.commit();
+						
+						//it forces the promotion screen to reload when the user logs out
+						//se deberá hacer que solo recarge el menu
+						Intent intent = ((Activity)context).getIntent();
+						((Activity)context).finish();
+						context.startActivity(intent);
+					}
+				});
+		builder.setNegativeButton(context.getResources().getString(R.string.no),
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.cancel();
+					}
+				});
+		AlertDialog alert = builder.create();
+		alert.show();
 	}
 	
 	private void initViews() {

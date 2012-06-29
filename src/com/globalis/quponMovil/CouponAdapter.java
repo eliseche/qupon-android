@@ -15,7 +15,6 @@ import com.globalis.entities.Coupon;
 import com.globalis.entities.Promotion;
 import com.globalis.extensions.OnCustomClickListener;
 import com.globalis.network.HttpRequest;
-import com.globalis.quponMovil.PromotionAdapter.ViewHolder;
 
 public class CouponAdapter extends ArrayAdapter<Coupon> {
 	private ImageManager imageManager;

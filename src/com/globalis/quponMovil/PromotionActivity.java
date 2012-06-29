@@ -18,6 +18,8 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -29,9 +31,12 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class PromotionActivity extends Activity implements OnItemClickListener, IOnCustomClickListener {
+public class PromotionActivity extends Activity implements OnItemClickListener,
+		IOnCustomClickListener {
 	private ListView listViewPromotion;
 	private PromotionAdapter promotionAdapter;
+
+	public static final int LOGIN_SUCCESS = 0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,40 +48,76 @@ public class PromotionActivity extends Activity implements OnItemClickListener, 
 	}
 
 	@Override
+	/**
+	 * It creates a menu for this activity
+	 * */
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.main_menu, menu);
 		return true;
 	}
 
+	/**
+	 * It prepares the items on the menu. If the user is logged in it makes visible
+	 * the settings and logout options, if not it shows the login option
+	 * */
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		if (LoginActivity.isLogged(this)) {
 			menu.findItem(R.id.menu_login).setVisible(false);
-		}
-		else {
+		} else {
 			menu.findItem(R.id.menu_settings).setVisible(false);
+			menu.findItem(R.id.menu_logout).setVisible(false);
 		}
 
 		return super.onPrepareOptionsMenu(menu);
 	}
 
 	@Override
+	/**
+	 * It handles every menu item event
+	 * */
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.menu_login:
 			Intent intentLogin = new Intent(this, LoginActivity.class);
-			startActivity(intentLogin);
+			startActivityForResult(intentLogin, LOGIN_SUCCESS);
 			break;
 		case R.id.menu_settings:
 			Intent intentSettings = new Intent(this, SettingsActivity.class);
 			startActivity(intentSettings);
+			break;
+		case R.id.menu_logout:
+			LoginActivity loginActivity = new LoginActivity();
+			loginActivity.logout(this);
 			break;
 		default:
 			break;
 		}
 		return true;
 	}
+
+	/**
+	 * It's the event that triggers when an activity upper in the stack is disposed.
+	 * For now it only does something if it's returning from the login activity where
+	 * if the user was correctly logged in it reloads the screen
+	 * */
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (requestCode == LOGIN_SUCCESS) {
+			if (resultCode == RESULT_OK) {
+				//it forces the promotion screen to reload when the user succesfully logs in
+				//se deberá hacer que solo recarge el menu
+				finish();
+				startActivity(getIntent());
+			}
+		}
+	}
+
 	
+	/**
+	 * It's the event that triggers when the user clicks on a promotion. It show
+	 * that promotion detail
+	 * */
 	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 		Promotion promotion = Promotion.getPromotions().get(arg2);
 		Intent intent = new Intent(this, PromotionDetailActivity.class);
@@ -84,6 +125,11 @@ public class PromotionActivity extends Activity implements OnItemClickListener, 
 		startActivity(intent);
 	}
 
+	/**
+	 * It's the event that triggers when the user clicks on the generate button
+	 * on any of the displayed promotions. It tries to generate a coupon, if successful
+	 * then it shows the coupon detail
+	 * */
 	public void OnCustomClick(View view, int position) {
 		if (LoginActivity.isLogged(this)) {
 			final Promotion promotion = Promotion.getPromotions().get(position);
@@ -92,29 +138,31 @@ public class PromotionActivity extends Activity implements OnItemClickListener, 
 			HttpRequest req = new HttpRequest();
 			Hashtable<String, String> params = new Hashtable<String, String>();
 			params.put("auth_token", GlobalPreference.getToken());
-			req.set(HttpRequest.Url.getCoupons(promID), params, HttpRequest.HttpMethod.POST);
+			req.set(HttpRequest.Url.getCoupons(promID), params,
+					HttpRequest.HttpMethod.POST);
 			HttpTask task = new HttpTask() {
 				@Override
 				public void doWork(Response response) {
 					if (response != null) {
-						if (!response.getBody().contains("error")) {
-							Gson gson = new Gson();							
-							CouponJson coupon = gson.fromJson(response.getBody(), CouponJson.class);	
-							
-							Intent intentCouponDetail = new Intent(PromotionActivity.this, CouponDetailActivity.class);
+						Gson gson = new Gson();
+						CouponJson coupon = gson.fromJson(
+								response.getBody(), CouponJson.class);
+						if (coupon.getState().equals(getResources().getString(R.string.success))) {
+							Intent intentCouponDetail = new Intent(
+									PromotionActivity.this,
+									CouponDetailActivity.class);
 							intentCouponDetail.putExtra("coupon", coupon);
-							startActivity(intentCouponDetail);							
-						}
-						else {
-							//Toast.makeText(PromotionActivity.this, loginResponse.getMessage(), Toast.LENGTH_LONG).show();
+							startActivity(intentCouponDetail);
+						} else {
+							 Toast.makeText(PromotionActivity.this, coupon.getMessage(),
+							 Toast.LENGTH_LONG).show();
 						}
 					}
-					 
+
 				}
 			};
 			task.set(PromotionActivity.this, req).execute();
-		} 
-		else {
+		} else {
 			Toast.makeText(this, R.string.must_be_logged, Toast.LENGTH_SHORT);
 			Intent intent = new Intent(this, LoginActivity.class);
 			startActivity(intent);
@@ -122,6 +170,12 @@ public class PromotionActivity extends Activity implements OnItemClickListener, 
 	}
 
 	@Override
+	/**
+	 * It handles the going-back-event on this activity which is the first on the stack
+	 * so in other words it triggers when the user closes the application.
+	 * It creates a dialog asking the user if he's really sure about
+	 * closing the application.
+	 * */
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -146,30 +200,53 @@ public class PromotionActivity extends Activity implements OnItemClickListener, 
 		return super.onKeyDown(keyCode, event);
 	}
 
+	/**
+	 * Initializes the view filling the listViewPromotion field, creating an event for 
+	 * itemclicking on it and finally logging the user if there's an email and a password
+	 * stored in the SharedPreferences
+	 * 
+	 * @param None
+	 * 
+	 * @return Nothing
+	 * */
 	private void initViews() {
 		listViewPromotion = (ListView) findViewById(R.id.promotion_list);
 		listViewPromotion.setOnItemClickListener(this);
-		SharedPreferences pref = getSharedPreferences(GlobalPreference.getLogin(), MODE_PRIVATE);
+		SharedPreferences pref = getSharedPreferences(
+				GlobalPreference.getLogin(), MODE_PRIVATE);
 		String email = pref.getString(GlobalPreference.getLoginEmail(), null);
-		String password = pref.getString(GlobalPreference.getLoginPassword(), null);
+		String password = pref.getString(GlobalPreference.getLoginPassword(),
+				null);
 		if (!Utils.isNullOrEmpty(email) && !Utils.isNullOrEmpty(password)) {
-			new LoginActivity().log(this, email, password);			
+			new LoginActivity().log(this, email, password);
 		}
 	}
-	
+
+	/**
+	 * Searches for all active promotions
+	 * 
+	 * @param None
+	 * 
+	 * @return Nothing
+	 * */
 	private void getPromotions() {
 		HttpRequest req = new HttpRequest();
-		req.set(HttpRequest.Url.getPromotion(), null, HttpRequest.HttpMethod.GET);
+		req.set(HttpRequest.Url.getPromotion(), null,
+				HttpRequest.HttpMethod.GET);
 		HttpTask task = new HttpTask() {
 			@Override
 			public void doWork(Response response) {
 				if (response != null) {
 					Gson gson = new Gson();
-					Type collectionType = new TypeToken<List<Promotion>>() {}.getType();
-					List<Promotion> promotions = gson.fromJson(response.getBody(), collectionType);					
+					Type collectionType = new TypeToken<List<Promotion>>() {
+					}.getType();
+					List<Promotion> promotions = gson.fromJson(
+							response.getBody(), collectionType);
 					Promotion.setPromotions(promotions);
 
-					promotionAdapter = new PromotionAdapter(PromotionActivity.this, R.layout.promotion_adapter, Promotion.getPromotions());
+					promotionAdapter = new PromotionAdapter(
+							PromotionActivity.this, R.layout.promotion_adapter,
+							Promotion.getPromotions());
 					listViewPromotion.setAdapter(promotionAdapter);
 				}
 			}

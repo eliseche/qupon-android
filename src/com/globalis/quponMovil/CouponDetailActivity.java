@@ -3,6 +3,7 @@ package com.globalis.quponMovil;
 import java.io.Serializable;
 
 import com.globalis.entities.Coupon;
+import com.globalis.entities.JsonResponse;
 import com.globalis.entities.Promotion;
 
 import android.app.Activity;
@@ -61,9 +62,8 @@ public class CouponDetailActivity extends Activity {
 		lblDiscount.setText(discount + R.id.coupon_detail_lbl_discount);
 	}
 	
-	public class CouponJson implements Serializable {
+	public class CouponJson extends JsonResponse implements Serializable {
 		private Coupon coupon;
-		private String state;
 		
 		public Coupon getCoupon() {
 			return coupon;
@@ -71,14 +71,6 @@ public class CouponDetailActivity extends Activity {
 		
 		public void setCoupon(Coupon coupon) {
 			this.coupon = coupon;
-		}
-		
-		public String getState() {
-			return state;
-		}
-		
-		public void setState(String state) {
-			this.state = state;
 		}
 		
 	}

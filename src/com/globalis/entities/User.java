@@ -109,4 +109,5 @@ public class User {
 		hashtable.put("user[password_confirmation]", passwordConfirmation);
 		return hashtable;
 	}
+
 }
