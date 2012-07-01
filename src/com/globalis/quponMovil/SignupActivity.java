@@ -7,10 +7,12 @@ import com.globalis.entities.User;
 import com.globalis.network.HttpRequest;
 import com.globalis.network.HttpTask;
 import com.globalis.network.Response;
+import com.globalis.quponMovil.CouponDetailActivity.CouponJson;
 import com.globalis.utils.Utils;
 import com.google.gson.Gson;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -128,6 +130,67 @@ public class SignupActivity extends Activity implements OnClickListener {
 		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.gender, android.R.layout.simple_spinner_item);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spnGender.setAdapter(adapter);
+		
+		if(LoginActivity.isLogged(this)){
+			HttpRequest req = new HttpRequest();
+			Hashtable<String, String> params = new Hashtable<String, String>();
+			params.put("auth_token", GlobalPreference.getToken());
+			req.set(HttpRequest.Url.getUserInfo(), params,
+					HttpRequest.HttpMethod.GET);
+			HttpTask task = new HttpTask() {
+				@Override
+				public void doWork(Response response) {
+					if (response != null) {
+						Gson gson = new Gson();
+						UserJson user = gson.fromJson(
+								response.getBody(), UserJson.class);
+						if (user.getState().equals(getResources().getString(R.string.success))) {
+							completeWithUserData(user.getUser());
+						} else {
+							 Toast.makeText(SignupActivity.this, user.getMessage(),
+							 Toast.LENGTH_LONG).show();
+						}
+					}
+				}
+
+				
+			};
+			task.set(SignupActivity.this, req).execute();
+		}
+	}
+	
+	private void completeWithUserData(User user) {
+		SharedPreferences pref = getApplicationContext().getSharedPreferences(GlobalPreference.getLogin(), MODE_PRIVATE);
+		String password = pref.getString(GlobalPreference.getLoginPassword(), null);
+		
+		txtEmail.setText(user.getEmail());
+		txtPassword.setText(password);
+		txtRePassword.setText(password);
+		txtFirstName.setText(user.getFirstName());
+		txtLastName.setText(user.getLastName());
+		txtPhoneNumber.setText(user.getPhoneNumber());
+		txtZipCode.setText(user.getZipCode());
+		String gender = user.getGender();
+		if(gender.equals("Masculino") || gender.equals("Male")){
+			spnGender.setSelection(1);
+		} else if(gender.equals("Femenino") || gender.equals("Female")){
+			spnGender.setSelection(2);
+		}else{
+			spnGender.setSelection(0);
+		}
+	}
+	
+	private class UserJson extends JsonResponse{
+		private User user;
+
+		public User getUser() {
+			return user;
+		}
+
+		public void setUser(User user) {
+			this.user = user;
+		}
+		
 	}
 	
 	private class SignUpResponse extends JsonResponse{}

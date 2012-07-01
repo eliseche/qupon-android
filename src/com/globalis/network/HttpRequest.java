@@ -54,6 +54,10 @@ public class HttpRequest {
 			return base + "/d/users.json";
 		}
 		
+		public static String getUserInfo(){
+			return base + "/d/users/edit.json";
+		}
+		
 		public static String getCoupons(int promotionID) {
 			return base + "/promotions/" + promotionID + "/coupons.json";
 		}

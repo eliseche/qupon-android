@@ -163,7 +163,7 @@ public class PromotionActivity extends Activity implements OnItemClickListener,
 			};
 			task.set(PromotionActivity.this, req).execute();
 		} else {
-			Toast.makeText(this, R.string.must_be_logged, Toast.LENGTH_SHORT);
+			Toast.makeText(this, R.string.must_be_logged, Toast.LENGTH_LONG);
 			Intent intent = new Intent(this, LoginActivity.class);
 			startActivity(intent);
 		}

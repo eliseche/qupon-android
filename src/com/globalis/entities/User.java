@@ -4,21 +4,21 @@ import java.util.Hashtable;
 import com.google.gson.annotations.SerializedName;
 
 public class User {	
-	@SerializedName("user[email]")
+	@SerializedName("email")
 	private String email;
-	@SerializedName("user[name]")
+	@SerializedName("name")
 	private String firstName;
-	@SerializedName("user[last_name]")
+	@SerializedName("last_name")
 	private String lastName;
-	@SerializedName("user[zip_code]")
+	@SerializedName("zip_code")
 	private String zipCode;
-	@SerializedName("user[phone_number]")
+	@SerializedName("phone_number")
 	private String phoneNumber;
-	@SerializedName("user[sex]")
+	@SerializedName("sex")
 	private String gender;
-	@SerializedName("user[password]")
+	@SerializedName("password")
 	private String password;
-	@SerializedName("user[password_confirmation]")
+	@SerializedName("password_confirmation")
 	private String passwordConfirmation;
 	
 	public String getEmail() {
