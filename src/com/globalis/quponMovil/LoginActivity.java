@@ -126,12 +126,6 @@ public class LoginActivity extends Activity implements OnClickListener {
 						.putString(GlobalPreference.getLoginEmail(), null)
 						.putString(GlobalPreference.getLoginPassword(), null)
 						.commit();
-						
-						//it forces the promotion screen to reload when the user logs out
-						//se deberá hacer que solo recarge el menu
-						Intent intent = ((Activity)context).getIntent();
-						((Activity)context).finish();
-						context.startActivity(intent);
 					}
 				});
 		builder.setNegativeButton(context.getResources().getString(R.string.no),

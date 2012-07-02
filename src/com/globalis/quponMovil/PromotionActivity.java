@@ -62,11 +62,16 @@ public class PromotionActivity extends Activity implements OnItemClickListener,
 	 * the settings and logout options, if not it shows the login option
 	 * */
 	public boolean onPrepareOptionsMenu(Menu menu) {
+		menu.clear();
 		if (LoginActivity.isLogged(this)) {
-			menu.findItem(R.id.menu_login).setVisible(false);
-		} else {
-			menu.findItem(R.id.menu_settings).setVisible(false);
-			menu.findItem(R.id.menu_logout).setVisible(false);
+			menu.removeItem(R.id.menu_login);
+			menu.add(0, R.id.menu_logout, Menu.NONE, R.string.menu_logout).setIcon(R.drawable.unlock);
+			menu.add(0, R.id.menu_settings, Menu.NONE, R.string.menu_settings).setIcon(R.drawable.wheel);
+		}
+		else {
+			menu.add(0, R.id.menu_login, Menu.NONE, R.string.menu_login).setIcon(R.drawable.lock); 
+			menu.removeItem(R.id.menu_logout); 
+			menu.removeItem(R.id.menu_settings);
 		}
 
 		return super.onPrepareOptionsMenu(menu);
@@ -80,7 +85,7 @@ public class PromotionActivity extends Activity implements OnItemClickListener,
 		switch (item.getItemId()) {
 		case R.id.menu_login:
 			Intent intentLogin = new Intent(this, LoginActivity.class);
-			startActivityForResult(intentLogin, LOGIN_SUCCESS);
+			startActivity(intentLogin);
 			break;
 		case R.id.menu_settings:
 			Intent intentSettings = new Intent(this, SettingsActivity.class);
@@ -95,24 +100,6 @@ public class PromotionActivity extends Activity implements OnItemClickListener,
 		}
 		return true;
 	}
-
-	/**
-	 * It's the event that triggers when an activity upper in the stack is disposed.
-	 * For now it only does something if it's returning from the login activity where
-	 * if the user was correctly logged in it reloads the screen
-	 * */
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		super.onActivityResult(requestCode, resultCode, data);
-		if (requestCode == LOGIN_SUCCESS) {
-			if (resultCode == RESULT_OK) {
-				//it forces the promotion screen to reload when the user succesfully logs in
-				//se deberá hacer que solo recarge el menu
-				finish();
-				startActivity(getIntent());
-			}
-		}
-	}
-
 	
 	/**
 	 * It's the event that triggers when the user clicks on a promotion. It show
