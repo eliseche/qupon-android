@@ -42,6 +42,7 @@
     <string name="settings_lbl_modify_info_user">Modify user</string>
     <string name="settings_lbl_modify_info_user_summary">Change your account information</string>
     <string name="coupon_detail_lbl_code">Code:</string>
+    <string name="coupon_adapter_generation_date">Generation date:</string>
     <string name="discount">Off</string>
     <string name="menu_login">Login</string>
     <string name="menu_settings">Settings</string>

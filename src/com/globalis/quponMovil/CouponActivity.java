@@ -13,16 +13,25 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.graphics.drawable.GradientDrawable.Orientation;
 import android.os.Bundle;
+import android.text.GetChars;
+import android.util.Config;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.HorizontalScrollView;
 import android.widget.ListView;
+import android.widget.TableRow;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.TableLayout;
 
-public class CouponActivity extends Activity implements OnItemClickListener {
-	private ListView listViewCoupons;
-	private CouponAdapter couponAdapter;
+public class CouponActivity extends Activity{
+	
+	private TableLayout tableLayout;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -32,19 +41,8 @@ public class CouponActivity extends Activity implements OnItemClickListener {
 		getCoupons();
 	}
 
-	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-		Coupon coupon = Coupon.getCoupons().get(arg2);
-		Intent intentCouponDetail = new Intent(this, CouponDetailActivity.class);
-		intentCouponDetail.putExtra("coupon", coupon);
-		startActivity(intentCouponDetail);
-	}
-
 	private void initViews() {
-		listViewCoupons = (ListView) findViewById(R.id.coupon_list);
-		listViewCoupons.setOnItemClickListener(this);
-
-		// agregar task para buscar cupones
-
+		tableLayout = (TableLayout)findViewById(R.id.my_coupon_tblll_coupons);
 	}
 
 	private void getCoupons() {
@@ -60,16 +58,51 @@ public class CouponActivity extends Activity implements OnItemClickListener {
 							CouponJson.class);
 					Coupon.setCoupons(coupons.getCoupon());
 
-					couponAdapter = new CouponAdapter(CouponActivity.this,
-							R.layout.coupon_adapter, Coupon.getCoupons());
-
-					listViewCoupons.setAdapter(couponAdapter);
+					chargeCoupons();
 				}
 			}
 		};
 		task.set(CouponActivity.this, req).execute();
 	}
 
+	private void chargeCoupons(){
+		List<Coupon> coupons = Coupon.getCoupons();
+		Promotion promotion;
+		TableRow currentTableRow = null;
+		View child;
+		int noCoupon = 0;
+		for (Coupon coupon : coupons) {
+			noCoupon++;
+			promotion = Promotion.getPromotion(coupon.getPromotionId());
+			LayoutInflater layoutInflater = LayoutInflater.from(this);
+			//falta setear valores de promocion y coupon
+			switch(getResources().getConfiguration().orientation){
+			case Configuration.ORIENTATION_PORTRAIT:
+				if(noCoupon%2==1){
+					currentTableRow = new TableRow(this);
+					child = layoutInflater.inflate(R.layout.coupon_adapter, currentTableRow);
+					currentTableRow.addView(child);
+					tableLayout.addView(currentTableRow);
+				}else{
+					child = layoutInflater.inflate(R.layout.coupon_adapter, currentTableRow);
+					currentTableRow.addView(child);
+				}
+				break;
+			case Configuration.ORIENTATION_LANDSCAPE:
+				if(noCoupon%4==1){
+					currentTableRow = new TableRow(this);
+					child = layoutInflater.inflate(R.layout.coupon_adapter, currentTableRow);
+					currentTableRow.addView(child);
+					tableLayout.addView(currentTableRow);
+				}else{
+					child = layoutInflater.inflate(R.layout.coupon_adapter, currentTableRow);
+					currentTableRow.addView(child);
+				}
+				break;
+			}
+		}
+	}
+	
 	private class CouponJson implements Serializable {
 		private List<Coupon> coupon;
 

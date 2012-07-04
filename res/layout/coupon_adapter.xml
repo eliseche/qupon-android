@@ -44,15 +44,25 @@
                 android:id="@+id/coupon_adapter_lbl_title"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dip"
                 android:gravity="center_horizontal"
                 android:text="Title"
                 android:textSize="15dip" />
 
+            <TextView 
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/coupon_adapter_lbl_generation_date"
+                android:gravity="center_horizontal"
+                android:textSize="8dip"
+                android:text="@string/coupon_adapter_generation_date"
+                />
             <TextView
                 android:id="@+id/coupon_adapter_lbl_generation_date"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
+                android:layout_marginBottom="5dip"
                 android:gravity="center_horizontal"
                 android:textSize="12dip"
                 android:text="01/01/0001" />
