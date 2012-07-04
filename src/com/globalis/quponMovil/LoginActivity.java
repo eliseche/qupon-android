@@ -70,7 +70,8 @@ public class LoginActivity extends Activity implements OnClickListener {
 		SharedPreferences pref = context.getSharedPreferences(GlobalPreference.getLogin(), MODE_PRIVATE);
 		String email = pref.getString(GlobalPreference.getLoginEmail(), null);
 		String password = pref.getString(GlobalPreference.getLoginPassword(), null);
-		if (!Utils.isNullOrEmpty(email) && !Utils.isNullOrEmpty(password)) {
+		if (!Utils.isNullOrEmpty(email) && !Utils.isNullOrEmpty(password) &&
+				!Utils.isNullOrEmpty(GlobalPreference.getToken())) {
 			return true;
 		}
 		return false;
@@ -89,14 +90,14 @@ public class LoginActivity extends Activity implements OnClickListener {
 					Gson gson = new Gson();
 					LoginResponse loginResponse = gson.fromJson(response.getBody(), LoginResponse.class);
 					if (response.isValidStatusCode()) {
-						GlobalPreference.setToken(loginResponse.getToken());
 						if (!isLogged(context)) {							
 							context.getSharedPreferences(GlobalPreference.getLogin(), MODE_PRIVATE)
 									.edit()
 									.putString(GlobalPreference.getLoginEmail(), user)
 									.putString(GlobalPreference.getLoginPassword(), password)
 									.commit();
-							Toast.makeText(getApplicationContext(), getResources().getString(R.string.login_successfully), Toast.LENGTH_LONG).show();
+							GlobalPreference.setToken(loginResponse.getToken());
+							Toast.makeText(context, getResources().getString(R.string.login_successfully), Toast.LENGTH_LONG).show();
 							Intent intent = new Intent();
 	                        setResult(Activity.RESULT_OK, intent);
 	                        finish();
@@ -105,7 +106,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 							setResult(Activity.RESULT_CANCELED, intent);
 						}
 					} else {
-						Toast.makeText(getApplicationContext(), loginResponse.getMessage(), Toast.LENGTH_LONG).show();
+						Toast.makeText(context, loginResponse.getMessage(), Toast.LENGTH_LONG).show();
 					}
 				}
 			}
