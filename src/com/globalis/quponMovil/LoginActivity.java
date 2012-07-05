@@ -97,7 +97,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 									.putString(GlobalPreference.getLoginPassword(), password)
 									.commit();
 							GlobalPreference.setToken(loginResponse.getToken());
-							Toast.makeText(context, getResources().getString(R.string.login_successfully), Toast.LENGTH_LONG).show();
+							Toast.makeText(context, context.getResources().getString(R.string.login_successfully), Toast.LENGTH_LONG).show();
 							Intent intent = new Intent();
 	                        setResult(Activity.RESULT_OK, intent);
 	                        finish();
@@ -106,7 +106,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 							setResult(Activity.RESULT_CANCELED, intent);
 						}
 					} else {
-						Toast.makeText(context, loginResponse.getMessage(), Toast.LENGTH_LONG).show();
+						Toast.makeText(context,loginResponse.getMessage(), Toast.LENGTH_LONG).show();
 					}
 				}
 			}

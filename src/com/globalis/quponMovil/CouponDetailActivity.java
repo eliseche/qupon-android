@@ -12,7 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class CouponDetailActivity extends Activity {
-	private CouponJson coupon;
+	private Coupon coupon;
 	private TextView lblDiscount, lblTitle, lblDescription, lblTermsCond,
 			lblCode;
 
@@ -33,20 +33,20 @@ public class CouponDetailActivity extends Activity {
 					Toast.LENGTH_LONG).show();
 			finish();
 		} else {
-			coupon = (CouponJson) serializable;
+			coupon = (Coupon) serializable;
 			collectData();
 		}
 	}
 
 	private void collectData() {
-		Promotion promotion = Promotion.getPromotion(coupon.getCoupon().getPromotionId());
+		Promotion promotion = Promotion.getPromotion(coupon.getPromotionId());
 		if (promotion != null) {
 			lblDiscount.setText(String.valueOf(promotion.getPromotion().getDiscount()));
 			lblTitle.setText(promotion.getPromotion().getTitle());
 			lblDescription.setText(promotion.getPromotion().getDescription());
 			lblTermsCond.setText(promotion.getPromotion().getTermsAndCondition());
 		}
-		lblCode.setText(coupon.getCoupon().getCouponCode());
+		lblCode.setText(coupon.getCouponCode());
 	}
 
 	private void initViews() {

@@ -9,8 +9,9 @@
         <TableLayout
             android:id="@+id/my_coupon_tblll_coupons"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:padding="30dip" >
+            android:layout_height="fill_parent">
+            <!-- android:padding="30dip" --> 
+            
         </TableLayout>
     </ScrollView>
 

@@ -45,6 +45,7 @@
     <string name="coupon_adapter_generation_date">Generation date:</string>
     <string name="discount">Off</string>
     <string name="menu_login">Login</string>
+    <string name="menu_coupones">Coupons</string>
     <string name="menu_settings">Settings</string>
     <string name="menu_logout">Logout</string>
     <string name="exception_no_network">Couldn\'t find an Internet connection</string>

@@ -58,20 +58,25 @@ public class PromotionActivity extends Activity implements OnItemClickListener,
 	}
 
 	/**
-	 * It prepares the items on the menu. If the user is logged in it makes visible
-	 * the settings and logout options, if not it shows the login option
+	 * It prepares the items on the menu. If the user is logged in it makes
+	 * visible the settings and logout options, if not it shows the login option
 	 * */
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		menu.clear();
 		if (LoginActivity.isLogged(this)) {
 			menu.removeItem(R.id.menu_login);
-			menu.add(0, R.id.menu_logout, Menu.NONE, R.string.menu_logout).setIcon(R.drawable.unlock);
-			menu.add(0, R.id.menu_settings, Menu.NONE, R.string.menu_settings).setIcon(R.drawable.wheel);
-		}
-		else {
-			menu.add(0, R.id.menu_login, Menu.NONE, R.string.menu_login).setIcon(R.drawable.lock); 
-			menu.removeItem(R.id.menu_logout); 
+			menu.add(0, R.id.menu_logout, Menu.NONE, R.string.menu_logout)
+					.setIcon(R.drawable.unlock);
+			menu.add(0, R.id.menu_settings, Menu.NONE, R.string.menu_settings)
+					.setIcon(R.drawable.wheel);
+			menu.add(0, R.id.menu_my_coupons, Menu.NONE, R.string.menu_coupones)
+					.setIcon(R.drawable.coupones);
+		} else {
+			menu.add(0, R.id.menu_login, Menu.NONE, R.string.menu_login)
+					.setIcon(R.drawable.lock);
+			menu.removeItem(R.id.menu_logout);
 			menu.removeItem(R.id.menu_settings);
+			menu.removeItem(R.id.menu_my_coupons);
 		}
 
 		return super.onPrepareOptionsMenu(menu);
@@ -87,6 +92,10 @@ public class PromotionActivity extends Activity implements OnItemClickListener,
 			Intent intentLogin = new Intent(this, LoginActivity.class);
 			startActivity(intentLogin);
 			break;
+		case R.id.menu_my_coupons:
+			Intent intentMyCoupons = new Intent(this, CouponActivity.class);
+			startActivity(intentMyCoupons);
+			break;
 		case R.id.menu_settings:
 			Intent intentSettings = new Intent(this, SettingsActivity.class);
 			startActivity(intentSettings);
@@ -100,7 +109,7 @@ public class PromotionActivity extends Activity implements OnItemClickListener,
 		}
 		return true;
 	}
-	
+
 	/**
 	 * It's the event that triggers when the user clicks on a promotion. It show
 	 * that promotion detail
@@ -114,8 +123,8 @@ public class PromotionActivity extends Activity implements OnItemClickListener,
 
 	/**
 	 * It's the event that triggers when the user clicks on the generate button
-	 * on any of the displayed promotions. It tries to generate a coupon, if successful
-	 * then it shows the coupon detail
+	 * on any of the displayed promotions. It tries to generate a coupon, if
+	 * successful then it shows the coupon detail
 	 * */
 	public void OnCustomClick(View view, int position) {
 		if (LoginActivity.isLogged(this)) {
@@ -132,17 +141,19 @@ public class PromotionActivity extends Activity implements OnItemClickListener,
 				public void doWork(Response response) {
 					if (response != null) {
 						Gson gson = new Gson();
-						CouponJson coupon = gson.fromJson(
-								response.getBody(), CouponJson.class);
-						if (coupon.getState().equals(getResources().getString(R.string.success))) {
+						CouponJson coupon = gson.fromJson(response.getBody(),
+								CouponJson.class);
+						if (coupon.getState().equals(
+								getResources().getString(R.string.success))) {
 							Intent intentCouponDetail = new Intent(
 									PromotionActivity.this,
 									CouponDetailActivity.class);
-							intentCouponDetail.putExtra("coupon", coupon);
+							intentCouponDetail.putExtra("coupon", coupon.getCoupon());
 							startActivity(intentCouponDetail);
 						} else {
-							 Toast.makeText(PromotionActivity.this, coupon.getMessage(),
-							 Toast.LENGTH_LONG).show();
+							Toast.makeText(PromotionActivity.this,
+									coupon.getMessage(), Toast.LENGTH_LONG)
+									.show();
 						}
 					}
 
@@ -188,9 +199,9 @@ public class PromotionActivity extends Activity implements OnItemClickListener,
 	}
 
 	/**
-	 * Initializes the view filling the listViewPromotion field, creating an event for 
-	 * itemclicking on it and finally logging the user if there's an email and a password
-	 * stored in the SharedPreferences
+	 * Initializes the view filling the listViewPromotion field, creating an
+	 * event for itemclicking on it and finally logging the user if there's an
+	 * email and a password stored in the SharedPreferences
 	 * 
 	 * @param None
 	 * 
