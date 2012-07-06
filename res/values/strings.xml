@@ -6,6 +6,7 @@
     <string name="no">No</string>
     <string name="exit">Are you sure you want to exit?</string>
     <string name="success">exito</string>
+    <string name="success_edit">Information succesfuly modified</string>
     <string name="logout">Are you sure you want to logout?</string>
     <string name="login_lbl_title">Welcome to Qupon</string>
     <string name="login_lbl_user">Username</string>

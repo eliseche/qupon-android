@@ -2,7 +2,7 @@
 <resources>
     <string-array name="gender"> 
 		<item>No especificado</item>
-        <item>Hombre</item>
-        <item>Mujer</item>
+        <item>Masculino</item>
+        <item>Femenino</item>
     </string-array>
 </resources>

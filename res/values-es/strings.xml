@@ -6,6 +6,7 @@
     <string name="no">No</string>
     <string name="exit">Esta seguro que desea salir?</string>
 	<string name="success">exito</string>
+    <string name="success_edit">Datos modificados con éxito</string>
     <string name="login_lbl_title">Bienvenido a QuponMovil</string>
     <string name="login_lbl_user">Usuario</string>
     <string name="login_lbl_password">Contraseña</string>
