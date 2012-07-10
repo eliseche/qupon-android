@@ -1,6 +1,7 @@
 package com.globalis.quponMovil;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Hashtable;
 
 import com.globalis.entities.JsonResponse;
@@ -14,25 +15,37 @@ import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.YuvImage;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 public class SignupActivity extends Activity implements OnClickListener {
+	
+	static final int DATE_DIALOG_ID = 1;
+	
 	private String email, password, rePassword, firstName, lastName,
 			phoneNumber, zipCode, gender;
 	private int userID;
 	private EditText txtEmail, txtPassword, txtRePassword, txtFirstName,
 			txtLastName, txtPhoneNumber, txtZipCode;
 	private Spinner spnGender;
-	private Button btnSignUp;
+	//birthday data
+	private int mYear, mMonth, mDay;
+	private Button btnSignUp, btnBirthdaySel;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -62,18 +75,20 @@ public class SignupActivity extends Activity implements OnClickListener {
 	}
 
 	public void saveUser(final User user) {
-		//set the gender in Masculino of Femenino
-		if (user.getGender().equals(getResources().getStringArray(R.array.gender)[1])) {
+		// set the gender in Masculino of Femenino
+		if (user.getGender().equals(
+				getResources().getStringArray(R.array.gender)[1])) {
 			user.setGender("Masculino");
-		} else if (user.getGender().equals(getResources().getStringArray(R.array.gender)[2])) {
+		} else if (user.getGender().equals(
+				getResources().getStringArray(R.array.gender)[2])) {
 			user.setGender("Femenino");
 		}
-		
+
 		UserJson userJson = new UserJson();
 		userJson.setUser(user);
 		Gson gson = new Gson();
 		String userString = gson.toJson(userJson).toString();
-		
+
 		HttpRequest req = new HttpRequest();
 		req.set(HttpRequest.Url.getSignup(), userString,
 				HttpRequest.HttpMethod.POSTJSON);
@@ -106,14 +121,15 @@ public class SignupActivity extends Activity implements OnClickListener {
 	}
 
 	private void editUser(User user) {
-		//set the gender in Masculino of Femenino
-		if (user.getGender().equals(getResources().getStringArray(R.array.gender)[1])) {
+		// set the gender in Masculino of Femenino
+		if (user.getGender().equals(
+				getResources().getStringArray(R.array.gender)[1])) {
 			user.setGender("Masculino");
-		} else if (user.getGender().equals(getResources().getStringArray(R.array.gender)[2])) {
+		} else if (user.getGender().equals(
+				getResources().getStringArray(R.array.gender)[2])) {
 			user.setGender("Femenino");
 		}
-		
-		
+
 		UserEdit userEdit = new UserEdit();
 		userEdit.setAuthToken(GlobalPreference.getToken());
 		userEdit.setUser(user);
@@ -132,7 +148,8 @@ public class SignupActivity extends Activity implements OnClickListener {
 								response.getBody(), UserJson.class);
 						if (signUpResponse.getState().equals(
 								getResources().getString(R.string.success))) {
-							Toast.makeText(getApplicationContext(),
+							Toast.makeText(
+									getApplicationContext(),
 									getApplicationContext().getResources()
 											.getString(R.string.success_edit),
 									Toast.LENGTH_SHORT).show();
@@ -162,6 +179,7 @@ public class SignupActivity extends Activity implements OnClickListener {
 		phoneNumber = String.valueOf(txtPhoneNumber.getText());
 		zipCode = String.valueOf(txtZipCode.getText());
 		gender = String.valueOf(spnGender.getSelectedItem());
+
 	}
 
 	private boolean validateFields() {
@@ -215,6 +233,18 @@ public class SignupActivity extends Activity implements OnClickListener {
 		txtLastName = (EditText) findViewById(R.id.signup_txt_last_name);
 		txtPhoneNumber = (EditText) findViewById(R.id.signup_txt_phone_number);
 		txtZipCode = (EditText) findViewById(R.id.signup_txt_zip_code);
+		btnBirthdaySel = (Button) findViewById(R.id.signup_btn_sel_birthday);
+		final Calendar c = Calendar.getInstance();
+		c.add(Calendar.YEAR, -13);
+		mYear = c.get(Calendar.YEAR);
+		mMonth = c.get(Calendar.MONTH);
+		mDay = c.get(Calendar.DATE);
+		btnBirthdaySel.setOnClickListener(new View.OnClickListener() {
+
+			public void onClick(View v) {
+				showDialog(DATE_DIALOG_ID);
+			}
+		});
 		btnSignUp = (Button) findViewById(R.id.signup_btn_sign_up);
 		btnSignUp.setOnClickListener(this);
 		spnGender = (Spinner) findViewById(R.id.signup_spn_gender);
@@ -274,6 +304,37 @@ public class SignupActivity extends Activity implements OnClickListener {
 			spnGender.setSelection(0);
 		}
 	}
+	
+	@Override
+    protected Dialog onCreateDialog(int id) {
+        switch (id) {
+            case DATE_DIALOG_ID:
+                return new DatePickerDialog(this,
+                            mDateSetListener,
+                            mYear, mMonth, mDay);
+        }
+        return null;
+    }
+
+    @Override
+    protected void onPrepareDialog(int id, Dialog dialog) {
+        switch (id) {
+            case DATE_DIALOG_ID:
+                ((DatePickerDialog) dialog).updateDate(mYear, mMonth, mDay);
+                break;
+        }
+    }    
+    
+    private DatePickerDialog.OnDateSetListener mDateSetListener =
+            new DatePickerDialog.OnDateSetListener() {
+
+                public void onDateSet(DatePicker view, int year, int monthOfYear,
+                        int dayOfMonth) {
+                    mYear = year;
+                    mMonth = monthOfYear;
+                    mDay = dayOfMonth;
+                }
+            };
 
 	private class UserJson extends JsonResponse {
 		private User user;

@@ -6,6 +6,7 @@ import java.util.List;
 import com.globalis.entities.Coupon;
 import com.globalis.entities.Promotion;
 import com.globalis.extensions.IOnCustomClickListener;
+import com.globalis.gps.GpsTask;
 import com.globalis.network.HttpRequest;
 import com.globalis.network.HttpTask;
 import com.globalis.network.Response;
@@ -20,6 +21,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.location.Location;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -45,6 +47,20 @@ public class PromotionActivity extends Activity implements OnItemClickListener,
 
 		initViews();
 		getPromotions();
+		/*
+		GpsTask gpsTask = new GpsTask() {
+
+			@Override
+			public void doWork(Location location) {
+				if (location != null)
+					Toast.makeText(
+							getApplicationContext(),
+							"Long: " + location.getLongitude() + "\n Lat: "
+									+ location.getLatitude(), Toast.LENGTH_LONG)
+							.show();
+			}
+		};
+		gpsTask.set(this).execute();*/
 	}
 
 	@Override
@@ -148,7 +164,8 @@ public class PromotionActivity extends Activity implements OnItemClickListener,
 							Intent intentCouponDetail = new Intent(
 									PromotionActivity.this,
 									CouponDetailActivity.class);
-							intentCouponDetail.putExtra("coupon", coupon.getCoupon());
+							intentCouponDetail.putExtra("coupon",
+									coupon.getCoupon());
 							startActivity(intentCouponDetail);
 						} else {
 							Toast.makeText(PromotionActivity.this,

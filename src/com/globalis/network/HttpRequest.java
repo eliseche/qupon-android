@@ -36,9 +36,9 @@ public class HttpRequest {
 	}
 
 	public static class Url {
-		public static String base = "http://50.116.21.186";
+		public static String base = "http://www.321cupon.com";
 
-		 static {base = "http://192.168.0.196:3000";}
+		 //static {base = "http://192.168.0.196:3000";}
 
 		public static String getBase() {
 			return base;
