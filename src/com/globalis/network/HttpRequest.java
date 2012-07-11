@@ -168,8 +168,27 @@ public class HttpRequest {
 	}
 	
 	private Response post(String url, String json) {
-		// TODO Auto-generated method stub
-		return null;
+		Response response = null;
+		HttpClient conn = null;
+		try {
+			conn = new DefaultHttpClient();
+			HttpPost post = new HttpPost(url);
+			post.setEntity(new StringEntity(json));
+			post.setHeader("Accept", "application/json");
+			post.setHeader("Content-type", "application/json");
+			HttpResponse httpResponse = conn.execute(post);
+			InputStream in = httpResponse.getEntity().getContent();
+			byte[] body = readStream(in);
+			response = new Response(httpResponse.getStatusLine()
+					.getStatusCode(), new String(body));
+			return response;
+		} catch (ClientProtocolException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return response;
 	}
 
 	public Response put(String url, Hashtable<String, String> params) {

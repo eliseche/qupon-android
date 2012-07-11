@@ -74,20 +74,20 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dip"
                 android:hint="@string/signup_txt_phone_number" />
-s
+
+            <Button
+                android:id="@+id/signup_btn_sel_birthday"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dip"
+                android:text="@string/signup_btn_sel_birthday" />
+
             <Spinner
                 android:id="@+id/signup_spn_gender"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dip"
                 android:prompt="@string/signup_spn_gender" />
-            
-            <Button
-                android:id="@+id/signup_btn_sel_birthday"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dip"
-                android:text="Birthday" />
 
             <Button
                 android:id="@+id/signup_btn_sign_up"

@@ -1,6 +1,7 @@
 package com.globalis.utils;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import android.content.Context;
@@ -15,6 +16,25 @@ import android.widget.TableRow;
 public class Utils {
 	public enum Resolution {
 		LOW, MEDIUM, HIGH, XHIGH
+	}
+
+	public static Date toDate(String dateString) {
+		Date date = null;
+		try {
+			SimpleDateFormat initialDateFormat = new SimpleDateFormat(
+					"yyyy-MM-dd");
+			date = initialDateFormat.parse(dateString);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return date;
+	}
+
+	public static String parseDate(Date date) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String dateString = sdf.format(date);
+		return dateString;
 	}
 
 	public static String parseDate(String startDate, Context context) {

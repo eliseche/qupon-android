@@ -23,6 +23,7 @@
     <string name="signup_txt_phone_number">Teléfono</string>
     <string name="signup_spn_gender">Sexo</string>
     <string name="signup_txt_email">Email</string>
+    <string name="signup_btn_sel_birthday">Fecha de Nacimiento</string>
 	<string name="signup_btn_register">Enviar</string>
 	<string name="signup_error_msg_complete_user">Por favor complete el usuario</string>
 	<string name="signup_error_msg_unmatching_pass">Las contraseñas no coinciden</string>

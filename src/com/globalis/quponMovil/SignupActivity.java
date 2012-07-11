@@ -1,7 +1,9 @@
 package com.globalis.quponMovil;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Hashtable;
 
 import com.globalis.entities.JsonResponse;
@@ -12,6 +14,7 @@ import com.globalis.network.Response;
 import com.globalis.quponMovil.CouponDetailActivity.CouponJson;
 import com.globalis.utils.Utils;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.SerializedName;
 
 import android.app.Activity;
@@ -22,6 +25,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.YuvImage;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
@@ -34,16 +38,16 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 public class SignupActivity extends Activity implements OnClickListener {
-	
+
 	static final int DATE_DIALOG_ID = 1;
-	
+
 	private String email, password, rePassword, firstName, lastName,
-			phoneNumber, zipCode, gender;
+			phoneNumber, zipCode, gender, birthday;
 	private int userID;
 	private EditText txtEmail, txtPassword, txtRePassword, txtFirstName,
 			txtLastName, txtPhoneNumber, txtZipCode;
 	private Spinner spnGender;
-	//birthday data
+	// birthday data
 	private int mYear, mMonth, mDay;
 	private Button btnSignUp, btnBirthdaySel;
 
@@ -102,7 +106,7 @@ public class SignupActivity extends Activity implements OnClickListener {
 					if (signUpResponse.equals(getResources().getString(
 							R.string.success))) {
 						Toast.makeText(SignupActivity.this,
-								signUpResponse.getMessage(), Toast.LENGTH_LONG)
+								getResources().getString(R.string.success), Toast.LENGTH_LONG)
 								.show();
 						Intent intent = new Intent();
 						intent.putExtra("username", user.getEmail());
@@ -179,7 +183,9 @@ public class SignupActivity extends Activity implements OnClickListener {
 		phoneNumber = String.valueOf(txtPhoneNumber.getText());
 		zipCode = String.valueOf(txtZipCode.getText());
 		gender = String.valueOf(spnGender.getSelectedItem());
-
+		// this one value is automatic birthday = mYear+"-"+mMonth+"-"+mDay;
+		if (birthday == null)
+			birthday = Utils.parseDate(new Date(mYear - 1900, mMonth, mDay));
 	}
 
 	private boolean validateFields() {
@@ -221,7 +227,7 @@ public class SignupActivity extends Activity implements OnClickListener {
 
 	private User createUser() {
 		User user = new User(email, firstName, lastName, zipCode, phoneNumber,
-				gender, password, rePassword);
+				gender, password, rePassword, birthday);
 		return user;
 	}
 
@@ -303,38 +309,42 @@ public class SignupActivity extends Activity implements OnClickListener {
 		} else {
 			spnGender.setSelection(0);
 		}
+		Date birthdayDate = Utils.toDate(user.getBirthday());
+		mYear = birthdayDate.getYear()+1900;
+		mMonth = birthdayDate.getMonth();
+		mDay = birthdayDate.getDate();
 	}
-	
+
 	@Override
-    protected Dialog onCreateDialog(int id) {
-        switch (id) {
-            case DATE_DIALOG_ID:
-                return new DatePickerDialog(this,
-                            mDateSetListener,
-                            mYear, mMonth, mDay);
-        }
-        return null;
-    }
+	protected Dialog onCreateDialog(int id) {
+		switch (id) {
+		case DATE_DIALOG_ID:
+			return new DatePickerDialog(this, mDateSetListener, mYear, mMonth,
+					mDay);
+		}
+		return null;
+	}
 
-    @Override
-    protected void onPrepareDialog(int id, Dialog dialog) {
-        switch (id) {
-            case DATE_DIALOG_ID:
-                ((DatePickerDialog) dialog).updateDate(mYear, mMonth, mDay);
-                break;
-        }
-    }    
-    
-    private DatePickerDialog.OnDateSetListener mDateSetListener =
-            new DatePickerDialog.OnDateSetListener() {
+	@Override
+	protected void onPrepareDialog(int id, Dialog dialog) {
+		switch (id) {
+		case DATE_DIALOG_ID:
+			((DatePickerDialog) dialog).updateDate(mYear, mMonth, mDay);
+			break;
+		}
+	}
 
-                public void onDateSet(DatePicker view, int year, int monthOfYear,
-                        int dayOfMonth) {
-                    mYear = year;
-                    mMonth = monthOfYear;
-                    mDay = dayOfMonth;
-                }
-            };
+	private DatePickerDialog.OnDateSetListener mDateSetListener = new DatePickerDialog.OnDateSetListener() {
+
+		public void onDateSet(DatePicker view, int year, int monthOfYear,
+				int dayOfMonth) {
+			birthday = Utils.parseDate(new Date(year - 1900, monthOfYear,
+					dayOfMonth));
+			mYear = year;
+			mMonth = monthOfYear;
+			mDay = dayOfMonth;
+		}
+	};
 
 	private class UserJson extends JsonResponse {
 		private User user;
@@ -373,6 +383,14 @@ public class SignupActivity extends Activity implements OnClickListener {
 	}
 
 	private class SignUpResponse extends JsonResponse {
+		private User user;
 
+		public User getUser() {
+			return user;
+		}
+
+		public void setUser(User user) {
+			this.user = user;
+		}
 	}
 }

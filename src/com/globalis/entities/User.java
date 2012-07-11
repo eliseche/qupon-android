@@ -1,9 +1,10 @@
 package com.globalis.entities;
 
+import java.io.Serializable;
 import java.util.Hashtable;
 import com.google.gson.annotations.SerializedName;
 
-public class User {	
+public class User implements Serializable {	
 	@SerializedName("email")
 	private String email;
 	@SerializedName("name")
@@ -20,6 +21,8 @@ public class User {
 	private String password;
 	@SerializedName("password_confirmation")
 	private String passwordConfirmation;
+	@SerializedName("birthday")
+	private String birthday;
 	
 	public String getEmail() {
 		return email;
@@ -85,8 +88,17 @@ public class User {
 		this.passwordConfirmation = passwordConfirmation;
 	}	
 	
+	public String getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(String birthday) {
+		this.birthday = birthday;
+	}
+	
 	public User(String email, String firstName, String lastName, String zipCode,
-			String phoneNumber, String gender, String password, String passwordConfirmation) {
+			String phoneNumber, String gender, String password, String passwordConfirmation,
+			String birthday) {
 		this.email = email;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -95,6 +107,7 @@ public class User {
 		this.gender = gender;
 		this.password = password;
 		this.passwordConfirmation = passwordConfirmation;
+		this.birthday = birthday;
 	}
 
 	public Hashtable<String, String> getHashtable() {
