@@ -4,9 +4,10 @@
     <string name="ok">OK</string>
     <string name="yes">Si</string>
     <string name="no">No</string>
-    <string name="exit">Esta seguro que desea salir?</string>
+    <string name="exit">¿Esta seguro que desea salir?</string>
 	<string name="success">exito</string>
     <string name="success_edit">Datos modificados con éxito</string>
+    <string name="logout">¿Esta seguro que desea salir?</string>
     <string name="login_lbl_title">Bienvenido a QuponMovil</string>
     <string name="login_lbl_user">Usuario</string>
     <string name="login_lbl_password">Contraseña</string>
@@ -43,10 +44,13 @@
     <string name="settings_lbl_modify_info_user">Modificar usuario</string>
     <string name="settings_lbl_modify_info_user_summary">Cambiar la información de su cuenta</string>
     <string name="coupon_detail_lbl_code">Código:</string>
+    <string name="coupon_adapter_generation_date">Generado:</string>
     <string name="discount">Off</string>
-    <string name="menu_login">Login</string>
-    <string name="menu_coupones">Cupones</string>
+    <string name="menu_login">Login</string>    
     <string name="menu_settings">Opciones</string>
+    <string name="menu_logout">Logout</string>
+    <string name="tab_promotions">Promociones</string>
+    <string name="tab_coupons">Cupones</string>
     <string name="exception_no_network">No se pudo encontrar una conexión a Internet</string>
     <string name="must_be_logged">Debe identificarse para poder seguir</string>
 </resources>

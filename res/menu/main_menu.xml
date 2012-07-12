@@ -4,12 +4,7 @@
         android:id="@+id/menu_login"
         android:icon="@drawable/lock"
         android:title="@string/menu_login">
-    </item>
-    <item 
-        android:id="@+id/menu_my_coupons"
-        android:icon="@drawable/coupones"
-        android:title="@string/menu_coupones">
-    </item>
+    </item>   
     <item
         android:id="@+id/menu_settings"
         android:icon="@drawable/wheel"

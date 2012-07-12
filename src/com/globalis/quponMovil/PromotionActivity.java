@@ -84,15 +84,12 @@ public class PromotionActivity extends Activity implements OnItemClickListener,
 			menu.add(0, R.id.menu_logout, Menu.NONE, R.string.menu_logout)
 					.setIcon(R.drawable.unlock);
 			menu.add(0, R.id.menu_settings, Menu.NONE, R.string.menu_settings)
-					.setIcon(R.drawable.wheel);
-			menu.add(0, R.id.menu_my_coupons, Menu.NONE, R.string.menu_coupones)
-					.setIcon(R.drawable.coupones);
+					.setIcon(R.drawable.wheel);			
 		} else {
 			menu.add(0, R.id.menu_login, Menu.NONE, R.string.menu_login)
 					.setIcon(R.drawable.lock);
 			menu.removeItem(R.id.menu_logout);
-			menu.removeItem(R.id.menu_settings);
-			menu.removeItem(R.id.menu_my_coupons);
+			menu.removeItem(R.id.menu_settings);			
 		}
 
 		return super.onPrepareOptionsMenu(menu);
@@ -107,11 +104,7 @@ public class PromotionActivity extends Activity implements OnItemClickListener,
 		case R.id.menu_login:
 			Intent intentLogin = new Intent(this, LoginActivity.class);
 			startActivity(intentLogin);
-			break;
-		case R.id.menu_my_coupons:
-			Intent intentMyCoupons = new Intent(this, CouponActivity.class);
-			startActivity(intentMyCoupons);
-			break;
+			break;		
 		case R.id.menu_settings:
 			Intent intentSettings = new Intent(this, SettingsActivity.class);
 			startActivity(intentSettings);

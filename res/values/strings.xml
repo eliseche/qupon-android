@@ -46,10 +46,11 @@
     <string name="coupon_detail_lbl_code">Code:</string>
     <string name="coupon_adapter_generation_date">Generation date:</string>
     <string name="discount">Off</string>
-    <string name="menu_login">Login</string>
-    <string name="menu_coupones">Coupons</string>
+    <string name="menu_login">Login</string>    
     <string name="menu_settings">Settings</string>
     <string name="menu_logout">Logout</string>
+    <string name="tab_promotions">Promotions</string>
+    <string name="tab_coupons">Coupons</string>
     <string name="exception_no_network">Couldn\'t find an Internet connection</string>
     <string name="must_be_logged">Must be logged in in order to proceed</string>
 </resources>
