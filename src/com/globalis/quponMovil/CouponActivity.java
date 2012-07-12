@@ -14,6 +14,7 @@ import com.globalis.network.Response;
 import com.globalis.quponMovil.CouponDetailActivity.CouponJson;
 import com.globalis.utils.Utils;
 import com.google.gson.Gson;
+import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
 
 import android.app.Activity;
@@ -44,13 +45,20 @@ public class CouponActivity extends Activity implements OnClickListener {
 
 	private TableLayout tableLayout;
 	private ImageManager imageManager;
+	public static final int REGISTRATION_SUCCESS = 0;
 
 	protected void onCreate(Bundle savedInstanceState) {
+
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.my_coupon);
-
-		initViews();
-		getCoupons();
+		if (!LoginActivity.isLogged(this)) {
+			Intent intent = new Intent(this, LoginActivity.class);
+			startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+			MainActivity.selectPreviousTab();
+		} else {
+			initViews();
+			getCoupons();
+		}
 	}
 
 	private void initViews() {
@@ -98,7 +106,6 @@ public class CouponActivity extends Activity implements OnClickListener {
 			Coupon coupon = couponJson.getCoupon();
 			noCoupon++;
 			LayoutInflater layoutInflater = LayoutInflater.from(this);
-			// falta setear valores de promocion y coupon
 			switch (getResources().getConfiguration().orientation) {
 			case Configuration.ORIENTATION_PORTRAIT:
 				if (noCoupon % 2 == 1) {
@@ -122,8 +129,8 @@ public class CouponActivity extends Activity implements OnClickListener {
 				}
 			}
 			// create view from xml
-			child = (RelativeLayout) layoutInflater.inflate(R.layout.coupon_adapter,
-					currentTableRow, false);
+			child = (RelativeLayout) layoutInflater.inflate(
+					R.layout.coupon_adapter, currentTableRow, false);
 			// get views from childs
 			imgPromotion = (ImageView) child
 					.findViewById(R.id.coupon_adapter_img_promotion);
@@ -135,9 +142,9 @@ public class CouponActivity extends Activity implements OnClickListener {
 					.findViewById(R.id.coupon_adapter_lbl_generation_date);
 			// set values to views
 			imageManager.displayImage(
-					HttpRequest.Url.getBase() + couponJson.getImage_url(),
+					HttpRequest.Url.getBase() + couponJson.getImageUrl(),
 					imgPromotion, progressBar);
-			lblTitle.setText(couponJson.getPromotion_title());
+			lblTitle.setText(couponJson.getPromotionTitle());
 			lblGenerationDate.setText(coupon.getGenerationDate().split("T")[0]);
 			// add click event
 			child.setOnClickListener(this);
@@ -147,10 +154,12 @@ public class CouponActivity extends Activity implements OnClickListener {
 	}
 
 	private class CouponJson implements Serializable {
-		
+
 		private Coupon coupon;
-		private String image_url;
-		private String promotion_title;
+		@SerializedName("image_url")
+		private String imageUrl;
+		@SerializedName("promotion_title")
+		private String promotionTitle;
 
 		public Coupon getCoupon() {
 			return coupon;
@@ -160,21 +169,22 @@ public class CouponActivity extends Activity implements OnClickListener {
 			this.coupon = coupon;
 		}
 
-		public String getImage_url() {
-			return image_url;
+		public String getImageUrl() {
+			return imageUrl;
 		}
 
-		public void setImage_url(String image_url) {
-			this.image_url = image_url;
+		public void setImageUrl(String imageUrl) {
+			this.imageUrl = imageUrl;
 		}
 
-		public String getPromotion_title() {
-			return promotion_title;
+		public String getPromotionTitle() {
+			return promotionTitle;
 		}
 
-		public void setPromotion_title(String promotion_title) {
-			this.promotion_title = promotion_title;
+		public void setPromotionTitle(String promotionTitle) {
+			this.promotionTitle = promotionTitle;
 		}
+
 	}
 
 	/**
@@ -182,8 +192,7 @@ public class CouponActivity extends Activity implements OnClickListener {
 	 * */
 	public void onClick(View v) {
 		Coupon coupon = Coupon.getCoupons().get(getChildLocation(v));
-		Intent intentCouponDetail = new Intent(
-				CouponActivity.this,
+		Intent intentCouponDetail = new Intent(CouponActivity.this,
 				CouponDetailActivity.class);
 		intentCouponDetail.putExtra("coupon", coupon);
 		startActivity(intentCouponDetail);
@@ -191,12 +200,13 @@ public class CouponActivity extends Activity implements OnClickListener {
 
 	private int getChildLocation(View v) {
 		int childLocation = -1;
-		for (int i = 0; i<tableLayout.getChildCount();i++) {
+		for (int i = 0; i < tableLayout.getChildCount(); i++) {
 			TableRow tableRow = (TableRow) tableLayout.getChildAt(i);
 			for (int j = 0; j < tableRow.getChildCount(); j++) {
 				childLocation++;
 				View child = tableRow.getChildAt(j);
-				if(v.equals(child)) return childLocation;
+				if (v.equals(child))
+					return childLocation;
 			}
 		}
 		return -1;

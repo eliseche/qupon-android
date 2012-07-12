@@ -28,7 +28,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:textSize="80dip"
+                android:textSize="80sp"
                 android:text="50"/>
                 <TextView 
                     android:id="@+id/coupon_detail_perc_symbol"
@@ -37,7 +37,7 @@
                     android:layout_toRightOf="@+id/coupon_detail_lbl_discount"
                     android:layout_alignTop="@+id/coupon_detail_lbl_discount"
                     android:paddingTop="7dip"
-                    android:textSize="43dip"
+                    android:textSize="43sp"
                     android:text="%"
                     />
                 <TextView 
@@ -46,7 +46,7 @@
                     android:layout_toRightOf="@+id/coupon_detail_lbl_discount"
                     android:layout_below="@+id/coupon_detail_perc_symbol"
                     android:paddingBottom="13dip"
-                    android:textSize="23dip"
+                    android:textSize="23sp"
                     android:text="@string/discount"
                     />
             </RelativeLayout>
@@ -57,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 android:layout_toRightOf="@+id/coupon_detail_rl_discount"
-                android:textSize="30dip"
+                android:textSize="30sp"
                 android:text="Title"/>
             <LinearLayout 
                 android:id="@+id/coupon_detail_ll_description"
@@ -69,7 +69,7 @@
                 android:id="@+id/coupon_detail_lbl_description"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20dip"
+                android:textSize="20sp"
                 android:text="Juegos casi gratis. Te llevas 10x1"
                 />
             </LinearLayout>
@@ -83,7 +83,7 @@
                 android:id="@+id/coupon_detail_lbl_terms_and_cond"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:textSize="10dip"
+                android:textSize="10sp"
                 android:text="Solo disponible para juegos en stock de commodoro 64"
                 />
             </LinearLayout>
@@ -104,14 +104,14 @@
                 android:layout_height="fill_parent"
                 android:gravity="center_vertical"
                 android:layout_marginLeft="20dip"
-                android:textSize="20dip"
+                android:textSize="20sp"
                 android:text="@string/coupon_detail_lbl_code"/>
             <TextView 
                 android:id="@+id/coupon_detail_lbl_code"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:gravity="center"
-                android:textSize="50dip"
+                android:textSize="50sp"
                 android:layout_toRightOf="@+id/coupon_detail_lbl_fix_code"
                 android:text="XxxxxXxxxxX"/>
         </RelativeLayout>

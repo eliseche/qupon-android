@@ -28,7 +28,7 @@ public class Splash extends Activity {
 					e.printStackTrace();
 				} finally {
 					finish();
-					startActivity(new Intent(Splash.this, PromotionActivity.class));					
+					startActivity(new Intent(Splash.this, MainActivity.class));					
 				}				
 			};			
 		};
