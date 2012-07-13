@@ -1,13 +1,11 @@
 package com.globalis.quponMovil;
 
-import android.app.Activity;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TabHost;
 import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TabHost.TabSpec;
-import android.widget.TabWidget;
 
 public class MainActivity extends TabActivity implements OnTabChangeListener {
 	
@@ -26,6 +24,10 @@ public class MainActivity extends TabActivity implements OnTabChangeListener {
 		Intent intentPromotion = new Intent(this, PromotionActivity.class);
 		tabPromotions.setContent(intentPromotion);
 		// Tab for Promotions by proximity
+		TabSpec tabPromotionsProximity = tabHost.newTabSpec("PromotionsProximity");
+		tabPromotionsProximity.setIndicator(getResources().getString(R.string.tab_promotions_proximity), getResources().getDrawable(R.drawable.wheel));
+		Intent intentPromotionProximity = new Intent(this, PromotionProximityActivity.class);
+		tabPromotionsProximity.setContent(intentPromotionProximity);
 		// Tab for my coupons
 		TabSpec tabCoupons = tabHost.newTabSpec("Coupons");
 		tabCoupons.setIndicator(getResources().getString(R.string.tab_coupons), getResources().getDrawable(R.drawable.coupones));
@@ -33,19 +35,17 @@ public class MainActivity extends TabActivity implements OnTabChangeListener {
 		tabCoupons.setContent(intentCoupons.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
 		
 		tabHost.addTab(tabPromotions);
+		tabHost.addTab(tabPromotionsProximity);
 		tabHost.addTab(tabCoupons);
 		tabHost.setOnTabChangedListener(this);
 	}
-
 
 	public static void selectPreviousTab(){
 		tabHost.setCurrentTab(previousTab);
 	}
 
-
 	@Override
 	public void onTabChanged(String tabId) {
 		previousTab = tabHost.getCurrentTab();
-	}
-	
+	}	
 }

@@ -43,6 +43,10 @@
             android:label="@string/app_name" >            
         </activity>
         <activity
+            android:name=".PromotionProximityActivity"
+            android:label="@string/app_name" >            
+        </activity>
+        <activity
             android:name=".PromotionDetailActivity"
             android:label="@string/app_name" >
         </activity>

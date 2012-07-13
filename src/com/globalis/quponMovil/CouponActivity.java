@@ -41,7 +41,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
-public class CouponActivity extends Activity implements OnClickListener {
+public class CouponActivity extends MenuEventActivity implements OnClickListener {
 
 	private TableLayout tableLayout;
 	private ImageManager imageManager;

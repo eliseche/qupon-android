@@ -10,15 +10,15 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import android.os.Bundle;
 
-public class PromotionActivity extends PromotionBaseActivity  {
+public class PromotionProximityActivity extends PromotionBaseActivity {
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState) {	
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.promotion);
 		
 		initViews();		
 		getPromotions();
-	}	
+	}
 	
 	/**
 	 * Search for all active promotions
@@ -38,11 +38,11 @@ public class PromotionActivity extends PromotionBaseActivity  {
 					List<Promotion> promotions = gson.fromJson(response.getBody(), collectionType);
 					Promotion.setPromotions(promotions);
 
-					promotionAdapter = new PromotionAdapter(PromotionActivity.this, R.layout.promotion_adapter, Promotion.getPromotions());
+					promotionAdapter = new PromotionAdapter(PromotionProximityActivity.this, R.layout.promotion_adapter, Promotion.getPromotions());
 					listViewPromotion.setAdapter(promotionAdapter);
 				}
 			}
 		};
-		task.set(PromotionActivity.this, req).execute();
+		task.set(PromotionProximityActivity.this, req).execute();
 	}
 }

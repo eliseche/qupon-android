@@ -50,6 +50,7 @@
     <string name="menu_settings">Opciones</string>
     <string name="menu_logout">Logout</string>
     <string name="tab_promotions">Promociones</string>
+    <string name="tab_promotions_proximity">Promociones cercanas</string>
     <string name="tab_coupons">Cupones</string>
     <string name="exception_no_network">No se pudo encontrar una conexión a Internet</string>
     <string name="must_be_logged">Debe identificarse para poder seguir</string>
